@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "liste_news.h"
 
 void adj_cell(cell_t **prec, cell_t *elt) {

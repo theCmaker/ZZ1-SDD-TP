@@ -1,6 +1,8 @@
 #ifndef __LISTE_NEWS_H__
 #define __LISTE_NEWS_H__
 
+  #include <string.h>
+
   typedef struct _news_t {
     int  debut;
     int  fin;
