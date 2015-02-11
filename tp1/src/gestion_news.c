@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <string.h>
 #include "gestion_news.h"
 
 #define SIZE_BUF 128
@@ -46,11 +48,11 @@ int sauver(cell_t *liste, char *nom_fichier) {
 }
 
 int getDate() {
-  int date;
-  /* TODO: RECUPERER DANS UNE CHAINE DE CARACTERES */
-  /* system("date +%Y%m%d");
-  sscanf(,"%d",&date); */
-  return date;
+  time_t now = time(NULL);
+  int datejour;
+  struct tm t = *localtime(&now);
+  datejour = (t.tm_year+1900)*10000+(t.tm_mon+1)*100+t.tm_mday;
+  return datejour;
 }
 
 void afficher_messages_date(cell_t *, int);
