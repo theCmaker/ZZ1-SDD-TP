@@ -9,7 +9,7 @@ void adj_cell(cell_t **prec, cell_t *elt) {
 
 cell_t ** rech_prec(cell_t **liste, int debut, short int *existe) {
   cell_t **prec = liste;
-  while ((*prec) && (*prec)->debut < debut) {
+  while ((*prec) && (*prec)->debut > debut) {
     prec = &((*prec)->suiv);
   }
   /* Booléen de présence     */
