@@ -126,12 +126,16 @@ void supprimer_obsoletes(cell_t **liste) {
   }
 }
 
-void remplacer_date(cell_t *liste, int date, int nvdate) {
-  cell_t *cour = liste;
+void remplacer_date(cell_t **liste, int date, int nvdate) {
+  cell_t *cour = *liste;
   while (cour->debut > date) {
     cour = cour->suiv;
   }
   while (cour->debut == date) {
-    cour->debut = nvdate;
+    if (cour->fin < date) {
+      cour->debut = nvdate;
+    }
   }
+  sauver(*liste,"/tmp/tmp_tp1_sdd.list");
+  charger(liste,"/tmp/tmp_tp1_sdd.list");
 }

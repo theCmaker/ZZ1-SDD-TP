@@ -12,6 +12,6 @@
   void afficher_messages_jour(cell_t *);
   void afficher_messages_motif(cell_t *, char *);
   void supprimer_obsoletes(cell_t **);
-  void remplacer_date(cell_t *, int, int);
+  void remplacer_date(cell_t **, int, int);
 
 #endif
