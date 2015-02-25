@@ -22,7 +22,15 @@ cell_t ** rech_prec(cell_t **liste, int debut, short int *existe) {
 void supp_cell(cell_t **prec) {
   cell_t *elt = *prec;
   *prec = elt->suiv;
+  free(elt->texte);
   free(elt);
+}
+
+void liberer_liste(cell_t **liste) {
+  while (*liste) {
+    supp_cell(liste);
+  }
+  *liste = NULL;
 }
 
 void ins_cell(cell_t **liste, cell_t *elt) {
@@ -36,6 +44,7 @@ news_t * creer_cell(int debut, int fin, char *message) {
   if (elt) {
     elt->debut = debut;
     elt->fin = fin;
+    elt->texte = (char*) malloc((strlen(message)+1)*sizeof(char));
     strcpy(elt->texte,message);
   }
   return elt;
