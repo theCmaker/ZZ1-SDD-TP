@@ -42,6 +42,7 @@ int charger(cell_t **liste, char *nom_fichier) {
       if (tmp) {
         ins_cell(liste,tmp);
       } else {
+        /* Code erreur: allocation de cellule */
         ret = 2;
       }
     }
@@ -137,5 +138,6 @@ void remplacer_date(cell_t **liste, int date, int nvdate) {
     }
   }
   sauver(*liste,"/tmp/tmp_tp1_sdd.list");
+  liberer_liste(liste);
   charger(liste,"/tmp/tmp_tp1_sdd.list");
 }
