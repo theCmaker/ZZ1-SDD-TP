@@ -7,13 +7,13 @@ int main(int argc, char *argv[]) {
     charger(&liste,argv[1]);
   }
   if (liste) {
-    printf("Affichage de la liste après récupération\n");
+    printf("Affichage de la liste apres recuperation\n");
     afficher_liste(liste);
 
     printf("Affichage des messages du jour\n");
     afficher_messages_jour(liste);
 
-    printf("Affichage des messages d'après-demain\n");
+    printf("Affichage des messages d'apres-demain\n");
     afficher_messages_date(liste,getDate()+2);
   }
   return 0;

@@ -12,8 +12,8 @@ cell_t ** rech_prec(cell_t **liste, int debut, short int *existe) {
   while ((*prec) && (*prec)->debut > debut) {
     prec = &((*prec)->suiv);
   }
-  /* Booléen de présence     */
-  /* 1 : présent             */
+  /* Booleen de presence     */
+  /* 1 : present             */
   /* 0 : absent              */
   *existe = (*prec && (*prec)->debut == debut)?1:0;
   return prec;

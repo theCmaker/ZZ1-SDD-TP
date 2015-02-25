@@ -9,9 +9,9 @@
 char buf[SIZE_BUF+1];
 
 /* -------------------------------------------------------------------- */
-/* flush_stdin    Vide le buffer des caractères qui y restent           */
+/* flush_stdin    Vide le buffer des caracteres qui y restent           */
 /*                                                                      */
-/* En sortie:   le nombre de caractères vidés (sauf '\n')               */
+/* En sortie:   le nombre de caracteres vides (sauf '\n')               */
 /* -------------------------------------------------------------------- */
 int flush_stdin() {
   char bin;
@@ -32,7 +32,7 @@ int charger(cell_t **liste, char *nom_fichier) {
   if (fichier) {
     ret = 0;
     while (!feof(fichier) && ret == 0 && fgets(buf,SIZE_BUF+1,fichier)) {
-      /* suppression du caractère \n résiduel si le texte fait moins de 100 caractères */
+      /* suppression du caractere \n residuel si le texte fait moins de 100 caracteres */
       scan = strchr(buf,'\n');
       if (scan) {
         *scan = '\0';
@@ -74,7 +74,7 @@ int getDate() {
 }
 
 void afficher_message(cell_t *m) {
-  printf("%s\n",m->texte);
+  printf("Debut: %d, Fin: %d, Message: %s\n",m->debut,m->fin,m->texte);
 }
 
 void afficher_liste(cell_t *l) {
