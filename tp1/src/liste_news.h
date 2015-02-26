@@ -1,3 +1,14 @@
+/*	liste_news.h
+	Header
+
+	-----| GESTION DE NEWS PAR LISTE CHAINEE |-----
+
+	BARBESANGE Benjamin,
+	PISSAVY Pierre-Loup
+
+	ISIMA 1ere Annee, 2014-2015
+*/
+
 #ifndef __LISTE_NEWS_H__
 #define __LISTE_NEWS_H__
 

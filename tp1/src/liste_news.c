@@ -1,3 +1,14 @@
+/*	liste_news.c
+	Fonctions de gestion de la liste chainee
+
+	-----| GESTION DE NEWS PAR LISTE CHAINEE |-----
+
+	BARBESANGE Benjamin,
+	PISSAVY Pierre-Loup
+
+	ISIMA 1ere Annee, 2014-2015
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "liste_news.h"

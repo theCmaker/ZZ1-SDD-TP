@@ -1,3 +1,14 @@
+/*	main.c
+	Fichier principal permettant les tests
+
+	-----| GESTION DE NEWS PAR LISTE CHAINEE |-----
+
+	BARBESANGE Benjamin,
+	PISSAVY Pierre-Loup
+
+	ISIMA 1ere Annee, 2014-2015
+*/
+
 #include <stdio.h>
 #include "gestion_news.h"
 
