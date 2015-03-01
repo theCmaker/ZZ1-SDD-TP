@@ -20,21 +20,6 @@
 
 char buf[SIZE_BUF+1];
 
-/* -------------------------------------------------------------------- */
-/* flush_stdin    Vide le buffer des caracteres qui y restent           */
-/*                                                                      */
-/* En sortie:   le nombre de caracteres vides (sauf '\n')               */
-/* -------------------------------------------------------------------- */
-int flush_stdin() {
-  char bin;
-  int cpt = -1; /*compteur de caracteres excluant '\n'*/
-  do { /*vidange buffer*/
-    scanf("%c", &bin);
-    ++cpt;
-  } while (bin != 10);
-  return cpt;
-}
-
 /*	int charger(cell_t **liste, char *nom_fichier)
 		Permet de charger les donnees d'un fichier passe en parametre
 		dans une liste dont l'adresse du pointeur de tete est
@@ -268,13 +253,14 @@ void supprimer_obsoletes(cell_t **liste) {
 */
 void remplacer_date(cell_t **liste, int date, int nvdate) {
   cell_t *cour = *liste;
-  while (cour->debut > date) {
+  while (cour && cour->debut > date) {
     cour = cour->suiv;
   }
-  while (cour->debut == date) {
-    if (cour->fin < date) {
+  while (cour && cour->debut == date) {
+    if (cour->fin >= nvdate) {
       cour->debut = nvdate;
     }
+    cour = cour->suiv;
   }
   sauver(*liste,"/tmp/tmp_tp1_sdd.list");
   liberer_liste(liste);
