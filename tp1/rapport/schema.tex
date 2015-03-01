@@ -1,0 +1,28 @@
+\begin{figure}[h]
+  \begin{subfigure}{0.5\textwidth}
+    \subcaption{Structure utilisée}
+    \label{fig:struct}
+    \begin{center}
+    \shorthandoff{:}
+    \begin{tikzpicture}[scale=0.5]
+      \matrix at (0,0) {
+        \node [case1] (a1) {debut}; & \node [case1] (a11) {fin}; & \node [case1,ptr] (a12) {message}; & \node [case1,ptr] (a13) {suiv}; \\[1cm]
+
+        \node [case2] (b1) {texte};\\
+      };
+      \draw [vers] (a12.south) |- +(0,-1) -| (b1.north);
+      \draw [vers] (a13.south) to +(0,-2) node {struct. suivante};
+    
+    \end{tikzpicture}
+    \shorthandon{:}
+    \end{center}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \subcaption{Code}
+    \label{fig:struct_code}
+    \begin{center}
+      \cfile[firstline=17,lastline=22]{../src/liste_news.h}
+    \end{center}
+  \end{subfigure}
+  \caption{Structure et code correspondant}
+\end{figure}

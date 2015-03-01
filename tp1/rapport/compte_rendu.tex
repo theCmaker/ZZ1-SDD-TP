@@ -1,0 +1,85 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc} %encodage entrée
+\usepackage[T1]{fontenc}
+\usepackage{graphicx} %images
+\usepackage[usenames,svgnames]{xcolor} %couleurs
+%\usepackage{cmbright} %fonte
+\usepackage[light,math]{iwona}
+\usepackage{tikz} %schémas
+\usepackage{algo} %mise en forme d'algos
+\usepackage{minted} %mise en forme de code source
+\usepackage{framed} %cadres et bordures
+\usepackage[frenchb]{babel} %langue
+\usepackage{amsmath} %symboles maths
+\usepackage{subcaption} %légendes et sous-figures
+\usepackage{enumitem} %formatage des listes à puces
+\usepackage[nobottomtitles]{titlesec} %formatage des chapitres
+\usepackage{blindtext}
+\usepackage[a4paper]{geometry} %mise en page
+\usepackage[hidelinks]{hyperref}%liens
+
+\input{settings/colors}
+\input{settings/algo}
+\input{settings/mintedC}
+\input{settings/mintedMakefile}
+\input{settings/mintedBash}
+\input{settings/hyperrefSettings}
+
+\hypersetup{
+  pdftitle={TP 1 - Gestion de news à partir d'une liste chaînée}
+}
+
+%styles et formatage
+\geometry{scale=0.8,centering}
+\frenchbsetup{StandardLists=true}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter\hsp\textcolor{lightgray}{|}\hsp}{0pt}{\LARGE\bfseries}
+
+\newcommand{\NIL}{\texttt{\small NIL}}
+\usetikzlibrary{decorations.pathreplacing} %grandes accolades des schémas
+\tikzset{%styles schémas
+    case1/.style={rectangle,draw,fill=RoyalBlue!50,minimum size=7.5mm,anchor=base,text height=1.5ex,text depth=.25ex,text centered},
+    case/.style={case1},
+    case2/.style={rectangle,draw,fill=Red!50,minimum size=7.5mm,anchor=base,text height=1.5ex,text depth=.25ex,text centered},
+    head/.style={case1, fill=yellow},
+    dead/.style={case1, fill=none, pattern=north west lines},
+    void/.style={minimum size=7.5mm},
+    vers/.style={thick,->, >= latex},
+    ptr/.style={case1, fill=gray!50}
+}
+
+\begin{document}
+  \input{titlepage}
+  \setlength{\parskip}{10pt}
+  \setlength{\parindent}{0pt}
+  \chapter{Présentation}
+    Le but de ce TP est de concevoir un ensemble de fonctions permettant de gérer des news sous forme de messages, chacun d'entre eux ayant une date de début et de fin de validité. On doit faire usage d'une liste chaînée. Les news sont ordonnées dans la liste chaînée selon l'ordre décroissant de la date de début (de la plus récente à la plus ancienne).
+
+    Les messages et informations satellites sont enregistrés dans un fichier, à raison d'une ligne par message. Ce fichier est supposé correct.
+
+    Les opérations suivantes sont permises:
+    \begin{itemize}
+      \item Charger une liste depuis un fichier,
+      \item Sauvegarder une liste dans un fichier,
+      \item Afficher les messages du jour,
+      \item Supprimer les messages obsolètes,
+      \item Modifier une date de début sur tous les messages,
+      \item Afficher tous les messages contenant une chaîne particulière.
+    \end{itemize}
+
+    \section{Structure de données employée}
+      \input{schema}
+    \section{Organisation du code source}
+      Nous avons défini deux modules, le premier est dédié à la gestion des listes chaînées (adjonction, recherche, suppression etc.), et le second à la gestion des news (lecture, sauvegarde, modifications etc.). Enfin, le programme principal utilise conjointement ces deux modules pour réaliser le traitement voulu.
+      \input{code_source}
+  \chapter{Détails du programme}
+    \input{detail_code}
+
+  \chapter{Compte rendu d'exécution}
+    \section{Makefile}
+      \makefilefile{../src/Makefile}
+
+    \section{Jeux de tests}
+      %\input{tests}
+
+\end{document}
