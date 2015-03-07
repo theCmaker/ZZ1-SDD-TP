@@ -1,0 +1,164 @@
+\section{Gestion des news}
+  La gestion des news s'effectue grace aux fichiers \texttt{gestion\_news.c} et \texttt{gestion\_news.h}.
+  
+  \subsection{charger}
+    \begin{algo}[informal]
+      \ALGO{Charger (Principe)}
+      \BEGIN
+        \STATE{On ouvre en lecture seule le fichier dont le nom est passé en paramètre}
+        \STATE[erreur d'ouverture de fichier]{On initialise le code de retour à 1}
+        \IF{on a pu l'ouvrir}
+          \STATE[pas de problème d'ouverture de fichier]{Le code de retour passe à 0}
+          \WHILE{l'on n'arrive pas à la fin du fichier}
+            \STATE{On lit une ligne}
+            \STATE{On stocke les date de début et de fin de message dans des variables}
+            \STATE{On stocke le message dans une chaîne de caractère}
+            \STATE{On crée une nouvelle cellule à partir des variables ci-dessus récupérées}
+            \IF{on a pu créer la cellule}
+              \STATE{On l'insère dans la liste chaînée}
+            \ELSE
+              \STATE[erreur allocation de cellule]{Le code de retour passe a 2}
+            \ENDIF
+          \ENDWHILE
+          \STATE{On ferme le fichier}
+        \ENDIF
+        \RETURN{le code d'erreur}
+      \END
+    \end{algo}
+
+    \begin{algo}[informal]
+      \VAR
+        \DECLVAR{ret}{entier qui retourne un code d'erreur \begin{minipage}{0.5\linewidth}\begin{itemize}
+          \item 0 si aucune erreur
+          \item 1 si problème lors de l'ouverture du fichier
+          \item 2 si problème lors de la création de la cellule
+        \end{itemize} \end{minipage}}
+        \DECLVAR{*fichier}{descripteur de fichier, ouvert a partir du nom passé en paramètres}
+        \DECLVAR{debut, fin}{entiers servant à stocker les dates de début et de fin de message lors du traitement du fichier}
+        \DECLVAR{*scan}{chaîne de caractère permettant de stocker le message lors du traitement du fichier}
+        \DECLVAR{*tmp}{pointeur de cellule qui servira de cellule temporaire à chaîner dans la liste}
+      \ENDVAR
+    \end{algo}
+
+  
+  \subsection{sauver}
+    \begin{algo}[informal]
+      \ALGO{Sauver (Principe)}
+      \BEGIN
+        \STATE{On crée un nouveau fichier à partir du nom donné en paramètre}
+        \STATE[erreur de création de fichier]{On initialise le code de retour à 1}
+        \IF{l'on a pu créer le fichier}
+          \WHILE{l'on n'est pas à la fin de la liste}
+            \STATE{On écrit les élément de la cellule en cours de traitement dans le fichier}
+            \STATE{On passe à la cellule suivante}
+          \ENDWHILE
+          \STATE{On ferme le fichier}
+          \STATE[pas d'erreur]{On passe le code de retour à 0}
+        \ENDIF
+        \RETURN{le code d'erreur}
+      \END
+    \end{algo}
+    
+    \begin{algo}[informal]
+      \VAR
+        \DECLVAR{ret}{entier représentant le code d'erreur de la fonction \begin{minipage}{0.45\textwidth}
+        \begin{itemize}
+          \item 0 aucune erreur
+          \item 1 erreur de création ou d'ouverture du fichier
+        \end{itemize} \end{minipage}}
+        \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
+        \DECLVAR{*fichier}{descripteur de fichier crée à partir du nom passé en paramètre}
+      \ENDVAR
+    \end{algo}
+
+  \subsection{getDate}
+    Cette fonction est fournie pour le TP, nous ne la détaillerons donc pas.
+  
+  \subsection{afficher\_message}
+    \begin{algo}[informal]
+      \ALGO{afficher\_message (Principe)}
+      \BEGIN
+        \STATE{On écrit les données d'une cellule en récupérant ses attributs}
+      \END
+    \end{algo}
+  
+  \subsection{afficher\_liste}
+    \begin{algo}[informal]
+      \ALGO{afficher\_liste (Principe)}
+      \BEGIN
+        \STATE{On initialialise l'élément courant au début de la liste}
+        \WHILE{l'élément courant n'est pas NULL}
+          \STATE{On affiche les élément de la cellule avec \textit{afficher\_message}}
+          \STATE{On passe à la cellule suivante}
+        \ENDWHILE
+      \END
+    \end{algo}
+
+    \begin{algo}[informal]
+      \VAR
+        \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
+      \ENDVAR
+    \end{algo}
+    
+  \subsection{traiter\_elt\_date}
+    \begin{algo}[informal]
+      \ALGO{traiter\_elt\_date (Principe)}
+      \BEGIN
+        \STATE{On initialise l'élément courant au début de la liste}
+        \WHILE{la date de début de l'élément courant est supérieure à la date à traiter}
+          \STATE{On passe à la cellule suivante}
+        \ENDWHILE
+        \WHILE {la date de début de l'élément courant est égale à la date recherchée}
+          \STATE{On applique la fonction passée en paramètre à la cellule courante}
+          \STATE{On passe à la cellule suivante}
+        \ENDWHILE
+      \END
+    \end{algo}
+
+    \begin{algo}[informal]
+      \VAR
+        \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
+      \ENDVAR
+    \end{algo}
+
+  \subsection{afficher\_messages\_date}
+    \begin{algo}[informal]
+      \ALGO{afficher\_messages\_date (Principe)}
+      \BEGIN
+        \STATE{On appelle la fonction \textit{traiter\_elt\_date} avec la date de début des messages à afficher et l'adresse de la fonction \textit{afficher\_message}}
+      \END
+    \end{algo}
+
+  \subsection{afficher\_messages\_jour}
+    \begin{algo}[informal]
+      \ALGO{afficher\_messages\_date (Principe)}
+      \BEGIN
+        \STATE{On appelle la fonction \textit{afficher\_messages\_date} avec en paramètre la date du jour obtenue avec \textit{getDate}}
+      \END
+    \end{algo}        
+          
+  \subsection{afficher\_messages\_motif}
+    Principe :
+  
+    \subsubsection{Lexique}
+      \begin{itemize}
+        \item 
+      \end{itemize}
+
+  \subsection{supprimer\_obsoletes}
+    Principe :
+
+    \subsubsection{Lexique}
+      \begin{itemize}
+        \item 
+      \end{itemize}
+
+  \subsection{remplacer\_date}
+    Principe :
+
+    \subsubsection{Lexique}
+      \begin{itemize}
+        \item 
+      \end{itemize}      
+
+\section{Gestion de la liste chaînée}

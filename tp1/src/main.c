@@ -1,12 +1,12 @@
-/*	main.c
-	Fichier principal permettant les tests
+/*  main.c
+  Fichier principal permettant les tests
 
-	-----| GESTION DE NEWS PAR LISTE CHAINEE |-----
+  -----| GESTION DE NEWS PAR LISTE CHAINEE |-----
 
-	BARBESANGE Benjamin,
-	PISSAVY Pierre-Loup
+  BARBESANGE Benjamin,
+  PISSAVY Pierre-Loup
 
-	ISIMA 1ere Annee, 2014-2015
+  ISIMA 1ere Annee, 2014-2015
 */
 
 #include <stdio.h>
