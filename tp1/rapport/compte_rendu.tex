@@ -75,6 +75,150 @@
   \chapter{Détails du programme}
     \input{detail_code}
 
+ \chapter{Principes et lexiques des fonctions}
+    \section{Gestion des news}
+      La gestion des news s'effectue grace aux fichiers \textbf{gestion\_news.c} et \textbf{gestion\_news.h}.
+      
+      \subsection{charger}
+Principe :
+On ouvre en lecture seule le fichier dont le nom est passé en paramètre
+On initialise le code de retour à 1 [erreur d'ouverture de fichier]
+
+Si on a pu l'ouvrir Alors
+  Le code de retour passe à 0 [pas de problème d'ouverture de fichier]
+  Tant qu'on arrive pas à la fin du fichier Faire
+    On lit une ligne
+    On stocke les date de début et de fin de message dans des variables
+    On stocke le message dans une chaîne de caractère
+    On crée une nouvelle cellule à partir des variables ci-dessus récupérées
+    
+    Si on a pu créer la cellule Alors
+      On l'insère dans la liste chaînée
+    Sinon
+      Le code de retour passe a 2 [erreur allocation de cellule]
+    Fin si
+  Fin tant que
+  On ferme le fichier
+Fin si
+On retourne le code d'erreur
+
+        \subsubsection{Lexique}
+          \begin{itemize}
+            \item ret : entier qui retourne un code d'erreur
+            \begin{itemize}
+              \item 0 si aucune erreur
+              \item 1 si problème lors de l'ouverture du fichier
+              \item 2 si problème lors de la création de la cellule
+            \end{itemize}
+            \item *fichier : descripteur de fichier, ouvert a partir du nom passé en paramètres
+            \item debut, fin : entiers servant à stocker les dates de début et de fin de message lors du traitement du fichier
+            \item *scan : chaîne de caractère permettant de stocker le message lors du traitement du fichier
+            \item *tmp : pointeur de cellule qui servira de cellule temporaire à chaîner dans la liste
+          \end{itemize}
+      
+      \subsection{sauver}
+Principe :
+On crée un nouveau fichier à partir du nom donné en paramètre
+On initialise le code de retour à 1 [erreur de création de fichier]
+
+Si on a pu créer le fichier Alors
+  Tant qu'on est pas à la fin de la liste Faire
+    On écrit les élément de la cellule en cours de traitement dans le fichier
+    On passe à la cellule suivante
+  Fin tant que
+  On ferme le fichier
+  On passe le code de retour à 0 [pas d'erreur]
+Fin si
+On retourne le code d'erreur
+        
+        \subsubsection{Lexique}
+        \begin{itemize}
+          \item ret : entier représentant le code d'erreur de la fonction
+          \begin{itemize}
+            \item 0 : aucune erreur
+            \item 1 : erreur de création ou d'ouverture du fichier
+          \end{itemize}
+          \item *cour : pointeur sur la cellule en cours de traitement dans la liste chaînée
+          \item *fichier : descripteur de fichier crée à partir du nom passé en paramètre
+        \end{itemize}
+
+      \subsection{getDate}
+Cette fonction est fournie pour le TP, nous ne la détaillerons donc pas.
+      
+      \subsection{afficher\_message}
+Principe :
+On écrit les données d'une cellule en récupérant ses attributs
+
+        \subsubsection{Lexique}
+          Aucune variable intermédiaire utilisée dans cette fonction.
+      
+      \subsection{afficher\_liste}
+Principe :
+On itilialise l'élément courant au début de la liste
+Tant que l'élément courant n'est pas NULL Faire
+  On affiche les élément de la cellule avec \textit{afficher\_message}
+  On passe à la cellule suivante
+Fin tant que
+
+        \subsubsection{Lexique}
+        \begin{itemize}
+          \item *cour : pointeur sur la cellule en cours de traitement dans la liste chaînée
+        \end{itemize}
+      
+        \subsection{traiter\_elt\_date}
+Principe :
+On initialise l'élément courant au début de la liste
+Tant que la date de début de l'élément courant est supérieure à la date à traiter Faire
+  On passe à la cellule suivante
+Fin tant que
+
+Tant que la date de début de l'élément courant est égale à la date recherchée
+  On applique la fonction passée en paramètre à la cellule courante
+  On passe à la cellule suivante
+Fin tant que
+
+        \subsubsection{Lexique}
+        \begin{itemize}
+          \item *cour : pointeur sur la cellule en cours de traitement dans la liste chaînée
+        \end{itemize}
+
+      \subsection{afficher\_messages\_date}
+Principe :
+On appelle la fonction \textit{traiter\_elt\_date} avec la date de debt des messages à afficher et l'adresse de la fonction \textit{afficher\_message}
+
+        \subsubsection{Lexique}
+          Aucune variable intermédiaire n'est utilisée dans cette fonction
+
+      \subsection{afficher\_messages\_jour}
+Principe :
+On appelle la fonction \textit{afficher\_messages\_date} avec en paramètre la date du jour obtenue avec \textit{getDate}
+      
+      \subsection{afficher\_messages\_motif}
+Principe :
+        
+        \subsubsection{Lexique}
+        \begin{itemize}
+          \item 
+        \end{itemize}
+      
+      \subsection{supprimer\_obsoletes}
+Principe :
+
+        \subsubsection{Lexique}
+        \begin{itemize}
+          \item 
+        \end{itemize}
+
+      \subsection{remplacer\_date}
+Principe :
+
+        \subsubsection{Lexique}
+        \begin{itemize}
+          \item 
+        \end{itemize}      
+
+    \section{Gestion de la liste chaînée}
+
   \chapter{Compte rendu d'exécution}
     \section{Makefile}
       \makefilefile{../src/Makefile}
