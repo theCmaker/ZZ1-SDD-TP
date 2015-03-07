@@ -1,0 +1,18 @@
+Affichage de la liste apres recuperation
+Debut: 20150220, Fin: 20150227, Message: Ajout en tete
+Debut: 20150217, Fin: 20150228, Message: Ajout en milieu de liste
+Debut: 20150215, Fin: 20150316, Message: Evenement lambda
+Debut: 20150215, Fin: 20150416, Message: Ajout liste vide
+Debut: 20150212, Fin: 20150222, Message: Ajout apres le dernier element
+
+Affichage des messages du jour
+Debut: 20150215, Fin: 20150316, Message: Evenement lambda
+Debut: 20150215, Fin: 20150416, Message: Ajout liste vide
+
+Suppression des messages obsoletes
+Debut: 20150215, Fin: 20150316, Message: Evenement lambda
+Debut: 20150215, Fin: 20150416, Message: Ajout liste vide
+
+Modification des dates de debut: 20150215 -> 20150326
+Debut: 20150326, Fin: 20150416, Message: Ajout liste vide
+Debut: 20150215, Fin: 20150316, Message: Evenement lambda

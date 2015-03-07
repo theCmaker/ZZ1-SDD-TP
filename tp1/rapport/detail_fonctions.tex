@@ -99,33 +99,30 @@
         \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
       \ENDVAR
     \end{algo}
-    
-  \subsection{traiter\_elt\_date}
-    \begin{algo}[informal]
-      \ALGO{traiter\_elt\_date (Principe)}
-      \BEGIN
-        \STATE{On initialise l'élément courant au début de la liste}
-        \WHILE{la date de début de l'élément courant est supérieure à la date à traiter}
-          \STATE{On passe à la cellule suivante}
-        \ENDWHILE
-        \WHILE {la date de début de l'élément courant est égale à la date recherchée}
-          \STATE{On applique la fonction passée en paramètre à la cellule courante}
-          \STATE{On passe à la cellule suivante}
-        \ENDWHILE
-      \END
-    \end{algo}
-
-    \begin{algo}[informal]
-      \VAR
-        \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
-      \ENDVAR
-    \end{algo}
 
   \subsection{afficher\_messages\_date}
     \begin{algo}[informal]
       \ALGO{afficher\_messages\_date (Principe)}
       \BEGIN
-        \STATE{On appelle la fonction \textit{traiter\_elt\_date} avec la date de début des messages à afficher et l'adresse de la fonction \textit{afficher\_message}}
+        \STATE{On initialise l'élément courant au début de la liste}
+        \WHILE{la date de début de l'élément courant est supérieure à la date à traiter}
+          \STATE{On passe à la cellule suivante}
+        \ENDWHILE
+        \WHILE{la date de début de l'élément courant est égale à la date recherchée}
+          \STATE{On affiche l'élément courant}
+          \STATE{On passe à la cellule suivante}
+        \ENDWHILE
+        \WHILE{la liste n'est pas finie}
+          \WHILE{la date de fin de l'élément courant est ultérieure à la date recherchée}
+            \STATE{On affiche l'élément courant}
+            \STATE{On passe à la cellule suivante}
+          \ENDWHILE
+    \end{algo}
+    \begin{algo}[continue]
+          \IF{la liste n'est pas finie}
+            \STATE{On passe à la cellule suivante}
+          \ENDIF
+        \ENDWHILE
       \END
     \end{algo}
 

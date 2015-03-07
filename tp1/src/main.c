@@ -13,8 +13,8 @@
 #include "gestion_news.h"
 
 int main(int argc, char *argv[]) {
-  int old_deb = 20150217;
-  int new_deb = 20150226;
+  int old_deb = 20150215;
+  int new_deb = 20150326;
   cell_t *liste = NULL;
   if (argc > 1) {
     charger(&liste,argv[1]);

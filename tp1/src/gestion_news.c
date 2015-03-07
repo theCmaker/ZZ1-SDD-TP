@@ -142,31 +142,6 @@ void afficher_liste(cell_t *l) {
   }
 }
 
-/*  void traiter_elt_date_debut(cell_t *liste, int date, void (*fun)(cell_t *))
-  Fonction permettant d'appliquer une fonction a tous les elements ayant
-  une date de debut passe en parametre
-
-  Entrees :
-    cell_t *liste : pointeur sur le premier element de la liste chainee
-    int date : date de debut des elements a traiter, de la forme AAAAMMJJ
-    void (*fun)(cell_t*) : fonction a appliquer aux elements correspondant a la 
-                 date passee en parametre
-                 cette fonction prend un pointeur sur un element de la liste chainee
-
-  Sortie :
-    Aucune
-*/
-void traiter_elt_date_debut(cell_t *liste, int date, void (*fun)(cell_t *)) {
-  cell_t *cour = liste;
-  while (cour->debut > date) {
-    cour = cour->suiv;
-  }
-  while (cour->debut == date) {
-    fun(cour);
-    cour = cour->suiv;
-  }
-}
-
 /*  void afficher_messages_date(cell_t *liste, int date)
   Affiche les messages de la liste correspondant a la date passee en parametre
 
@@ -178,7 +153,23 @@ void traiter_elt_date_debut(cell_t *liste, int date, void (*fun)(cell_t *)) {
     Aucune
 */
 void afficher_messages_date(cell_t *liste, int date) {
-  traiter_elt_date_debut(liste,date,&afficher_message);
+  cell_t *cour = liste;
+  while (cour && cour->debut > date) {
+    cour = cour->suiv;
+  }
+  while (cour && cour->debut == date) {
+    afficher_message(cour);
+    cour = cour->suiv;
+  }
+  while (cour) {
+    while (cour && cour->fin >= date) {
+      afficher_message(cour);
+      cour = cour->suiv;
+    }
+    if (cour) {
+      cour = cour->suiv;
+    }
+  }
 }
 
 /*  void afficher_messages_jour(cell_t *liste)
