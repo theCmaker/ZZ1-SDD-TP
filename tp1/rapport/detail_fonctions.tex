@@ -1,3 +1,6 @@
+Dans cette partie, sont décrits les algorithme de principes associés aux fonctions écrites en langage C, ainsi qu'un lexique concernant les variables intermédiaires des fonctions.
+Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans le code source directement
+
 \section{Gestion des news}
   La gestion des news s'effectue grace aux fichiers \texttt{gestion\_news.c} et \texttt{gestion\_news.h}.
   
@@ -86,7 +89,7 @@
     \begin{algo}[informal]
       \ALGO{afficher\_liste (Principe)}
       \BEGIN
-        \STATE{On initialialise l'élément courant au début de la liste}
+        \STATE{On initialise l'élément courant au début de la liste}
         \WHILE{l'élément courant n'est pas NULL}
           \STATE{On affiche les élément de la cellule avec \textit{afficher\_message}}
           \STATE{On passe à la cellule suivante}
@@ -108,17 +111,17 @@
         \WHILE{la date de début de l'élément courant est supérieure à la date à traiter}
           \STATE{On passe à la cellule suivante}
         \ENDWHILE
-        \WHILE{la date de début de l'élément courant est égale à la date recherchée}
-          \STATE{On affiche l'élément courant}
-          \STATE{On passe à la cellule suivante}
-        \ENDWHILE
+%        \WHILE{la date de début de l'élément courant est égale à la date recherchée}
+%          \STATE{On affiche l'élément courant}
+%          \STATE{On passe à la cellule suivante}
+%        \ENDWHILE
         \WHILE{la liste n'est pas finie}
           \WHILE{la date de fin de l'élément courant est ultérieure à la date recherchée}
-            \STATE{On affiche l'élément courant}
+            \STATE{On affiche le message de l'élément courant}
             \STATE{On passe à la cellule suivante}
           \ENDWHILE
-    \end{algo}
-    \begin{algo}[continue]
+%    \end{algo} %pourquoi ces 2 lignes ?
+%    \begin{algo}[continue]
           \IF{la liste n'est pas finie}
             \STATE{On passe à la cellule suivante}
           \ENDIF
@@ -150,9 +153,9 @@
     \begin{algo}[informal] %principe
       \ALGO{afficher\_messages\_motif (Principe)}
       \BEGIN
-        \STATE{On initialialise l'élément courant au début de la liste}
-        \WHILE{L'élément courant n'est pas NULL}
-          \IF{Le message contenu dans la cellule courant contient le motif}
+        \STATE{On initialise l'élément courant au début de la liste}
+        \WHILE{l'élément courant n'est pas NULL}
+          \IF{le message contenu dans la cellule courant contient le motif}
             \STATE{On affiche ce message}
           \ENDIF
           \STATE{On passe à l'élément suivant}
@@ -173,7 +176,7 @@
         \STATE{On récupère la date du jour dans un entier}
         \STATE{On initialise un pointeur double **prec au début de la liste (ceci afin d'économiser l'utilisation du'une variable supplémentaire)}
         \WHILE{*prec n'est pas NULL}
-          \IF{La date de fin de message de *prec est inférieure à la date du jour}
+          \IF{la date de fin de message de *prec est inférieure à la date du jour}
             \STATE{On supprime cette cellule à partir du précédent prec}
           \ELSE
             \STATE{On passe à l'élément suivant}
@@ -194,11 +197,11 @@
       \ALGO{remplacer\_date (Principe)}
       \BEGIN
         \STATE{On initialise l'élément courant que début de la liste}
-        \WHILE{L'élémént courant n'est pas NULL ET ALORS La date de début de message de l'élément courant est supérieure à la date à modifier}
+        \WHILE{l'élémént courant n'est pas NULL ET ALORS La date de début de message de l'élément courant est supérieure à la date à modifier}
           \STATE{On passe à l'élément suivant}
         \ENDWHILE
-        \WHILE{L'élément courant n'est pas NULL ET ALORS La date de début de message de l'élément courant est égale à la date à modifier}
-          \IF{La date de fin de l'élément courant est supérieure ou égale à la nouvelle date}
+        \WHILE{l'élément courant n'est pas NULL ET ALORS La date de début de message de l'élément courant est égale à la date à modifier}
+          \IF{la date de fin de l'élément courant est supérieure ou égale à la nouvelle date}
             \STATE{On modifie la date de début de message de l'élément courant à la nouvelle date passée en paramètre}
           \ENDIF
           \STATE{On passe à l'élément suivant}
@@ -213,6 +216,111 @@
       \VAR
         \DECLVAR{*cour}{Pointeur sur la cellule en cours de traitement dans la liste chaînée}
       \ENDVAR
-    \end{algo}  
+    \end{algo}
 
 \section{Gestion de la liste chaînée}
+  \subsection{adj\_cell}
+    \begin{algo}[informal] %principe
+      \ALGO{adj\_cell (Principe)}
+      \BEGIN
+        \STATE{On a **prec un pointeur sur l'adresse de l'élément suivant à l'élément après lequel insérer}
+        \STATE{L'élément suivant de l'élément à ajouter est *prec, l'élément suivant de son précédent}
+        \STATE{L'élément suivant du précédent devient l'élément à ajouter}
+      \END
+    \end{algo}
+
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{Aucune variable intermédiaire n'est utilisée dans cette fonction}{}
+      \ENDVAR
+    \end{algo}
+
+  \subsection{rech\_prec}
+    \begin{algo}[informal] %principe
+      \ALGO{rech\_prec (Principe)}
+      \BEGIN
+        \STATE{On initialise **prec, un pointeur sur l'adresse du début de la liste}
+        \WHILE{*prec n'est pas NULL ET ALORS la date de début de *prec est supérieure à la date après laquelle insérer}
+          \STATE{prec prend l'adresse de l'adresse de l'élément suivant dans la liste}
+        \ENDWHILE
+        \STATE{La variable d'entré/sortie \textit{existe} prend la valeur 1 si la date cherchée est présente, 0 sinon}
+        \RETURN{prec}
+      \END
+    \end{algo}
+
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{Aucune variable intermédiaire n'est utilisée dans cette fonction}{}
+      \ENDVAR
+    \end{algo}
+
+  \subsection{supp\_cell}
+    \begin{algo}[informal] %principe
+      \ALGO{supp\_cell (Principe)}
+      \BEGIN
+        \STATE{On sauvegarde l'adresse de l'élément à supprimer dans un pointeur temporaire}
+        \STATE{L'élément suivant du précédent devient l'élément suivant de l'élément à supprimer}
+        \STATE{On libère le texte de la cellule à supprimer (car celui-ci est alloué dynamiquement)}
+        \STATE{On libère la cellule à supprimer}
+      \END
+    \end{algo}
+
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{*elt}{pointeur temporaire sur la cellule à supprimer}
+      \ENDVAR
+    \end{algo}
+  
+  \subsection{liberer\_liste}
+    \begin{algo}[informal] %principe
+      \ALGO{liberer\_liste (Principe)}
+      \BEGIN
+        \WHILE{la liste n'est pas vide}
+          \STATE{On supprime les cellules une à une}
+        \ENDWHILE
+        \STATE{On place le pointeur de tête de la liste à NULL}
+      \END
+    \end{algo}
+
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{Aucune variable intermédiaire n'est utilisée dans cette fonction}{}
+      \ENDVAR
+    \end{algo}
+
+  \subsection{ins\_cell}
+    \begin{algo}[informal] %principe
+      \ALGO{ins\_cell (Principe)}
+      \BEGIN
+        \STATE{On récupère un pointeur sur l'adresse de l'élément avant lequel insérer avec la fontion \textit{rech\_prec}}
+        \STATE{On ajoute l'élément dans la liste avec la fonction \textit{adj\_cell} en utilisant les variables prec et le pointeur sur l'élément à ajouter}
+      \END
+    \end{algo}
+
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{existe}{booleen de présence de l'élément recherché, modifié dans \textit{rech\_prec}}
+        \DECLVAR{**prec}{pointeur sur l'adresse de l'élément après lequel insérer}
+      \ENDVAR
+    \end{algo}
+
+  \subsection{creer\_cell}
+    \begin{algo}[informal] %principe
+      \ALGO{ (Principe)}
+      \BEGIN
+        \STATE{On alloue un élément de la liste chaînée}
+        \IF{l'allocation a réussie}
+          \STATE{On place les dates de début et de fin de message dans les champs appropriés}
+          \STATE{On allou l'espace nécéssaire pour le message dans le champ texte}
+          \STATE{On recopie le texte passé en entré dans le champ texte de la cellule}
+        \ENDIF
+        \RETURN{le nouvel élément crée}
+      \END
+    \end{algo}
+
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{*elt}{pointeur sur le nouvel élément crée, ce sera également le retour de la fonction. Si celui-ci est à NULL, cela signifie qu'il y a eu un soucis lors de son allocation}
+      \ENDVAR
+    \end{algo}
+    
