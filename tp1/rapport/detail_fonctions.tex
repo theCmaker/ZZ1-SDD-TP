@@ -126,36 +126,93 @@
       \END
     \end{algo}
 
+    \begin{algo}[informal]
+      \VAR
+        \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
+      \ENDVAR
+    \end{algo}
+
   \subsection{afficher\_messages\_jour}
     \begin{algo}[informal]
       \ALGO{afficher\_messages\_date (Principe)}
       \BEGIN
         \STATE{On appelle la fonction \textit{afficher\_messages\_date} avec en paramètre la date du jour obtenue avec \textit{getDate}}
       \END
-    \end{algo}        
+    \end{algo}
+    
+        \begin{algo}[informal]
+      \VAR
+        \DECLVAR{Aucune variable intermédiaire n'est utilisée dans cette fonction}{}
+      \ENDVAR
+    \end{algo}
           
   \subsection{afficher\_messages\_motif}
-    Principe :
-  
-    \subsubsection{Lexique}
-      \begin{itemize}
-        \item 
-      \end{itemize}
+    \begin{algo}[informal] %principe
+      \ALGO{afficher\_messages\_motif (Principe)}
+      \BEGIN
+        \STATE{On initialialise l'élément courant au début de la liste}
+        \WHILE{L'élément courant n'est pas NULL}
+          \IF{Le message contenu dans la cellule courant contient le motif}
+            \STATE{On affiche ce message}
+          \ENDIF
+          \STATE{On passe à l'élément suivant}
+        \ENDWHILE
+      \END
+    \end{algo}
+
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{*cour}{Pointeur sur la cellule en cours de traitement dans la liste chaînée}
+      \ENDVAR
+    \end{algo}
 
   \subsection{supprimer\_obsoletes}
-    Principe :
+    \begin{algo}[informal] %principe
+      \ALGO{supprimer\_obsoletes (Principe)}
+      \BEGIN
+        \STATE{On récupère la date du jour dans un entier}
+        \STATE{On initialise un pointeur double **prec au début de la liste (ceci afin d'économiser l'utilisation du'une variable supplémentaire)}
+        \WHILE{*prec n'est pas NULL}
+          \IF{La date de fin de message de *prec est inférieure à la date du jour}
+            \STATE{On supprime cette cellule à partir du précédent prec}
+          \ELSE
+            \STATE{On passe à l'élément suivant}
+          \ENDIF
+        \ENDWHILE
+      \END
+    \end{algo}
 
-    \subsubsection{Lexique}
-      \begin{itemize}
-        \item 
-      \end{itemize}
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{date}{Date du jour récupérée avec la fonction \textit{getDate}}
+        \DECLVAR{**prec}{Pointeur double servant à parcourir la liste en ayant toujours accès à l'élément précédent d'une cellule}
+      \ENDVAR
+    \end{algo}
 
   \subsection{remplacer\_date}
-    Principe :
+    \begin{algo}[informal]
+      \ALGO{remplacer\_date (Principe)}
+      \BEGIN
+        \STATE{On initialise l'élément courant que début de la liste}
+        \WHILE{L'élémént courant n'est pas NULL ET ALORS La date de début de message de l'élément courant est supérieure à la date à modifier}
+          \STATE{On passe à l'élément suivant}
+        \ENDWHILE
+        \WHILE{L'élément courant n'est pas NULL ET ALORS La date de début de message de l'élément courant est égale à la date à modifier}
+          \IF{La date de fin de l'élément courant est supérieure ou égale à la nouvelle date}
+            \STATE{On modifie la date de début de message de l'élément courant à la nouvelle date passée en paramètre}
+          \ENDIF
+          \STATE{On passe à l'élément suivant}
+        \ENDWHILE
+        \STATE{On sauvegarde la liste courante dans un fichier temporaire}
+        \STATE{On libère la liste}
+        \STATE{On recharge la liste à partir du fichier temporaire, ce qui va recréer la liste triée}
+      \END
+    \end{algo}
 
-    \subsubsection{Lexique}
-      \begin{itemize}
-        \item 
-      \end{itemize}      
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{*cour}{Pointeur sur la cellule en cours de traitement dans la liste chaînée}
+      \ENDVAR
+    \end{algo}  
 
 \section{Gestion de la liste chaînée}
