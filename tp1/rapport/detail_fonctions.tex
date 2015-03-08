@@ -1,5 +1,6 @@
-Dans cette partie, sont décrits les algorithme de principes associés aux fonctions écrites en langage C, ainsi qu'un lexique concernant les variables intermédiaires des fonctions.
-Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans le code source directement
+Dans cette partie, sont décrits les algorithmes de principe associés aux fonctions écrites en langage C, ainsi qu'un lexique concernant les variables intermédiaires des fonctions.
+
+Le lexique des variable d'entrée, sortie et entrée/sortie sont disponibles dans le code source directement.
 
 \section{Gestion des news}
   La gestion des news s'effectue grace aux fichiers \texttt{gestion\_news.c} et \texttt{gestion\_news.h}.
@@ -28,14 +29,17 @@ Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans 
         \RETURN{le code d'erreur}
       \END
     \end{algo}
-
     \begin{algo}[informal]
       \VAR
-        \DECLVAR{ret}{entier qui retourne un code d'erreur \begin{minipage}{0.5\linewidth}\begin{itemize}
-          \item 0 si aucune erreur
-          \item 1 si problème lors de l'ouverture du fichier
-          \item 2 si problème lors de la création de la cellule
-        \end{itemize} \end{minipage}}
+        \DECLVAR{ret}{entier qui retourne un code d'erreur 
+          \begin{minipage}{0.5\linewidth}
+            \begin{itemize}[noitemsep,nolistsep]
+              \item 0 si aucune erreur\phantom{p}
+              \item 1 si problème lors de l'ouverture du fichier
+              \item 2 si problème lors de la création de la cellule
+            \end{itemize}
+          \end{minipage}
+        }
         \DECLVAR{*fichier}{descripteur de fichier, ouvert a partir du nom passé en paramètres}
         \DECLVAR{debut, fin}{entiers servant à stocker les dates de début et de fin de message lors du traitement du fichier}
         \DECLVAR{*scan}{chaîne de caractère permettant de stocker le message lors du traitement du fichier}
@@ -43,7 +47,6 @@ Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans 
       \ENDVAR
     \end{algo}
 
-  
   \subsection{sauver}
     \begin{algo}[informal]
       \ALGO{Sauver (Principe)}
@@ -60,13 +63,11 @@ Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans 
         \ENDIF
         \RETURN{le code d'erreur}
       \END
-    \end{algo}
-    
-    \begin{algo}[informal]
+      \vspace{0.3cm}
       \VAR
         \DECLVAR{ret}{entier représentant le code d'erreur de la fonction \begin{minipage}{0.45\textwidth}
-        \begin{itemize}
-          \item 0 aucune erreur
+        \begin{itemize}[noitemsep,nolistsep]
+          \item 0 aucune erreur\phantom{p}
           \item 1 erreur de création ou d'ouverture du fichier
         \end{itemize} \end{minipage}}
         \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
@@ -96,7 +97,6 @@ Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans 
         \ENDWHILE
       \END
     \end{algo}
-
     \begin{algo}[informal]
       \VAR
         \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
@@ -111,17 +111,11 @@ Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans 
         \WHILE{la date de début de l'élément courant est supérieure à la date à traiter}
           \STATE{On passe à la cellule suivante}
         \ENDWHILE
-%        \WHILE{la date de début de l'élément courant est égale à la date recherchée}
-%          \STATE{On affiche l'élément courant}
-%          \STATE{On passe à la cellule suivante}
-%        \ENDWHILE
         \WHILE{la liste n'est pas finie}
           \WHILE{la date de fin de l'élément courant est ultérieure à la date recherchée}
             \STATE{On affiche le message de l'élément courant}
             \STATE{On passe à la cellule suivante}
           \ENDWHILE
-%    \end{algo} %pourquoi ces 2 lignes ?
-%    \begin{algo}[continue]
           \IF{la liste n'est pas finie}
             \STATE{On passe à la cellule suivante}
           \ENDIF
@@ -137,7 +131,7 @@ Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans 
 
   \subsection{afficher\_messages\_jour}
     \begin{algo}[informal]
-      \ALGO{afficher\_messages\_date (Principe)}
+      \ALGO{afficher\_messages\_jour (Principe)}
       \BEGIN
         \STATE{On appelle la fonction \textit{afficher\_messages\_date} avec en paramètre la date du jour obtenue avec \textit{getDate}}
       \END
@@ -197,10 +191,10 @@ Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans 
       \ALGO{remplacer\_date (Principe)}
       \BEGIN
         \STATE{On initialise l'élément courant que début de la liste}
-        \WHILE{l'élémént courant n'est pas NULL ET ALORS La date de début de message de l'élément courant est supérieure à la date à modifier}
+        \WHILE{l'élémént courant n'est pas NULL \ANDTHEN La date de début de message de l'élément courant est supérieure à la date à modifier}
           \STATE{On passe à l'élément suivant}
         \ENDWHILE
-        \WHILE{l'élément courant n'est pas NULL ET ALORS La date de début de message de l'élément courant est égale à la date à modifier}
+        \WHILE{l'élément courant n'est pas NULL \ANDTHEN La date de début de message de l'élément courant est égale à la date à modifier}
           \IF{la date de fin de l'élément courant est supérieure ou égale à la nouvelle date}
             \STATE{On modifie la date de début de message de l'élément courant à la nouvelle date passée en paramètre}
           \ENDIF
@@ -240,10 +234,10 @@ Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans 
       \ALGO{rech\_prec (Principe)}
       \BEGIN
         \STATE{On initialise **prec, un pointeur sur l'adresse du début de la liste}
-        \WHILE{*prec n'est pas NULL ET ALORS la date de début de *prec est supérieure à la date après laquelle insérer}
+        \WHILE{*prec n'est pas NULL \ANDTHEN la date de début de *prec est supérieure à la date après laquelle insérer}
           \STATE{prec prend l'adresse de l'adresse de l'élément suivant dans la liste}
         \ENDWHILE
-        \STATE{La variable d'entré/sortie \textit{existe} prend la valeur 1 si la date cherchée est présente, 0 sinon}
+        \STATE{La variable d'entrée/sortie \textit{existe} prend la valeur 1 si la date cherchée est présente, 0 sinon}
         \RETURN{prec}
       \END
     \end{algo}
@@ -292,14 +286,14 @@ Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans 
     \begin{algo}[informal] %principe
       \ALGO{ins\_cell (Principe)}
       \BEGIN
-        \STATE{On récupère un pointeur sur l'adresse de l'élément avant lequel insérer avec la fontion \textit{rech\_prec}}
+        \STATE{On récupère un pointeur sur l'adresse de l'élément avant lequel insérer avec la fonction \textit{rech\_prec}}
         \STATE{On ajoute l'élément dans la liste avec la fonction \textit{adj\_cell} en utilisant les variables prec et le pointeur sur l'élément à ajouter}
       \END
     \end{algo}
 
     \begin{algo}[informal] %lexique
       \VAR
-        \DECLVAR{existe}{booleen de présence de l'élément recherché, modifié dans \textit{rech\_prec}}
+        \DECLVAR{existe}{booléen de présence de l'élément recherché, modifié dans \textit{rech\_prec}}
         \DECLVAR{**prec}{pointeur sur l'adresse de l'élément après lequel insérer}
       \ENDVAR
     \end{algo}
@@ -309,18 +303,18 @@ Le lexique des variable d'entré, sortie et entré/sortie sont disponibles dans 
       \ALGO{ (Principe)}
       \BEGIN
         \STATE{On alloue un élément de la liste chaînée}
-        \IF{l'allocation a réussie}
+        \IF{l'allocation a réussi}
           \STATE{On place les dates de début et de fin de message dans les champs appropriés}
-          \STATE{On allou l'espace nécéssaire pour le message dans le champ texte}
-          \STATE{On recopie le texte passé en entré dans le champ texte de la cellule}
+          \STATE{On alloue l'espace nécessaire pour le message dans le champ texte}
+          \STATE{On recopie le texte passé en entrée dans le champ texte de la cellule}
         \ENDIF
-        \RETURN{le nouvel élément crée}
+        \RETURN{le nouvel élément créé}
       \END
     \end{algo}
 
     \begin{algo}[informal] %lexique
       \VAR
-        \DECLVAR{*elt}{pointeur sur le nouvel élément crée, ce sera également le retour de la fonction. Si celui-ci est à NULL, cela signifie qu'il y a eu un soucis lors de son allocation}
+        \DECLVAR{*elt}{pointeur sur le nouvel élément créé, ce sera également le retour de la fonction. Si celui-ci est à NULL, cela signifie qu'il y a eu un problème lors de son allocation}
       \ENDVAR
     \end{algo}
     

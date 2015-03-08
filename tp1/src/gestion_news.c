@@ -157,10 +157,6 @@ void afficher_messages_date(cell_t *liste, int date) {
   while (cour && cour->debut > date) {
     cour = cour->suiv;
   }
-  while (cour && cour->debut == date) {
-    afficher_message(cour);
-    cour = cour->suiv;
-  }
   while (cour) {
     while (cour && cour->fin >= date) {
       afficher_message(cour);

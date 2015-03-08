@@ -19,10 +19,12 @@
 
 \newcommand{\algocommentbeginchars}{\{}
 \newcommand{\algocommentendchars}{\}}
-\newcommand{\AND}{\algokeywordand \ }
-\newcommand{\ANDTHEN}{\algokeywordandthen \ }
-\newcommand{\OR}{\algokeywordor \ }
-\newcommand{\NOT}{\algokeywordnot \ }
+\newcommand{\AND}{\algokeywordfont{\algokeywordand} \ }
+\newcommand{\ANDTHEN}{\algokeywordfont{\algokeywordandthen} \ }
+
+\newcommand{\OR}{\algokeywordfont{\algokeywordor \ }}
+\newcommand{\ORELSE}{\algokeywordfont{\algokeywordorelse \ }}
+\newcommand{\NOT}{\algokeywordfont{\algokeywordnot \ }}
 \newcommand{\MOD}{\ensuremath{\bmod}\ }
 \newcommand{\LE}{\ensuremath{\le}\ }
 \newcommand{\LT}{\ensuremath{<}\ }
@@ -35,6 +37,7 @@
 \newcommand{\algokeywordand}{}
 \newcommand{\algokeywordandthen}{}
 \newcommand{\algokeywordor}{}
+\newcommand{\algokeywordorelse}{}
 \newcommand{\algokeywordnot}{}
 \newcommand{\algokeywordof}{}
 \newcommand{\algokeywordalgo}{}
@@ -84,6 +87,7 @@
   \renewcommand{\algokeywordand}{Et}%
   \renewcommand{\algokeywordandthen}{Et Alors}%
   \renewcommand{\algokeywordor}{Ou}%
+  \renewcommand{\algokeywordorelse}{Ou Sinon}%
   \renewcommand{\algokeywordnot}{Non}%
   \renewcommand{\algokeywordalgo}{Algorithme}%
   \renewcommand{\algokeywordbegin}{D\'ebut}%
@@ -133,6 +137,7 @@
   \renewcommand{\algokeywordand}{And}%
   \renewcommand{\algokeywordandthen}{And Then}%
   \renewcommand{\algokeywordor}{Or}%
+  \renewcommand{\algokeywordorelse}{Or Else}%
   \renewcommand{\algokeywordnot}{Not}%
   \renewcommand{\algokeywordalgo}{Algorithm}%
   \renewcommand{\algokeywordbegin}{Begin}%
