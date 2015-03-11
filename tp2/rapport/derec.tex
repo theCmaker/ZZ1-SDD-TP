@@ -1,37 +1,65 @@
 \documentclass{report}
+\usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[frenchb]{babel}
+\usepackage{amsmath}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 
 \begin{document}
+  \begin{figure}[h!]
+  \centering
   \begin{tikzpicture}
     % style des noeuds
-    \tikzstyle{debutfin}=[ellipse,draw,text=red]
-    \tikzstyle{instruct}=[rectangle,draw,fill=yellow!50]
+    \tikzstyle{debutfin}=[ellipse,draw,fill=Yellow!75]
+    \tikzstyle{instruct}=[rectangle,draw,fill=Orange!75,text width=2.5cm,align=center]
     \tikzstyle{test}=[diamond, aspect=2.5,thick,
-    draw=blue,fill=yellow!50,text=blue]
-    \tikzstyle{es}=[rectangle,draw,rounded corners=4pt,fill=blue!25]
-    % style des fl?ches
-    \tikzstyle{suite}=[->,>=stealth',thick,rounded corners=4pt]
+    draw=ForestGreen,fill=LimeGreen!75]
+    \tikzstyle{es}=[rectangle,draw,rounded corners=4pt,fill=RoyalBlue!50]
+    % style des flèches
+    \tikzstyle{suite}=[thick,->,>=stealth']
+    \tikzstyle{arr}=[->,>=stealth']
     % placement des noeuds
-    \node[debutfin] (debut) at (-2,5) {Début};
-    \node[es] (lire) at (-2,4) {Lire un entier positif $N$};
-    \node[test] (test) at (0,0) {$N>0$ \ ?};
-    \node[instruct] (init) at (-2,2.5) {$S\leftarrow 0$};
-    \node[instruct] (plus) at (0,-2.5) {$S\leftarrow S+N$};
-    \node[instruct] (moins) at (0,-3.5) {$N\leftarrow N-1$};
-    \node[es] (afficher) at (-4,-2) {Afficher la somme $S$};
-    \node[debutfin] (fin) at (-4,-3) {Fin};
-    % Placement des fl?ches
-    \draw[suite] (debut) -- (lire);
-    \draw[suite] (lire) -- (init);
-    \draw[suite] (init) -- (test.north);
-    \draw[suite] (test) -- (plus) node[midway,fill=white]{oui};
-    \draw[suite] (plus) -- (moins);
-    \draw[suite] (moins)|-(3,-4.5) |- (1,1.5)--(test.north);
-    \draw[suite] (test)-|(afficher)node[near start,fill=white]{non};
-    \draw[suite] (afficher) -- (fin);
+    \node[debutfin] (debut) at (-2,6) {Début};
+    \node[instruct] (init) at (-2,4) {$sl := s;$ $il := i;$ $p := INIT();$};
+    \node[test] (test1) at (-2,2) {$sl := 0 ?$};
+    \node[test] (test2) at (-2,0) {$sl < 0 \text{ ou } il < N ?$};
+    \node[instruct] (push) at (-2,-2.5) {$Empiler(sl);$ $Empiler(il);$};
+    \node[instruct] (inc_double) at (-2,-5) {$sl := sl - P(il);$ $il := il - P(I);$};
+    \node[instruct] (r_true) at (2,2) {$R := Vrai;$};
+    \node[instruct] (r_false) at (2,0) {$R := Faux;$};
+    \node[test] (test3) at (6,2) {$Vide(p)?$};
+    \node[instruct] (pop) at (6,0) {$Depiler(il);$ $Depiler(sl);$};
+    \node[test] (test4) at (6,-2) {$R = Vrai ?$};
+    \node[es] (print) at (6,-4) {$Ecrire(P(il));$};
+    \node[instruct] (ilpp) at (10,-2) {$il := il + 1$};
+    \node[instruct] (ret) at (10,2) {$Retourner R;$};
+    \node[debutfin] (fin) at (10,1) {Fin};
+    % Placement des flèches
+    \draw[suite] (debut) -- (init);
+    \draw[suite] (init) -- (test1.north);
+    \draw[suite] (test1.south) -- (test2.north) node[midway,right]{non};
+    \draw[suite] (test2.south) -- (push.north) node[midway,right]{non};
+    \draw[suite] (push.south) -- (inc_double.north);
+    \draw[suite] (test1.east) -- (r_true) node[midway,above]{oui};
+    \draw[suite] (test2.east) -- (r_false) node[midway,above]{oui};
+    \draw[suite] (r_true) -- (test3.west);
+    \draw[suite] (r_false.east) -| +(0.5,0) |- (test3.west);
+    \draw[suite] (test3.east) -- (ret) node[midway,above]{oui};
+    \draw[suite] (ret.south) -- (fin.north);
+    \draw[suite] (test3.south) -- (pop.north) node[midway,right]{non};
+    \draw[suite] (pop.south) -- (test4.north);
+    \draw[suite] (test4.east) -- (ilpp) node[midway,above]{non};
+    \draw[suite] (test4.south) -- (print.north) node[midway,right]{oui};
+    \draw[suite,arr] (print.south) |- +(0,-0.5) -| +(-2,0) |- (test3.west);
+    \draw[suite,arr] (inc_double.south) |- +(0,-0.5) -| +(-2.5,0) |- (-2,3);
+    \draw[suite,arr] (ilpp.east) -| +(0.5,0) |- +(0,5) |- (-2,3);
+
+    %~ \draw[suite] (plus) -- (moins);
+    %~ \draw[suite] (moins)|-(3,-4.5) |- (1,1.5)--(test.north);
+    %~ \draw[suite] (test)-|(afficher)node[near start,fill=white]{non};
+    %~ \draw[suite] (afficher) -- (fin);
   \end{tikzpicture}
+  \end{figure}
 \end{document}
