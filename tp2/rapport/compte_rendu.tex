@@ -54,23 +54,21 @@
   \setlength{\parindent}{0pt}
   \chapter{Présentation}
     Le but de ce TP est de dérécurssifier une fonction à l'aide d'un pile. Les fonctions de gestion d'une pile seront ainsi crées.
-
-    
-
-    Les opérations suivantes sont permises:
+    Les opérations suivantes sont permisesavec la pile:
     \begin{itemize}
-      \item Charger une liste depuis un fichier,
-      \item Sauvegarder une liste dans un fichier,
-      \item Afficher les messages du jour,
-      \item Supprimer les messages obsolètes,
-      \item Modifier une date de début sur tous les messages,
-      \item Afficher tous les messages contenant une chaîne particulière.
+      \item Initialiser la pile,
+      \item Libérer la pile,
+      \item Tester si la pile est vide,
+      \item Tester si la pile est pleine,
+      \item Retourner l'élément en haut de la pile,
+      \item Afficher l'élément en haut de la pile,
+      \item Insérer un élément dans la pile.
     \end{itemize}
 
     \section{Structure de données employée}
       \input{schema}
     \section{Organisation du code source}
-      Nous avons défini deux modules, le premier est dédié à la gestion des listes chaînées (adjonction, recherche, suppression etc.), et le second à la gestion des news (lecture, sauvegarde, modifications etc.). Enfin, le programme principal utilise conjointement ces deux modules pour réaliser le traitement voulu.
+      Nous avons défini deux modules, le premier contient une fonction sous forme récurssive ansi que sa version sous forme itérative. Nous disposons également d'un module permettant de gérer une pile, qui est ainsi utilisée lors de la dérécurssification de la fonction.
       \input{code_source}
   \chapter{Détails du programme}
     \input{detail_code}
