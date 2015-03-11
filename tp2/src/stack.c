@@ -1,7 +1,27 @@
+/*  stack.c
+  Fonctions de gestion de la structure de pile
+
+  -----| DERECURSIFICATION DE FONCTION PAR PILE |-----
+
+  BARBESANGE Benjamin,
+  PISSAVY Pierre-Loup
+
+  ISIMA 1ere Annee, 2014-2015
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
 
+/*  int init(stack_t *p, int n)
+
+  Entrees :
+    *p : pointeur sur la pile
+    n : taille maximum de la pile
+
+  Sortie :
+    
+*/
 int init(stack_t *p, int n) {
   int ret = 1;
   p->max = n;

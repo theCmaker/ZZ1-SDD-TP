@@ -1,12 +1,35 @@
+/*  truc.c
+  Fonction recursive et son equivalent en iteratif
+
+  -----| DERECURSIFICATION DE FONCTION PAR PILE |-----
+
+  BARBESANGE Benjamin,
+  PISSAVY Pierre-Loup
+
+  ISIMA 1ere Annee, 2014-2015
+*/
+
 #include <stdio.h>
 #include "stack.h"
+#include "truc.h"
 
 #define N 10
 
 int P[N+1] = {0,1,3,2,5,5,2,7,1,9,1};
 
-int TRUC(int,int);
+/*  int TRUC(int S, int I)
+  Fonction sous forme recursive qui affiche la decomposition de
+  S en I entiers pris a partir d'un tableau d'entiers (defini ici en statique)
 
+  Entrees :
+    int S : Nombre a decomposer
+    int I : Nombre d'entiers utilises pour decomposer S
+
+  Sortie :
+    int : entier sous forme de booleen
+      0 si on a pas pu decomposer S exactement
+      1 sinon
+*/
 int TRUC(int S, int I) {
   if (S == 0) {
     return 1;
@@ -20,6 +43,18 @@ int TRUC(int S, int I) {
   }
 }
 
+/*  int truc_iter(int s, int i)
+  Meme fonction qu'au dessus, mais sous forme iterative
+
+  Entrees :
+    int s : Nombre a decomposer
+    int i : Nombre d'entiers utilises pour decomposer S
+
+  Sortie :
+    int : entier sous forme de booleen
+      0 si on a pas pu decomposer S exactement
+      1 sinon
+*/
 int truc_iter(int s, int i) {
   int sl = s;
   int il = i;
@@ -50,25 +85,4 @@ int truc_iter(int s, int i) {
     }
   } while (!empty(p));
   return r;
-}
-
-int main(void) {
-  int S, I;
-  do {
-    S = -1;
-    while (S <= 0) {
-      printf("S? ");
-      scanf("%d",&S);
-    }
-    printf("I? ");
-    scanf("%d",&I);
-
-    if (I >= 0) {
-      printf("Recursif:\n");
-      TRUC(S,I);
-      printf("Iteratif:\n");
-      truc_iter(S,I);
-    }
-  } while (I >= 0);
-  return 0;
 }

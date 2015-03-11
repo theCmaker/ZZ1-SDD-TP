@@ -2,319 +2,60 @@ Dans cette partie, sont décrits les algorithmes de principe associés aux fonct
 
 Le lexique des variable d'entrée, sortie et entrée/sortie sont disponibles dans le code source directement.
 
-\section{Gestion des news}
-  La gestion des news s'effectue grace aux fichiers \texttt{gestion\_news.c} et \texttt{gestion\_news.h}.
+\section{Gestion de la pile}
+  La gestion de la pile s'effectue grace aux fichiers \textit{stack.c} et \textit{stack.h}.
   
-  \subsection{charger}
-    \begin{algo}[informal]
-      \ALGO{Charger (Principe)}
-      \BEGIN
-        \STATE{On ouvre en lecture seule le fichier dont le nom est passé en paramètre}
-        \STATE[erreur d'ouverture de fichier]{On initialise le code de retour à 1}
-        \IF{on a pu l'ouvrir}
-          \STATE[pas de problème d'ouverture de fichier]{Le code de retour passe à 0}
-          \WHILE{l'on n'arrive pas à la fin du fichier}
-            \STATE{On lit une ligne}
-            \STATE{On stocke les date de début et de fin de message dans des variables}
-            \STATE{On stocke le message dans une chaîne de caractère}
-            \STATE{On crée une nouvelle cellule à partir des variables ci-dessus récupérées}
-            \IF{on a pu créer la cellule}
-              \STATE{On l'insère dans la liste chaînée}
-            \ELSE
-              \STATE[erreur allocation de cellule]{Le code de retour passe a 2}
-            \ENDIF
-          \ENDWHILE
-          \STATE{On ferme le fichier}
-        \ENDIF
-        \RETURN{le code d'erreur}
-      \END
-    \end{algo}
-    \begin{algo}[informal]
-      \VAR
-        \DECLVAR{ret}{entier qui retourne un code d'erreur 
-          \begin{minipage}{0.5\linewidth}
-            \begin{itemize}[noitemsep,nolistsep]
-              \item 0 si aucune erreur\phantom{p}
-              \item 1 si problème lors de l'ouverture du fichier
-              \item 2 si problème lors de la création de la cellule
-            \end{itemize}
-          \end{minipage}
-        }
-        \DECLVAR{*fichier}{descripteur de fichier, ouvert a partir du nom passé en paramètres}
-        \DECLVAR{debut, fin}{entiers servant à stocker les dates de début et de fin de message lors du traitement du fichier}
-        \DECLVAR{*scan}{chaîne de caractère permettant de stocker le message lors du traitement du fichier}
-        \DECLVAR{*tmp}{pointeur de cellule qui servira de cellule temporaire à chaîner dans la liste}
-      \ENDVAR
-    \end{algo}
+  \subsection{init}
+  \subsection{supp}
+  \subsection{empty}
+  \subsection{full}
+  \subsection{pop}
+  \subsection{top}
+  \subsection{push}
 
-  \subsection{sauver}
-    \begin{algo}[informal]
-      \ALGO{Sauver (Principe)}
-      \BEGIN
-        \STATE{On crée un nouveau fichier à partir du nom donné en paramètre}
-        \STATE[erreur de création de fichier]{On initialise le code de retour à 1}
-        \IF{l'on a pu créer le fichier}
-          \WHILE{l'on n'est pas à la fin de la liste}
-            \STATE{On écrit les élément de la cellule en cours de traitement dans le fichier}
-            \STATE{On passe à la cellule suivante}
-          \ENDWHILE
-          \STATE{On ferme le fichier}
-          \STATE[pas d'erreur]{On passe le code de retour à 0}
-        \ENDIF
-        \RETURN{le code d'erreur}
-      \END
-      \vspace{0.3cm}
-      \VAR
-        \DECLVAR{ret}{entier représentant le code d'erreur de la fonction \begin{minipage}{0.45\textwidth}
-        \begin{itemize}[noitemsep,nolistsep]
-          \item 0 aucune erreur\phantom{p}
-          \item 1 erreur de création ou d'ouverture du fichier
-        \end{itemize} \end{minipage}}
-        \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
-        \DECLVAR{*fichier}{descripteur de fichier crée à partir du nom passé en paramètre}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{getDate}
-    Cette fonction est fournie pour le TP, nous ne la détaillerons donc pas.
-  
-  \subsection{afficher\_message}
-    \begin{algo}[informal]
-      \ALGO{afficher\_message (Principe)}
-      \BEGIN
-        \STATE{On écrit les données d'une cellule en récupérant ses attributs}
-      \END
-    \end{algo}
-  
-  \subsection{afficher\_liste}
-    \begin{algo}[informal]
-      \ALGO{afficher\_liste (Principe)}
-      \BEGIN
-        \STATE{On initialise l'élément courant au début de la liste}
-        \WHILE{l'élément courant n'est pas NULL}
-          \STATE{On affiche les élément de la cellule avec \textit{afficher\_message}}
-          \STATE{On passe à la cellule suivante}
-        \ENDWHILE
-      \END
-    \end{algo}
-    \begin{algo}[informal]
-      \VAR
-        \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{afficher\_messages\_date}
-    \begin{algo}[informal]
-      \ALGO{afficher\_messages\_date (Principe)}
-      \BEGIN
-        \STATE{On initialise l'élément courant au début de la liste}
-        \WHILE{la date de début de l'élément courant est supérieure à la date à traiter}
-          \STATE{On passe à la cellule suivante}
-        \ENDWHILE
-        \WHILE{la liste n'est pas finie}
-          \WHILE{la date de fin de l'élément courant est ultérieure à la date recherchée}
-            \STATE{On affiche le message de l'élément courant}
-            \STATE{On passe à la cellule suivante}
-          \ENDWHILE
-          \IF{la liste n'est pas finie}
-            \STATE{On passe à la cellule suivante}
-          \ENDIF
-        \ENDWHILE
-      \END
-    \end{algo}
-
-    \begin{algo}[informal]
-      \VAR
-        \DECLVAR{*cour}{pointeur sur la cellule en cours de traitement dans la liste chaînée}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{afficher\_messages\_jour}
-    \begin{algo}[informal]
-      \ALGO{afficher\_messages\_jour (Principe)}
-      \BEGIN
-        \STATE{On appelle la fonction \textit{afficher\_messages\_date} avec en paramètre la date du jour obtenue avec \textit{getDate}}
-      \END
-    \end{algo}
+\section{Dérecursification de la fonction}
+  La fonction récursive ainsi que sa version itérée se trouvent dans les fichiers \textit{truc.c} et \textit{truc.h}.
+  \subsection{TRUC}
+    Cette fonction étant l'énoncé du TP, nous ne détaillerons ainsi ne le principe ni les variables utilisées dans cet algorihtme.
     
-        \begin{algo}[informal]
-      \VAR
-        \DECLVAR{Aucune variable intermédiaire n'est utilisée dans cette fonction}{}
-      \ENDVAR
-    \end{algo}
-          
-  \subsection{afficher\_messages\_motif}
+  \subsection{truc\_iter}
     \begin{algo}[informal] %principe
-      \ALGO{afficher\_messages\_motif (Principe)}
+      \ALGO{truc\_iter (Principe)}
       \BEGIN
-        \STATE{On initialise l'élément courant au début de la liste}
-        \WHILE{l'élément courant n'est pas NULL}
-          \IF{le message contenu dans la cellule courant contient le motif}
-            \STATE{On affiche ce message}
-          \ENDIF
-          \STATE{On passe à l'élément suivant}
-        \ENDWHILE
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{*cour}{Pointeur sur la cellule en cours de traitement dans la liste chaînée}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{supprimer\_obsoletes}
-    \begin{algo}[informal] %principe
-      \ALGO{supprimer\_obsoletes (Principe)}
-      \BEGIN
-        \STATE{On récupère la date du jour dans un entier}
-        \STATE{On initialise un pointeur double **prec au début de la liste (ceci afin d'économiser l'utilisation du'une variable supplémentaire)}
-        \WHILE{*prec n'est pas NULL}
-          \IF{la date de fin de message de *prec est inférieure à la date du jour}
-            \STATE{On supprime cette cellule à partir du précédent prec}
+        \STATE{Copie des paramètres d'entré dans des variables locales, sl et il}
+        \STATE{Initialisation de la pile de la même taille que le tableau statique}
+        \REPEAT
+          \WHILE{sl > 0 \ANDTHEN il <= N}
+            \STATE{On push sl dans la pile}
+            \STATE{On push il dans la pile}
+            \STATE{sl = sl - P[il]}
+            \STATE{On incrémente il}
+          \ENDWHILE
+          \IF{sl = 0}
+            \STATE{Le booléen de retour est à Vrai}
+            \WHILE{la pile n'est pas vide}
+              \STATE{On récupère il et sl à partir de la pile}
+              \STATE{On affiche P[il]}
+            \ENDWHILE
           \ELSE
-            \STATE{On passe à l'élément suivant}
+            \STATE{Le booléen de retour est à Faux}
+            \IF{la pile n'est pas vide}
+              \STATE{On récupère il est sl à partir de la pile}
+              \STATE{On incrémente il}
+            \ENDIF
           \ENDIF
-        \ENDWHILE
+        \ENDREPEAT[while]{la pile n'est pas vide}
+        \RETURN{Booléen de retour}
       \END
     \end{algo}
 
     \begin{algo}[informal] %lexique
       \VAR
-        \DECLVAR{date}{Date du jour récupérée avec la fonction \textit{getDate}}
-        \DECLVAR{**prec}{Pointeur double servant à parcourir la liste en ayant toujours accès à l'élément précédent d'une cellule}
+        \DECLVAR{sl}{copie locale du nombre s passé en paramètre. Représente le nombre à décomposer}
+        \DECLVAR{il}{copie locale du nombre i passé en paramètre. Représente le nombre d'entiers du tableau à utiliser pour décomposer s}
+        \DECLVAR{r}{booléen de retour, indique 1 si on a obtenue la somme s, 0 sinon}
+        \DECLVAR{p}{pile}
+        \DECLVAR{P}{tableau d'entiers, défini statiquement}
+        \DECLVAR{N}{taille du tableau P}
       \ENDVAR
     \end{algo}
-
-  \subsection{remplacer\_date}
-    \begin{algo}[informal]
-      \ALGO{remplacer\_date (Principe)}
-      \BEGIN
-        \STATE{On initialise l'élément courant que début de la liste}
-        \WHILE{l'élémént courant n'est pas NULL \ANDTHEN La date de début de message de l'élément courant est supérieure à la date à modifier}
-          \STATE{On passe à l'élément suivant}
-        \ENDWHILE
-        \WHILE{l'élément courant n'est pas NULL \ANDTHEN La date de début de message de l'élément courant est égale à la date à modifier}
-          \IF{la date de fin de l'élément courant est supérieure ou égale à la nouvelle date}
-            \STATE{On modifie la date de début de message de l'élément courant à la nouvelle date passée en paramètre}
-          \ENDIF
-          \STATE{On passe à l'élément suivant}
-        \ENDWHILE
-        \STATE{On sauvegarde la liste courante dans un fichier temporaire}
-        \STATE{On libère la liste}
-        \STATE{On recharge la liste à partir du fichier temporaire, ce qui va recréer la liste triée}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{*cour}{Pointeur sur la cellule en cours de traitement dans la liste chaînée}
-      \ENDVAR
-    \end{algo}
-
-\section{Gestion de la liste chaînée}
-  \subsection{adj\_cell}
-    \begin{algo}[informal] %principe
-      \ALGO{adj\_cell (Principe)}
-      \BEGIN
-        \STATE{On a **prec un pointeur sur l'adresse de l'élément suivant à l'élément après lequel insérer}
-        \STATE{L'élément suivant de l'élément à ajouter est *prec, l'élément suivant de son précédent}
-        \STATE{L'élément suivant du précédent devient l'élément à ajouter}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{Aucune variable intermédiaire n'est utilisée dans cette fonction}{}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{rech\_prec}
-    \begin{algo}[informal] %principe
-      \ALGO{rech\_prec (Principe)}
-      \BEGIN
-        \STATE{On initialise **prec, un pointeur sur l'adresse du début de la liste}
-        \WHILE{*prec n'est pas NULL \ANDTHEN la date de début de *prec est supérieure à la date après laquelle insérer}
-          \STATE{prec prend l'adresse de l'adresse de l'élément suivant dans la liste}
-        \ENDWHILE
-        \STATE{La variable d'entrée/sortie \textit{existe} prend la valeur 1 si la date cherchée est présente, 0 sinon}
-        \RETURN{prec}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{Aucune variable intermédiaire n'est utilisée dans cette fonction}{}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{supp\_cell}
-    \begin{algo}[informal] %principe
-      \ALGO{supp\_cell (Principe)}
-      \BEGIN
-        \STATE{On sauvegarde l'adresse de l'élément à supprimer dans un pointeur temporaire}
-        \STATE{L'élément suivant du précédent devient l'élément suivant de l'élément à supprimer}
-        \STATE{On libère le texte de la cellule à supprimer (car celui-ci est alloué dynamiquement)}
-        \STATE{On libère la cellule à supprimer}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{*elt}{pointeur temporaire sur la cellule à supprimer}
-      \ENDVAR
-    \end{algo}
-  
-  \subsection{liberer\_liste}
-    \begin{algo}[informal] %principe
-      \ALGO{liberer\_liste (Principe)}
-      \BEGIN
-        \WHILE{la liste n'est pas vide}
-          \STATE{On supprime les cellules une à une}
-        \ENDWHILE
-        \STATE{On place le pointeur de tête de la liste à NULL}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{Aucune variable intermédiaire n'est utilisée dans cette fonction}{}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{ins\_cell}
-    \begin{algo}[informal] %principe
-      \ALGO{ins\_cell (Principe)}
-      \BEGIN
-        \STATE{On récupère un pointeur sur l'adresse de l'élément avant lequel insérer avec la fonction \textit{rech\_prec}}
-        \STATE{On ajoute l'élément dans la liste avec la fonction \textit{adj\_cell} en utilisant les variables prec et le pointeur sur l'élément à ajouter}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{existe}{booléen de présence de l'élément recherché, modifié dans \textit{rech\_prec}}
-        \DECLVAR{**prec}{pointeur sur l'adresse de l'élément après lequel insérer}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{creer\_cell}
-    \begin{algo}[informal] %principe
-      \ALGO{ (Principe)}
-      \BEGIN
-        \STATE{On alloue un élément de la liste chaînée}
-        \IF{l'allocation a réussi}
-          \STATE{On place les dates de début et de fin de message dans les champs appropriés}
-          \STATE{On alloue l'espace nécessaire pour le message dans le champ texte}
-          \STATE{On recopie le texte passé en entrée dans le champ texte de la cellule}
-        \ENDIF
-        \RETURN{le nouvel élément créé}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{*elt}{pointeur sur le nouvel élément créé, ce sera également le retour de la fonction. Si celui-ci est à NULL, cela signifie qu'il y a eu un problème lors de son allocation}
-      \ENDVAR
-    \end{algo}
-    

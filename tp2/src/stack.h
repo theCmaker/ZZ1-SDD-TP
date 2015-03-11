@@ -1,3 +1,14 @@
+/*  stack.h
+  Header
+
+  -----| DERECURSIFICATION DE FONCTION PAR PILE |-----
+
+  BARBESANGE Benjamin,
+  PISSAVY Pierre-Loup
+
+  ISIMA 1ere Annee, 2014-2015
+*/
+
 #ifndef __STACK__H
 #define __STACK__H
 
