@@ -31,8 +31,9 @@
     \node[test] (test4) at (6,-2) {$R = Vrai ?$};
     \node[es] (print) at (6,-4) {$\mathrm{Ecrire}(P(il));$};
     \node[instruct] (ilpp) at (10,-2) {$il := il + 1$};
-    \node[instruct] (ret) at (10,2) {$\mathrm{Retourner} R;$};
-    \node[debutfin] (fin) at (10,1) {Fin};
+    \node[instruct] (net) at (10,2) {$\mathrm{Liberer}(p);$};
+    \node[instruct] (ret) at (10,1) {$\mathrm{Retourner} R;$};
+    \node[debutfin] (fin) at (10,0) {Fin};
     % Placement des flèches
     \draw[suite] (debut) -- (init);
     \draw[suite] (init) -- (test1.north);
@@ -43,7 +44,8 @@
     \draw[suite] (test2.east) -- (r_false) node[near start,above]{oui};
     \draw[suite] (r_true) -- (test3.west);
     \draw[suite] (r_false.east) -| (4,0) |- (test3.west);
-    \draw[suite] (test3.east) -- (ret) node[near start,above]{oui};
+    \draw[suite] (test3.east) -- (net) node[near start,above]{oui};
+    \draw[suite] (net.south) -- (ret.north);
     \draw[suite] (ret.south) -- (fin.north);
     \draw[suite] (test3.south) -- (pop.north) node[near start,right]{non};
     \draw[suite] (pop.south) -- (test4.north);

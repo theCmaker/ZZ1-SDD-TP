@@ -56,33 +56,32 @@ int TRUC(int S, int I) {
 int truc_iter(int s, int i) {
   int sl = s;
   int il = i;
-  int r;
+  int r = 0;
   stack_t p;
-  init(&p,N);
-  do {
-    while (sl > 0 && il <= N) {
-/*      push(&p,sl);*/
-      push(&p,il);
-      sl -= P[il];
-      ++il;
-    }
-    if (sl == 0) {
-      r = 1;
-      while (!empty(p)) {
-        pop(&p,&il);
-/*        pop(&p,&sl);*/
-        sl += P[il];
-        printf("%d\n",P[il]);
-      }
-    } else {
-      r = 0;
-      if (!empty(p)) {
-        pop(&p,&il);
-/*        pop(&p,&sl);*/
-        sl += P[il];
+  if (init(&p,N)) {
+    do {
+      while (sl > 0 && il <= N) {
+        push(&p,il);
+        sl -= P[il];
         ++il;
       }
-    }
-  } while (!empty(p));
+      if (sl == 0) {
+        r = 1;
+        while (!empty(p)) {
+          pop(&p,&il);
+          sl += P[il];
+          printf("%d\n",P[il]);
+        }
+      } else {
+        r = 0;
+        if (!empty(p)) {
+          pop(&p,&il);
+          sl += P[il];
+          ++il;
+        }
+      }
+    } while (!empty(p));
+    supp(&p);
+  }
   return r;
 }
