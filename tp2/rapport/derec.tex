@@ -1,4 +1,4 @@
-\documentclass{report}
+\documentclass{standalone}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -8,8 +8,6 @@
 \usetikzlibrary{shapes,arrows}
 
 \begin{document}
-  \begin{figure}[h!]
-  \centering
   \begin{tikzpicture}
     % style des noeuds
     \tikzstyle{debutfin}=[ellipse,draw,fill=Yellow!75]
@@ -19,47 +17,41 @@
     \tikzstyle{es}=[rectangle,draw,rounded corners=4pt,fill=RoyalBlue!50]
     % style des flèches
     \tikzstyle{suite}=[thick,->,>=stealth']
-    \tikzstyle{arr}=[->,>=stealth']
     % placement des noeuds
     \node[debutfin] (debut) at (-2,6) {Début};
-    \node[instruct] (init) at (-2,4) {$sl := s;$ $il := i;$ $p := INIT();$};
-    \node[test] (test1) at (-2,2) {$sl := 0 ?$};
+    \node[instruct] (init) at (-2,4) {$sl := s;$ $il := i;$ $p := \mathrm{INIT}();$};
+    \node[test] (test1) at (-2,2) {$sl = 0 ?$};
     \node[test] (test2) at (-2,0) {$sl < 0 \text{ ou } il < N ?$};
-    \node[instruct] (push) at (-2,-2.5) {$Empiler(sl);$ $Empiler(il);$};
-    \node[instruct] (inc_double) at (-2,-5) {$sl := sl - P(il);$ $il := il - P(I);$};
+    \node[instruct] (push) at (-2,-2.5) {$\mathrm{Empiler}(sl);$ $\mathrm{Empiler}(il);$};
+    \node[instruct] (inc_double) at (-2,-5) {$sl := sl - P(il);$ $il := il + 1;$};
     \node[instruct] (r_true) at (2,2) {$R := Vrai;$};
     \node[instruct] (r_false) at (2,0) {$R := Faux;$};
-    \node[test] (test3) at (6,2) {$Vide(p)?$};
-    \node[instruct] (pop) at (6,0) {$Depiler(il);$ $Depiler(sl);$};
+    \node[test] (test3) at (6,2) {$\mathrm{Vide}(p)?$};
+    \node[instruct] (pop) at (6,0) {$\mathrm{Depiler}(il);$ $\mathrm{Depiler}(sl);$};
     \node[test] (test4) at (6,-2) {$R = Vrai ?$};
-    \node[es] (print) at (6,-4) {$Ecrire(P(il));$};
+    \node[es] (print) at (6,-4) {$\mathrm{Ecrire}(P(il));$};
     \node[instruct] (ilpp) at (10,-2) {$il := il + 1$};
-    \node[instruct] (ret) at (10,2) {$Retourner R;$};
+    \node[instruct] (ret) at (10,2) {$\mathrm{Retourner} R;$};
     \node[debutfin] (fin) at (10,1) {Fin};
     % Placement des flèches
     \draw[suite] (debut) -- (init);
     \draw[suite] (init) -- (test1.north);
-    \draw[suite] (test1.south) -- (test2.north) node[midway,right]{non};
-    \draw[suite] (test2.south) -- (push.north) node[midway,right]{non};
+    \draw[suite] (test1.south) -- (test2.north) node[near start,right]{non};
+    \draw[suite] (test2.south) -- (push.north) node[near start,right]{non};
     \draw[suite] (push.south) -- (inc_double.north);
-    \draw[suite] (test1.east) -- (r_true) node[midway,above]{oui};
-    \draw[suite] (test2.east) -- (r_false) node[midway,above]{oui};
+    \draw[suite] (test1.east) -- (r_true) node[near start,above]{oui};
+    \draw[suite] (test2.east) -- (r_false) node[near start,above]{oui};
     \draw[suite] (r_true) -- (test3.west);
-    \draw[suite] (r_false.east) -| +(0.5,0) |- (test3.west);
-    \draw[suite] (test3.east) -- (ret) node[midway,above]{oui};
+    \draw[suite] (r_false.east) -| (4,0) |- (test3.west);
+    \draw[suite] (test3.east) -- (ret) node[near start,above]{oui};
     \draw[suite] (ret.south) -- (fin.north);
-    \draw[suite] (test3.south) -- (pop.north) node[midway,right]{non};
+    \draw[suite] (test3.south) -- (pop.north) node[near start,right]{non};
     \draw[suite] (pop.south) -- (test4.north);
-    \draw[suite] (test4.east) -- (ilpp) node[midway,above]{non};
-    \draw[suite] (test4.south) -- (print.north) node[midway,right]{oui};
-    \draw[suite,arr] (print.south) |- +(0,-0.5) -| +(-2,0) |- (test3.west);
-    \draw[suite,arr] (inc_double.south) |- +(0,-0.5) -| +(-2.5,0) |- (-2,3);
-    \draw[suite,arr] (ilpp.east) -| +(0.5,0) |- +(0,5) |- (-2,3);
-
-    %~ \draw[suite] (plus) -- (moins);
-    %~ \draw[suite] (moins)|-(3,-4.5) |- (1,1.5)--(test.north);
-    %~ \draw[suite] (test)-|(afficher)node[near start,fill=white]{non};
-    %~ \draw[suite] (afficher) -- (fin);
+    \draw[suite] (test4.east) -- (ilpp) node[near start,above]{non};
+    \draw[suite] (test4.south) -- (print.north) node[near start,right]{oui};
+    \draw[suite] (print.south) |- +(0,-0.5) -| (4,1);
+    \draw[suite] (inc_double.south) |- +(0,-0.5) -| +(-2.5,0) |- (-2,3);
+    \draw[suite] (ilpp.east) -| +(0.5,0) |- +(0,5) |- (-2,3);
+    \draw[suite] (4,-3)--(4,-2);
   \end{tikzpicture}
-  \end{figure}
 \end{document}
