@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "truc.h"
 #include "stack.h"
 
-int main(void) {
+int main(int argc, char *argv[]) {
   stack_t p;
   int i = 0;
   if (init(&p,10)) {
@@ -13,6 +15,10 @@ int main(void) {
       printf("Depiler: %d\n",i);
     }
     supp(&p);
+  }
+  if (argc > 2) {
+    TRUC(atoi(argv[1]),atoi(argv[2]));
+    truc_iter(atoi(argv[1]),atoi(argv[2]));
   }
   return 0;
 }

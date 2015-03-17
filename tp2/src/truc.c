@@ -9,13 +9,11 @@
   ISIMA 1ere Annee, 2014-2015
 */
 
-#include <stdio.h>
-#include "stack.h"
 #include "truc.h"
 
 #define N 10
 
-int P[N+1] = {0,1,3,2,5,5,2,7,1,9,1};
+int P[N+1] = {0,1,3,2,0,5,2,7,1,9,1};
 
 /*  int TRUC(int S, int I)
   Fonction sous forme recursive qui affiche la decomposition de
@@ -63,7 +61,7 @@ int truc_iter(int s, int i) {
   init(&p,N);
   do {
     while (sl > 0 && il <= N) {
-      push(&p,sl);
+/*      push(&p,sl);*/
       push(&p,il);
       sl -= P[il];
       ++il;
@@ -72,14 +70,16 @@ int truc_iter(int s, int i) {
       r = 1;
       while (!empty(p)) {
         pop(&p,&il);
-        pop(&p,&sl);
+/*        pop(&p,&sl);*/
+        sl += P[il];
         printf("%d\n",P[il]);
       }
     } else {
       r = 0;
       if (!empty(p)) {
         pop(&p,&il);
-        pop(&p,&sl);
+/*        pop(&p,&sl);*/
+        sl += P[il];
         ++il;
       }
     }

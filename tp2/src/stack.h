@@ -12,6 +12,9 @@
 #ifndef __STACK__H
 #define __STACK__H
 
+  #include <stdio.h>
+  #include <stdlib.h>
+
   typedef int datatype;
 
   typedef struct _stack_t {
