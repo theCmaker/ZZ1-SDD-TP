@@ -15,12 +15,12 @@
   #include <stdio.h>
   #include <stdlib.h>
 
-  typedef int datatype;
+  typedef int datatype; /* permet d'utiliser des types differents avec la pile */
 
   typedef struct _stack_t {
-    int       max;
-    int       top;
-    datatype *val;
+    int       max;  /* nombre max d'elements dans la pile */
+    int       top;  /* position de l'element en tete de pile */
+    datatype *val;  /* tableau des valeurs de la pile */
   } stack_t;
 
   int init(stack_t *,int);
