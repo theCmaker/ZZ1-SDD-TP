@@ -6,12 +6,93 @@ Le lexique des variable d'entrée, sortie et entrée/sortie sont disponibles dan
   La gestion de la pile s'effectue grace aux fichiers \textit{stack.c} et \textit{stack.h}.
   
   \subsection{init}
+      \begin{algo}[informal] %principe
+      \ALGO{init}
+      \BEGIN
+        \STATE[Il n'y a aucune erreur]{On initialise le code de retour à 0}
+        \STATE{On initialise la taille max de la pile}
+        \STATE[Pour indiquer qu'elle est vide]{On initialise l'indice du haut de la pile à -1}
+        \STATE{On alloue l'espace de la pile}
+        \IF{l'allocation est réussie}
+          \STATE{Le code d'erreur passe à 0}
+        \ENDIF
+        \RETURN{code d'erreur}
+      \END
+    \end{algo}
+
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{ret}{code d'erreur, 0 si il y a une erreur de création de la pile, 1 sinon}
+      \ENDVAR
+    \end{algo}
+
   \subsection{supp}
+    Ici, nous libérons simplement de tableau de valeurs de la pile, puisque celui-ci est alloué dynamiquement lors de la création.
+  
   \subsection{empty}
+    Cette fonction teste simplement si l'indice du haut de la pile est -1, ce qui veut dire qu'il n'y a aucun élément dans la pile. Ainsi la valeur 1 sera retournée. Sinon la valeur 0 est retournée.
+  
   \subsection{full}
+    Cette fonction vérifie si l'indice de l'élément en haut de la pile est égal à la taille max de la pile (moins 1, car les tableaux commencent à 0). Si c'est le cas, on renvoie 1 pour signaler que la pile est pleine, et 0 sinon.
+  
   \subsection{pop}
+    \begin{algo}[informal] %principe
+    \ALGO{pop}
+    \BEGIN
+      \STATE[On n'a pas dépilé]{On initialise le code de retour à 0}
+      \IF{la pile n'est pas vide}
+        \STATE{On dépile l'élément dans une variable en Input/Output}
+        \STATE[On a dépilé et récupéré l'élément]{Le code d'erreur passe à 1}
+        \STATE[On retranche 1 à l'indice précédent]{On modifie l'indice de l'élément en haut de la pile}
+      \ENDIF
+      \RETURN{code d'erreur}
+    \END
+  \end{algo}
+
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{ok}{code d'erreur, 0 si on n'a pas dépilé, 1 si on a dépilé la valeur en haut de la pile}
+    \ENDVAR
+  \end{algo}
+  
   \subsection{top}
+    \begin{algo}[informal] %principe
+    \ALGO{top}
+    \BEGIN
+      \STATE[Pas d'élément dépilé]{On initialise le code de retour à 0}
+      \IF{la pile n'est pas vide}
+        \STATE{On dépile dans une variable en I/O}
+        \STATE[On a dépilé]{Le code d'erreur passe à 1}
+      \ENDIF
+      \RETURN{code d'erreur}
+    \END
+  \end{algo}
+
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{ok}{code d'erreur, 0 si on n'a pas récupéré l'élément en haut de la pile, 1 si on l'a récupéré}
+    \ENDVAR
+  \end{algo}
+  
   \subsection{push}
+    \begin{algo}[informal] %principe
+    \ALGO{push}
+    \BEGIN
+      \STATE[L'élément n'est pas ajouté dans la pile]{On initialise le code de retour à 0}
+      \IF{la pile n'est pas pleine}
+        \STATE{On incrémente l'indice de l'élément en haut de la pile}
+        \STATE{On place l'élément dans le tableau de la pile, à l'indice précédement modifié}
+        \STATE[L'élément est empilé]{Le code d'erreur passe à 1}
+      \ENDIF
+      \RETURN{code d'erreur}
+    \END
+  \end{algo}
+
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{ok}{code d'erreur, 0 si on n'a pas empilé, 1 si on a empilé la valeur}
+    \ENDVAR
+  \end{algo}
 
 \section{Dérecursification de la fonction}
   La fonction récursive ainsi que sa version itérée se trouvent dans les fichiers \textit{truc.c} et \textit{truc.h}.
