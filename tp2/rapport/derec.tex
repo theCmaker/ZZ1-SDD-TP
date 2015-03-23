@@ -1,4 +1,4 @@
-Nous allons dérécursiver cette fonction.
+Nous allons dérécursiver cette fonction. Il s'agit d'un traitement simplifié du problème du sac à dos.
 \subsubsection{Logigramme initial}
   \begin{center}
     \begin{tikzpicture}
@@ -53,7 +53,7 @@ Nous allons dérécursiver cette fonction.
       \node[instruct] (init) at (-2,3.5) {$il := I;$ $sl := S;$};
       \node[test] (test1) at (-2,1.75) {$sl = 0 ?$};
       \node[instruct] (ret1) at (2,1.75) {$R := Vrai;$};
-      \node[test] (test2) at (-2,0) {$S < 0 \text{ ou } I > N ?$};
+      \node[test] (test2) at (-2,0) {$sl < 0 \text{ ou } il > N ?$};
       \node[instruct] (ret2) at (2,0) {$R := Faux;$};
       \node[test] (test3) at (-2,-2) {\scriptsize$TRUC(ls-P(il),il+1) ?$};
       \node[instruct, text width=2cm] (ilpp) at (-6,-2) {$il := il+1;$};

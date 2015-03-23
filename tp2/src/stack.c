@@ -1,7 +1,7 @@
 /*  stack.c
   Fonctions de gestion de la structure de pile
 
-  -----| DERECURSIFICATION DE FONCTION PAR PILE |-----
+  -----| DERECURSIVATION DE FONCTION PAR PILE |-----
 
   BARBESANGE Benjamin,
   PISSAVY Pierre-Loup
@@ -20,8 +20,8 @@ Fonction d'initialisation de la pile avec une taille max
 
   Sortie :
     int : code d'erreur
-      0 si aucune erreur
-      1 si erreur de creation de la pile
+      1 si aucune erreur
+      0 si erreur de creation de la pile
 */
 int init(stack_t *p, int n) {
   int ret = 1;

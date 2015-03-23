@@ -1,19 +1,19 @@
 Dans cette partie, sont décrits les algorithmes de principe associés aux fonctions écrites en langage C, ainsi qu'un lexique concernant les variables intermédiaires des fonctions.
 
-Le lexique des variable d'entrée, sortie et entrée/sortie sont disponibles dans le code source directement.
+Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles dans le code source directement.
 
 \section{Gestion de la pile}
-  La gestion de la pile s'effectue grace aux fichiers \textit{stack.c} et \textit{stack.h}.
+  La gestion de la pile s'effectue grâce aux fichiers \texttt{stack.c} et \texttt{stack.h}.
   
   \subsection{init}
       \begin{algo}[informal] %principe
       \ALGO{init}
       \BEGIN
-        \STATE[Il n'y a aucune erreur]{On initialise le code de retour à 0}
+        \STATE[Il n'y a aucune erreur]{On initialise le code de retour à 1}
         \STATE{On initialise la taille max de la pile}
         \STATE[Pour indiquer qu'elle est vide]{On initialise l'indice du haut de la pile à -1}
         \STATE{On alloue l'espace de la pile}
-        \IF{l'allocation est réussie}
+        \IF{l'allocation n'est pas réussie}
           \STATE{Le code d'erreur passe à 0}
         \ENDIF
         \RETURN{code d'erreur}
@@ -42,16 +42,16 @@ Le lexique des variable d'entrée, sortie et entrée/sortie sont disponibles dan
       \STATE[On n'a pas dépilé]{On initialise le code de retour à 0}
       \IF{la pile n'est pas vide}
         \STATE{On dépile l'élément dans une variable en Input/Output}
-        \STATE[On a dépilé et récupéré l'élément]{Le code d'erreur passe à 1}
+        \STATE[On a dépilé et récupéré l'élément]{Le code de retour passe à 1}
         \STATE[On retranche 1 à l'indice précédent]{On modifie l'indice de l'élément en haut de la pile}
       \ENDIF
-      \RETURN{code d'erreur}
+      \RETURN{code de retour}
     \END
   \end{algo}
 
   \begin{algo}[informal] %lexique
     \VAR
-      \DECLVAR{ok}{code d'erreur, 0 si on n'a pas dépilé, 1 si on a dépilé la valeur en haut de la pile}
+      \DECLVAR{ok}{code de retour, 0 si on n'a pas dépilé, 1 si on a dépilé la valeur en haut de la pile}
     \ENDVAR
   \end{algo}
   
@@ -59,18 +59,18 @@ Le lexique des variable d'entrée, sortie et entrée/sortie sont disponibles dan
     \begin{algo}[informal] %principe
     \ALGO{top}
     \BEGIN
-      \STATE[Pas d'élément dépilé]{On initialise le code de retour à 0}
+      \STATE[Pas d'élément lu]{On initialise le code de retour à 0}
       \IF{la pile n'est pas vide}
-        \STATE{On dépile dans une variable en I/O}
+        \STATE{On copie la tête de pile dans une variable en I/O}
         \STATE[On a dépilé]{Le code d'erreur passe à 1}
       \ENDIF
-      \RETURN{code d'erreur}
+      \RETURN{code de retour}
     \END
   \end{algo}
 
   \begin{algo}[informal] %lexique
     \VAR
-      \DECLVAR{ok}{code d'erreur, 0 si on n'a pas récupéré l'élément en haut de la pile, 1 si on l'a récupéré}
+      \DECLVAR{ok}{code de retour, 0 si on n'a pas récupéré l'élément en haut de la pile, 1 si on l'a récupéré}
     \ENDVAR
   \end{algo}
   
@@ -82,22 +82,22 @@ Le lexique des variable d'entrée, sortie et entrée/sortie sont disponibles dan
       \IF{la pile n'est pas pleine}
         \STATE{On incrémente l'indice de l'élément en haut de la pile}
         \STATE{On place l'élément dans le tableau de la pile, à l'indice précédement modifié}
-        \STATE[L'élément est empilé]{Le code d'erreur passe à 1}
+        \STATE[L'élément est empilé]{Le code de retour passe à 1}
       \ENDIF
-      \RETURN{code d'erreur}
+      \RETURN{code de retour}
     \END
   \end{algo}
 
   \begin{algo}[informal] %lexique
     \VAR
-      \DECLVAR{ok}{code d'erreur, 0 si on n'a pas empilé, 1 si on a empilé la valeur}
+      \DECLVAR{ok}{code de retour, 0 si on n'a pas empilé, 1 si on a empilé la valeur}
     \ENDVAR
   \end{algo}
 
-\section{Dérecursification de la fonction}
-  La fonction récursive ainsi que sa version itérée se trouvent dans les fichiers \textit{truc.c} et \textit{truc.h}.
+\section{Dérécursivation de la fonction}
+  La fonction récursive ainsi que sa version itérative se trouvent dans les fichiers \texttt{truc.c} et \texttt{truc.h}.
   \subsection{TRUC}
-    Cette fonction étant l'énoncé du TP, nous ne détaillerons ainsi ne le principe ni les variables utilisées dans cet algorithme.
+    Cette fonction étant l'énoncé du TP, nous ne détaillerons ainsi ni le principe ni les variables utilisées dans cet algorithme.
     
     \input{derec}
     
@@ -107,27 +107,31 @@ Le lexique des variable d'entrée, sortie et entrée/sortie sont disponibles dan
       \BEGIN
         \STATE{Copie des paramètres d'entré dans des variables locales, sl et il}
         \STATE{Initialisation de la pile de la même taille que le tableau statique}
-        \REPEAT
-          \WHILE{sl > 0 \ANDTHEN il <= N}
-            \STATE{On envoie sl dans la pile}
-            \STATE{On envoie il dans la pile}
-            \STATE{sl = sl - P[il]}
-            \STATE{On incrémente il}
-          \ENDWHILE
-          \IF{sl = 0}
-            \STATE{Le booléen de retour est à Vrai}
-            \WHILE{la pile n'est pas vide}
-              \STATE{On récupère il et sl à partir de la pile}
-              \STATE{On affiche P[il]}
-            \ENDWHILE
-          \ELSE
-            \STATE{Le booléen de retour est à Faux}
-            \IF{la pile n'est pas vide}
-              \STATE{On récupère il est sl à partir de la pile}
+        \IF{l'initialisation a réussi}
+          \REPEAT
+            \WHILE{sl \GT 0 \AND il \LE N}
+              \STATE{On envoie il dans la pile}
+              \STATE{sl \AFF sl - P(il)}
               \STATE{On incrémente il}
+            \ENDWHILE
+            \IF{sl \EQ 0}
+              \STATE{Le booléen de retour est à Vrai}
+              \WHILE{la pile n'est pas vide}
+                \STATE{On récupère il à partir de la pile}
+                \STATE{On ajoute P(il) à sl}
+                \STATE{On affiche P(il)}
+              \ENDWHILE
+            \ELSE
+              \STATE{Le booléen de retour est à Faux}
+              \IF{la pile n'est pas vide}
+                \STATE{On récupère il à partir de la pile}
+                \STATE{On ajoute P(il) à sl}
+                \STATE{On incrémente il}
+              \ENDIF
             \ENDIF
-          \ENDIF
-        \ENDREPEAT[while]{la pile n'est pas vide}
+          \ENDREPEAT[while]{la pile n'est pas vide}
+          \STATE{On supprime la pile}
+        \ENDIF
         \RETURN{Booléen de retour}
       \END
     \end{algo}

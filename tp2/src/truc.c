@@ -1,7 +1,7 @@
 /*  truc.c
   Fonction recursive et son equivalent en iteratif
 
-  -----| DERECURSIFICATION DE FONCTION PAR PILE |-----
+  -----| DERECURSIVATION DE FONCTION PAR PILE |-----
 
   BARBESANGE Benjamin,
   PISSAVY Pierre-Loup
@@ -10,6 +10,7 @@
 */
 
 #include "truc.h"
+#include "stack.h"
 
 #define N 10
 
