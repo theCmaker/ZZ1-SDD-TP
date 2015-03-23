@@ -8,7 +8,6 @@
 
   ISIMA 1ere Annee, 2014-2015
 */
-
 #include "stack.h"
 
 /*  int init(stack_t *p, int n)

@@ -12,8 +12,7 @@
 #include "truc.h"
 #include "stack.h"
 
-#define N 10
-
+/* tableau des valeurs pour la decomposition, premiere valeur inutile */
 int P[N+1] = {0,1,3,2,0,5,2,7,1,9,1};
 
 /*  int TRUC(int S, int I)

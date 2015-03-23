@@ -12,6 +12,7 @@
 #define __TRUC__H
 	#include <stdio.h>
 	#include <stdlib.h>
+	#define N 10
 	int TRUC(int, int);
 	int truc_iter(int, int);
 #endif

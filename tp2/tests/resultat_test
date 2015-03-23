@@ -1,0 +1,41 @@
+1) Test de pile avec 5 éléments
+Empiler: 0
+Empiler: 1
+Empiler: 2
+Empiler: 3
+Empiler: 4
+Depiler: 4
+Depiler: 3
+Depiler: 2
+Depiler: 1
+Depiler: 0
+Comparons les resultats donnes par les deux fonctions
+2) TRUC(15,1)
+Tableau P : 1 3 2 0 5 2 7 1 9 1 
+1
+1
+2
+5
+0
+2
+3
+1
+Reponse: Vrai
+3) truc(15,1)
+Tableau P : 1 3 2 0 5 2 7 1 9 1 
+1
+1
+2
+5
+0
+2
+3
+1
+Reponse: Vrai
+Exemples de resolutions impossibles
+4) truc(15,7)
+Tableau P : 1 3 2 0 5 2 7 1 9 1 
+Reponse: Faux
+5) TRUC(256,1)
+Tableau P : 1 3 2 0 5 2 7 1 9 1 
+Reponse: Faux

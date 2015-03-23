@@ -6,7 +6,6 @@ CFLAGS=-Wall -ansi -pedantic -Wextra -g
 SOURCES=main.c stack.c truc.c
 OBJECTS=$(SOURCES:.c=.o)
 
-#Nom du programme
 EXEC=prog
 
 $(EXEC): $(OBJECTS)
