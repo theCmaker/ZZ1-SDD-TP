@@ -16,7 +16,9 @@ Le lexique des variable d'entrée, sortie et entrée/sortie sont disponibles dan
 \section{Dérecursification de la fonction}
   La fonction récursive ainsi que sa version itérée se trouvent dans les fichiers \textit{truc.c} et \textit{truc.h}.
   \subsection{TRUC}
-    Cette fonction étant l'énoncé du TP, nous ne détaillerons ainsi ne le principe ni les variables utilisées dans cet algorihtme.
+    Cette fonction étant l'énoncé du TP, nous ne détaillerons ainsi ne le principe ni les variables utilisées dans cet algorithme.
+    
+    \input{derec}
     
   \subsection{truc\_iter}
     \begin{algo}[informal] %principe
@@ -26,8 +28,8 @@ Le lexique des variable d'entrée, sortie et entrée/sortie sont disponibles dan
         \STATE{Initialisation de la pile de la même taille que le tableau statique}
         \REPEAT
           \WHILE{sl > 0 \ANDTHEN il <= N}
-            \STATE{On push sl dans la pile}
-            \STATE{On push il dans la pile}
+            \STATE{On envoie sl dans la pile}
+            \STATE{On envoie il dans la pile}
             \STATE{sl = sl - P[il]}
             \STATE{On incrémente il}
           \ENDWHILE
