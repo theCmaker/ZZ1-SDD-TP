@@ -2,7 +2,6 @@
 p 5
 
 #Comparons les resultats donnes par les deux fonctions
-
 #2) TRUC(15,1)
 T 15 1
 
@@ -10,7 +9,6 @@ T 15 1
 t 15 1
 
 #Exemples de resolutions impossibles
-
 #4) truc(15,7)
 t 15 7
 

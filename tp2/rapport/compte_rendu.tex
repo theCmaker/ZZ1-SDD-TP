@@ -26,7 +26,7 @@
 \input{settings/hyperrefSettings}
 
 \hypersetup{
-  pdftitle={TP 2 - Dérécursification à l'aide d'une pile}
+  pdftitle={TP 2 - Dérécursivation à l'aide d'une pile}
 }
 
 %styles et formatage
@@ -50,10 +50,12 @@
 
 \begin{document}
   \input{titlepage}
+  \tableofcontents
   \setlength{\parskip}{10pt}
   \setlength{\parindent}{0pt}
   \chapter{Présentation}
     Le but de ce TP est de dérécursiver une fonction à l'aide d'une pile. Les fonctions de gestion d'une pile seront ainsi créées.
+
     Les opérations suivantes sont permises avec la pile:
     \begin{itemize}
       \item Initialiser la pile,
@@ -66,6 +68,7 @@
     \end{itemize}
 
     \section{Structure de données employée}
+      Les données seront stockées dans une liste contiguë à accès indirect en tête. La taille et le pointeur sur cette liste ainsi que l'indice de l'élément en tête de pile sont stockés dans la structure représentée en figure \ref{fig:struct_code_drawing}.
       \input{schema}
     \section{Organisation du code source}
       Nous avons défini deux modules, le premier contient une fonction sous forme récursive ansi que sa version sous forme itérative. Nous disposons également d'un module permettant de gérer une pile, qui est ainsi utilisé lors de la dérécursivation de la fonction.

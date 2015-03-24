@@ -13,7 +13,7 @@
 #include "stack.h"
 
 /* tableau des valeurs pour la decomposition, premiere valeur inutile */
-int P[N+1] = {0,1,3,2,0,5,2,7,1,9,1};
+int P[N+1] = {0,1,3,2,4,5,2,7,1,9,1};
 
 /*  int TRUC(int S, int I)
   Fonction sous forme recursive qui affiche la decomposition de

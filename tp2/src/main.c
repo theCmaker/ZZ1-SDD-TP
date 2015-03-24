@@ -65,7 +65,6 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-
 void pile_test(int n) {
   stack_t p;
   int i = 0;
