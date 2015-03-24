@@ -1,85 +1,90 @@
 Nous allons dérécursiver cette fonction. Il s'agit d'un traitement simplifié du problème du sac à dos.
-\subsubsection{Logigramme initial}
-  \begin{center}
-    \begin{tikzpicture}
-      % style des noeuds
-      \tikzstyle{debutfin}=[ellipse,draw,fill=Yellow!75]
-      \tikzstyle{instruct}=[rectangle,draw,fill=Orange!75,text width=4cm,align=center]
-      \tikzstyle{test}=[diamond, aspect=2.5,thick,
-      draw=ForestGreen,fill=LimeGreen!75]
-      \tikzstyle{es}=[rectangle,draw,rounded corners=4pt,fill=RoyalBlue!50]
-      % style des flèches
-      \tikzstyle{suite}=[thick,->,>=stealth']
-      % placement des noeuds
-      \node[debutfin] (debut) at (-2,3) {Début};
-      \node[test] (test1) at (-2,1.75) {$S = 0 ?$};
-      \node[instruct] (ret1) at (3,1.75) {$\mathrm{Retourner}\: Vrai;$};
-      \node[test] (test2) at (-2,0) {$S < 0 \text{ ou } I > N ?$};
-      \node[instruct] (ret2) at (3,0) {$\mathrm{Retourner}\: Faux;$};
-      \node[test] (test3) at (-2,-2) {\scriptsize$TRUC(S-P(I),I+1) ?$};
-      \node[instruct] (ret3) at (3,-2) {$\mathrm{Retourner}\: TRUC(S,I+1);$};
-      \node[es] (print) at (-2,-3.5) {$\mathrm{Ecrire}(P(I));$};
-      \node[instruct] (ret4) at (3,-3.5) {$\mathrm{Retourner}\: Vrai;$};
-      \node[debutfin] (fin) at (8,-1) {Fin};
-      % Placement des flèches
-      \draw[suite] (debut) -- (test1);
-      \draw[suite] (test1.east) -- (ret1) node[near start,above]{oui};
-      \draw[suite] (test1.south) -- (test2.north) node[near start,right]{non};
-      \draw[suite] (test2.east) -- (ret2) node[near start,above]{oui};
-      \draw[suite] (test2.south) -- (test3.north) node[near start,right]{non};
-      \draw[suite] (test3.east) -- (ret3) node[near start,above]{non};
-      \draw[suite] (test3.south) -- (print.north) node[near start,right]{oui};
-      \draw[suite] (print.east) -- (ret4.west);
-      \draw[suite] (ret1.east) -| +(1,-2.75) -- (fin); 
-      \draw[suite] (ret2.east) -- +(1,0);
-      \draw[suite] (ret3.east) -- +(1,0);
-      \draw[suite] (ret4.east) -| +(1,2.5) -- (fin);
-    \end{tikzpicture}
-  \end{center}
 
-\subsubsection{Suppression des appels terminaux}
-  \begin{center}
-    \begin{tikzpicture}
-      % style des noeuds
-      \tikzstyle{debutfin}=[ellipse,draw,fill=Yellow!75]
-      \tikzstyle{instruct}=[rectangle,draw,fill=Orange!75,text width=2cm,align=center]
-      \tikzstyle{test}=[diamond, aspect=2.5,thick,
-      draw=ForestGreen,fill=LimeGreen!75]
-      \tikzstyle{es}=[rectangle,draw,rounded corners=4pt,fill=RoyalBlue!50]
-      % style des flèches
-      \tikzstyle{suite}=[thick,->,>=stealth']
-      % placement des noeuds
-      \node[debutfin] (debut) at (-2,4.75) {Début};
-      \node[instruct] (init) at (-2,3.5) {$il := I;$ $sl := S;$};
-      \node[test] (test1) at (-2,1.75) {$sl = 0 ?$};
-      \node[instruct] (ret1) at (2,1.75) {$R := Vrai;$};
-      \node[test] (test2) at (-2,0) {$sl < 0 \text{ ou } il > N ?$};
-      \node[instruct] (ret2) at (2,0) {$R := Faux;$};
-      \node[test] (test3) at (-2,-2) {\scriptsize$TRUC(ls-P(il),il+1) ?$};
-      \node[instruct, text width=2cm] (ilpp) at (-6,-2) {$il := il+1;$};
-      \node[es] (print) at (-2,-3.5) {$\mathrm{Ecrire}(P(il));$};
-      \node[instruct] (ret3) at (2,-3.5) {$R := Vrai;$};
-      \node[instruct] (ret) at (6,-1) {$\mathrm{Retourner}\: R;$};
-      \node[debutfin] (fin) at (6,-2) {Fin};
-      % Placement des flèches
-      \draw[suite] (debut) -- (init);
-      \draw[suite] (init) -- (test1);
-      \draw[suite] (test1.east) -- (ret1) node[near start,above]{oui};
-      \draw[suite] (test1.south) -- (test2.north) node[near start,right]{non};
-      \draw[suite] (test2.east) -- (ret2) node[near start,above]{oui};
-      \draw[suite] (test2.south) -- (test3.north) node[near start,right]{non};
-      \draw[suite] (test3.west) -- (ilpp) node[near start,above]{non};
-      \draw[suite] (test3.south) -- (print.north) node[near start,right]{oui};
-      \draw[suite] (print) -- (ret3);
-      \draw[suite] (ret1.east) -| +(1,-2.75) -- (ret.west);
-      \draw[suite] (ret2.east) -- +(1,0);
-      \draw[suite] (ret3.east) -| +(1,2.5) -- (ret);
-      \draw[suite] (ilpp.north) |- +(0,4.5) -- (-2,2.75);
-      \draw[suite] (ret.south) -- (fin.north);
-    \end{tikzpicture}
-  \end{center}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    % style des noeuds
+    \tikzstyle{debutfin}=[ellipse,draw,fill=Yellow!75]
+    \tikzstyle{instruct}=[rectangle,draw,fill=Orange!75,text width=4cm,align=center]
+    \tikzstyle{test}=[diamond, aspect=2.5,thick,
+    draw=ForestGreen,fill=LimeGreen!75]
+    \tikzstyle{es}=[rectangle,draw,rounded corners=4pt,fill=RoyalBlue!50]
+    % style des flèches
+    \tikzstyle{suite}=[thick,->,>=stealth']
+    % placement des noeuds
+    \node[debutfin] (debut) at (-2,3) {Début};
+    \node[test] (test1) at (-2,1.75) {$S = 0 ?$};
+    \node[instruct] (ret1) at (3,1.75) {$\mathrm{Retourner}\: Vrai;$};
+    \node[test] (test2) at (-2,0) {$S < 0 \text{ ou } I > N ?$};
+    \node[instruct] (ret2) at (3,0) {$\mathrm{Retourner}\: Faux;$};
+    \node[test] (test3) at (-2,-2) {\scriptsize$TRUC(S-P(I),I+1) ?$};
+    \node[instruct] (ret3) at (3,-2) {$\mathrm{Retourner}\: TRUC(S,I+1);$};
+    \node[es] (print) at (-2,-3.5) {$\mathrm{Ecrire}(P(I));$};
+    \node[instruct] (ret4) at (3,-3.5) {$\mathrm{Retourner}\: Vrai;$};
+    \node[debutfin] (fin) at (8,-1) {Fin};
+    % Placement des flèches
+    \draw[suite] (debut) -- (test1);
+    \draw[suite] (test1.east) -- (ret1) node[near start,above]{oui};
+    \draw[suite] (test1.south) -- (test2.north) node[near start,right]{non};
+    \draw[suite] (test2.east) -- (ret2) node[near start,above]{oui};
+    \draw[suite] (test2.south) -- (test3.north) node[near start,right]{non};
+    \draw[suite] (test3.east) -- (ret3) node[near start,above]{non};
+    \draw[suite] (test3.south) -- (print.north) node[near start,right]{oui};
+    \draw[suite] (print.east) -- (ret4.west);
+    \draw[suite] (ret1.east) -| +(1,-2.75) -- (fin); 
+    \draw[suite] (ret2.east) -- +(1,0);
+    \draw[suite] (ret3.east) -- +(1,0);
+    \draw[suite] (ret4.east) -| +(1,2.5) -- (fin);
+  \end{tikzpicture}
+  \caption{Logigramme initial}
+\end{figure}
+\vfill
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    % style des noeuds
+    \tikzstyle{debutfin}=[ellipse,draw,fill=Yellow!75]
+    \tikzstyle{instruct}=[rectangle,draw,fill=Orange!75,text width=2cm,align=center]
+    \tikzstyle{test}=[diamond, aspect=2.5,thick,
+    draw=ForestGreen,fill=LimeGreen!75]
+    \tikzstyle{es}=[rectangle,draw,rounded corners=4pt,fill=RoyalBlue!50]
+    % style des flèches
+    \tikzstyle{suite}=[thick,->,>=stealth']
+    % placement des noeuds
+    \node[debutfin] (debut) at (-2,4.75) {Début};
+    \node[instruct] (init) at (-2,3.5) {$il := I;$ $sl := S;$};
+    \node[test] (test1) at (-2,1.75) {$sl = 0 ?$};
+    \node[instruct] (ret1) at (2,1.75) {$R := Vrai;$};
+    \node[test] (test2) at (-2,0) {$sl < 0 \text{ ou } il > N ?$};
+    \node[instruct] (ret2) at (2,0) {$R := Faux;$};
+    \node[test] (test3) at (-2,-2) {\scriptsize$TRUC(ls-P(il),il+1) ?$};
+    \node[instruct, text width=2cm] (ilpp) at (-6,-2) {$il := il+1;$};
+    \node[es] (print) at (-2,-3.5) {$\mathrm{Ecrire}(P(il));$};
+    \node[instruct] (ret3) at (2,-3.5) {$R := Vrai;$};
+    \node[instruct] (ret) at (6,-1) {$\mathrm{Retourner}\: R;$};
+    \node[debutfin] (fin) at (6,-2) {Fin};
+    % Placement des flèches
+    \draw[suite] (debut) -- (init);
+    \draw[suite] (init) -- (test1);
+    \draw[suite] (test1.east) -- (ret1) node[near start,above]{oui};
+    \draw[suite] (test1.south) -- (test2.north) node[near start,right]{non};
+    \draw[suite] (test2.east) -- (ret2) node[near start,above]{oui};
+    \draw[suite] (test2.south) -- (test3.north) node[near start,right]{non};
+    \draw[suite] (test3.west) -- (ilpp) node[near start,above]{non};
+    \draw[suite] (test3.south) -- (print.north) node[near start,right]{oui};
+    \draw[suite] (print) -- (ret3);
+    \draw[suite] (ret1.east) -| +(1,-2.75) -- (ret.west);
+    \draw[suite] (ret2.east) -- +(1,0);
+    \draw[suite] (ret3.east) -| +(1,2.5) -- (ret);
+    \draw[suite] (ilpp.north) |- +(0,4.5) -- (-2,2.75);
+    \draw[suite] (ret.south) -- (fin.north);
+  \end{tikzpicture}
+  \caption{Suppression des appels terminaux}
+\end{figure}
+\vfill\null
 
-\subsubsection{Suppression des appels non-terminaux}
+\begin{figure}[H]
+  \centering
   \begin{tikzpicture}
     % style des noeuds
     \tikzstyle{debutfin}=[ellipse,draw,fill=Yellow!75]
@@ -130,3 +135,5 @@ Nous allons dérécursiver cette fonction. Il s'agit d'un traitement simplifié 
     \draw[suite] (ilpp.east) -| +(0.5,0) |- +(0,5) |- (-2,3);
     \draw[suite] (4,-3)--(4,-2);
   \end{tikzpicture}
+  \caption{Suppression des appels non-terminaux}
+\end{figure}

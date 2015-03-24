@@ -44,6 +44,8 @@ Fonction de suppression de la pile
 */
 void supp(stack_t *p) {
   free(p->val);
+  p->top = -1; /* Empeche de depiler */
+  p->max = 0; /* Empeche d'empiler */
 }
 
 /*  int empty(stack_t *p)

@@ -17,11 +17,11 @@ int P[N+1] = {0,1,3,2,0,5,2,7,1,9,1};
 
 /*  int TRUC(int S, int I)
   Fonction sous forme recursive qui affiche la decomposition de
-  S en I entiers pris a partir d'un tableau d'entiers (defini ici en statique)
+  S a partir d'un tableau d'entiers (defini ici en statique)
 
   Entrees :
     int S : Nombre a decomposer
-    int I : Nombre d'entiers utilises pour decomposer S
+    int I : Point de depart dans le tableau pour decomposer S
 
   Sortie :
     int : entier sous forme de booleen
@@ -46,7 +46,7 @@ int TRUC(int S, int I) {
 
   Entrees :
     int s : Nombre a decomposer
-    int i : Nombre d'entiers utilises pour decomposer S
+    int i : Point de depart dans P pour decomposer S
 
   Sortie :
     int : entier sous forme de booleen

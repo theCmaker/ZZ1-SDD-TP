@@ -14,23 +14,23 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
         \STATE[Pour indiquer qu'elle est vide]{On initialise l'indice du haut de la pile à -1}
         \STATE{On alloue l'espace de la pile}
         \IF{l'allocation n'est pas réussie}
-          \STATE{Le code d'erreur passe à 0}
+          \STATE{Le code de retour passe à 0}
         \ENDIF
-        \RETURN{code d'erreur}
+        \RETURN{code de retour}
       \END
     \end{algo}
 
     \begin{algo}[informal] %lexique
       \VAR
-        \DECLVAR{ret}{code d'erreur, 0 si il y a une erreur de création de la pile, 1 sinon}
+        \DECLVAR{ret}{code de retour, 0 si il y a une erreur de création de la pile, 1 sinon}
       \ENDVAR
     \end{algo}
 
   \subsection{supp}
-    Ici, nous libérons simplement de tableau de valeurs de la pile, puisque celui-ci est alloué dynamiquement lors de la création.
+    Ici, nous libérons simplement le tableau de valeurs de la pile, puisque celui-ci est alloué dynamiquement lors de la création. Nous avons choisi de modifier les champs (indice de tête de pile à $-1$ et taille de la pile à $0$) afin d'empêcher tout traitement sur cette pile jusqu'à sa réinitialisation. En effet, les fonctions permettant d'empiler et de dépiler renverront un code d'erreur.
   
   \subsection{empty}
-    Cette fonction teste simplement si l'indice du haut de la pile est -1, ce qui veut dire qu'il n'y a aucun élément dans la pile. Ainsi la valeur 1 sera retournée. Sinon la valeur 0 est retournée.
+    Cette fonction teste simplement si l'indice du haut de la pile est $-1$, ce qui signifie qu'il n'y a aucun élément dans la pile. Ainsi la valeur 1 sera retournée. Sinon la valeur 0 est retournée.
   
   \subsection{full}
     Cette fonction vérifie si l'indice de l'élément en haut de la pile est égal à la taille max de la pile (moins 1, car les tableaux commencent à 0). Si c'est le cas, on renvoie 1 pour signaler que la pile est pleine, et 0 sinon.
@@ -62,7 +62,7 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \STATE[Pas d'élément lu]{On initialise le code de retour à 0}
       \IF{la pile n'est pas vide}
         \STATE{On copie la tête de pile dans une variable en I/O}
-        \STATE[On a dépilé]{Le code d'erreur passe à 1}
+        \STATE[On a récupéré la valeur]{Le code de retour passe à 1}
       \ENDIF
       \RETURN{code de retour}
     \END
@@ -100,12 +100,13 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
     Cette fonction étant l'énoncé du TP, nous ne détaillerons ainsi ni le principe ni les variables utilisées dans cet algorithme.
     
     \input{derec}
-    
+  \newpage
+  \newpage
   \subsection{truc\_iter}
     \begin{algo}[informal] %principe
       \ALGO{truc\_iter (Principe)}
       \BEGIN
-        \STATE{Copie des paramètres d'entré dans des variables locales, sl et il}
+        \STATE{Copie des paramètres d'entrée dans des variables locales, sl et il}
         \STATE{Initialisation de la pile de la même taille que le tableau statique}
         \IF{l'initialisation a réussi}
           \REPEAT
@@ -139,8 +140,8 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
     \begin{algo}[informal] %lexique
       \VAR
         \DECLVAR{sl}{copie locale du nombre s passé en paramètre. Représente le nombre à décomposer}
-        \DECLVAR{il}{copie locale du nombre i passé en paramètre. Représente le nombre d'entiers du tableau à utiliser pour décomposer s}
-        \DECLVAR{r}{booléen de retour, indique 1 si on a obtenue la somme s, 0 sinon}
+        \DECLVAR{il}{copie locale du nombre i passé en paramètre. Représente le point de départ dans le tableau pour décomposer s}
+        \DECLVAR{r}{booléen de retour, indique 1 si on a obtenu la somme s, 0 sinon}
         \DECLVAR{p}{pile}
         \DECLVAR{P}{tableau d'entiers, défini statiquement}
         \DECLVAR{N}{taille du tableau P}
