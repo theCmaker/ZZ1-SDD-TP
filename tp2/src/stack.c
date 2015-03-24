@@ -26,7 +26,7 @@ int init(stack_t *p, int n) {
   int ret = 1;
   p->max = n;
   p->top = -1;
-  p->val = (int*) malloc(n*sizeof(int));
+  p->val = (datatype*) malloc(n*sizeof(datatype));
   if (p->val == NULL) {
     ret = 0;
   }
