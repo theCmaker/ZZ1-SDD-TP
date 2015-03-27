@@ -57,7 +57,7 @@ Nous allons dérécursiver cette fonction. Il s'agit d'un traitement simplifié 
     \node[instruct] (ret1) at (2,1.75) {$R := Vrai;$};
     \node[test] (test2) at (-2,0) {$sl < 0 \text{ ou } il > N ?$};
     \node[instruct] (ret2) at (2,0) {$R := Faux;$};
-    \node[test] (test3) at (-2,-2) {\scriptsize$TRUC(ls-P(il),il+1) ?$};
+    \node[test] (test3) at (-2,-2) {\scriptsize$TRUC(sl-P(il),il+1) ?$};
     \node[instruct, text width=2cm] (ilpp) at (-6,-2) {$il := il+1;$};
     \node[es] (print) at (-2,-3.5) {$\mathrm{Ecrire}(P(il));$};
     \node[instruct] (ret3) at (2,-3.5) {$R := Vrai;$};
