@@ -25,7 +25,7 @@
     Aucune
 */
 void adj_cell(cell_t **prec, cell_t *elt) {
-  elt->bro = (*prec);
+  elt->lh = (*prec);
   (*prec) = elt;
 }
 
@@ -47,7 +47,7 @@ void adj_cell(cell_t **prec, cell_t *elt) {
 cell_t ** rech_prec(cell_t **liste, char letter, short int *existe) {
   cell_t **prec = liste;
   while ((*prec) && (*prec)->letter > letter) {
-    prec = &((*prec)->bro);
+    prec = &((*prec)->lh);
   }
   /* Booleen de presence     */
   /* 1 : present             */
@@ -68,7 +68,7 @@ cell_t ** rech_prec(cell_t **liste, char letter, short int *existe) {
 */
 void supp_cell(cell_t **prec) {
   cell_t *elt = *prec;
-  *prec = elt->bro;
+  *prec = elt->lh;
   free(elt);
 }
 

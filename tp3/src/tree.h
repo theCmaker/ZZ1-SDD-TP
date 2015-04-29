@@ -16,9 +16,12 @@
   #include <stdlib.h>
   #include <string.h>
   #include "list.h"
-
   typedef node_t tree_t;
+  #include "stack.h"
+
+  #define DEBUG 0
 
   int creerArbre(char *, tree_t **);
-
+  int creerArbre_2(char *ch, tree_t **r);
+  void afficherArbre(tree_t *t);
 #endif

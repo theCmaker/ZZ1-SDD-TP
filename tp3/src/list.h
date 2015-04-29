@@ -16,8 +16,8 @@
 
   typedef struct _node_t {
     char letter;
-    struct _node_t *son;
-    struct _node_t *bro;
+    struct _node_t *lv;
+    struct _node_t *lh;
   } node_t;
 
   typedef struct _node_t cell_t;

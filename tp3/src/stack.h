@@ -15,7 +15,7 @@
   #include <stdio.h>
   #include <stdlib.h>
 
-  typedef cell_t* datatype; /* permet d'utiliser des types differents avec la pile */
+  typedef tree_t** datatype;
 
   typedef struct _stack_t {
     int       max;  /* nombre max d'elements dans la pile */
