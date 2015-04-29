@@ -26,7 +26,7 @@
 \input{settings/hyperrefSettings}
 
 \hypersetup{
-  pdftitle={TP 2 - Dérécursivation à l'aide d'une pile}
+  pdftitle={TP 3 - Gestion d'un dictionnaire arborescent}
 }
 
 %styles et formatage
@@ -36,17 +36,6 @@
 \titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter\hsp\textcolor{lightgray}{|}\hsp}{0pt}{\LARGE\bfseries}
 
 \newcommand{\NIL}{\texttt{\small NIL}}
-\usetikzlibrary{decorations.pathreplacing} %grandes accolades des schémas
-\tikzset{%styles schémas
-    case1/.style={rectangle,draw,fill=RoyalBlue!50,minimum size=7.5mm,anchor=base,text height=1.5ex,text depth=.25ex,text centered},
-    case/.style={case1},
-    case2/.style={rectangle,draw,fill=Red!50,minimum size=7.5mm,anchor=base,text height=1.5ex,text depth=.25ex,text centered},
-    head/.style={case1, fill=yellow},
-    dead/.style={case1, fill=none, pattern=north west lines},
-    void/.style={minimum size=7.5mm},
-    vers/.style={thick,->, >= latex},
-    ptr/.style={case1, fill=gray!50}
-}
 
 \begin{document}
   \input{titlepage}
@@ -54,24 +43,17 @@
   \setlength{\parskip}{10pt}
   \setlength{\parindent}{0pt}
   \chapter{Présentation}
-    Le but de ce TP est de dérécursiver une fonction à l'aide d'une pile. Les fonctions de gestion d'une pile seront ainsi créées.
+    Le but de ce tp est de créer une structure d'arbres permettant de gérer des mots d'un dictionnaire. Chaque liste des liens horizontaux est rangée par ordre alphabétique.
 
-    Les opérations suivantes sont permises avec la pile:
+    Les opérations suivantes sont permises avec l'arbre:
     \begin{itemize}
-      \item Initialiser la pile,
-      \item Libérer la pile,
-      \item Tester si la pile est vide,
-      \item Tester si la pile est pleine,
-      \item Retourner l'élément en haut de la pile,
-      \item Afficher l'élément en haut de la pile,
-      \item Insérer un élément dans la pile.
+      \item Creer l'arbre à partir de la notation parenthésée,
     \end{itemize}
 
     \section{Structure de données employée}
-      Les données seront stockées dans une liste contiguë à accès indirect en tête. La taille et le pointeur sur cette liste ainsi que l'indice de l'élément en tête de pile sont stockés dans la structure représentée en figure \ref{fig:struct_code_drawing}.
-      \input{schema}
+      Les mots du dictionnaire sont rangés dans un arbre. La fin d'un mot est signalée par une lettre majuscule. rangés dans l'ordre alphabétique
     \section{Organisation du code source}
-      Nous avons défini deux modules, le premier contient une fonction sous forme récursive ansi que sa version sous forme itérative. Nous disposons également d'un module permettant de gérer une pile, qui est ainsi utilisé lors de la dérécursivation de la fonction.
+      Nous avons découpé le tp en 3 parties. Une partie s'occupe de la gestion de pile, une autre de la gestion de liste chaînée (utilisées dans la définition de l'arbre) et la dernière est chargée de gérer la structure d'arbre que nous avons crée.
 
       \input{code_source}
   \chapter{Détails du programme}
@@ -85,6 +67,6 @@
       \makefilefile{../src/Makefile}
 
     \section{Jeux de tests}
-      \input{tests}
+%      \input{tests}
 
 \end{document}
