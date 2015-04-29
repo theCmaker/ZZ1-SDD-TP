@@ -1,0 +1,90 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc} %encodage entrée
+\usepackage[T1]{fontenc}
+\usepackage{graphicx} %images
+\usepackage[usenames,dvipsnames]{xcolor} %couleurs
+\usepackage[light,math]{iwona}
+\usepackage{tikz} %schémas
+\usetikzlibrary{shapes,arrows}
+\usepackage{algo} %mise en forme d'algos
+\usepackage{minted} %mise en forme de code source
+\usepackage{framed} %cadres et bordures
+\usepackage[frenchb]{babel} %langue
+\usepackage{amsmath} %symboles maths
+\usepackage{subcaption} %légendes et sous-figures
+\usepackage{enumitem} %formatage des listes à puces
+\usepackage[nobottomtitles]{titlesec} %formatage des chapitres
+\usepackage{blindtext}
+\usepackage[a4paper]{geometry} %mise en page
+\usepackage[hidelinks]{hyperref}%liens
+
+\input{settings/colors}
+\input{settings/algo}
+\input{settings/mintedC}
+\input{settings/mintedMakefile}
+\input{settings/mintedBash}
+\input{settings/hyperrefSettings}
+
+\hypersetup{
+  pdftitle={TP 2 - Dérécursivation à l'aide d'une pile}
+}
+
+%styles et formatage
+\geometry{scale=0.8,centering}
+\frenchbsetup{StandardLists=true}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter\hsp\textcolor{lightgray}{|}\hsp}{0pt}{\LARGE\bfseries}
+
+\newcommand{\NIL}{\texttt{\small NIL}}
+\usetikzlibrary{decorations.pathreplacing} %grandes accolades des schémas
+\tikzset{%styles schémas
+    case1/.style={rectangle,draw,fill=RoyalBlue!50,minimum size=7.5mm,anchor=base,text height=1.5ex,text depth=.25ex,text centered},
+    case/.style={case1},
+    case2/.style={rectangle,draw,fill=Red!50,minimum size=7.5mm,anchor=base,text height=1.5ex,text depth=.25ex,text centered},
+    head/.style={case1, fill=yellow},
+    dead/.style={case1, fill=none, pattern=north west lines},
+    void/.style={minimum size=7.5mm},
+    vers/.style={thick,->, >= latex},
+    ptr/.style={case1, fill=gray!50}
+}
+
+\begin{document}
+  \input{titlepage}
+  \tableofcontents
+  \setlength{\parskip}{10pt}
+  \setlength{\parindent}{0pt}
+  \chapter{Présentation}
+    Le but de ce TP est de dérécursiver une fonction à l'aide d'une pile. Les fonctions de gestion d'une pile seront ainsi créées.
+
+    Les opérations suivantes sont permises avec la pile:
+    \begin{itemize}
+      \item Initialiser la pile,
+      \item Libérer la pile,
+      \item Tester si la pile est vide,
+      \item Tester si la pile est pleine,
+      \item Retourner l'élément en haut de la pile,
+      \item Afficher l'élément en haut de la pile,
+      \item Insérer un élément dans la pile.
+    \end{itemize}
+
+    \section{Structure de données employée}
+      Les données seront stockées dans une liste contiguë à accès indirect en tête. La taille et le pointeur sur cette liste ainsi que l'indice de l'élément en tête de pile sont stockés dans la structure représentée en figure \ref{fig:struct_code_drawing}.
+      \input{schema}
+    \section{Organisation du code source}
+      Nous avons défini deux modules, le premier contient une fonction sous forme récursive ansi que sa version sous forme itérative. Nous disposons également d'un module permettant de gérer une pile, qui est ainsi utilisé lors de la dérécursivation de la fonction.
+
+      \input{code_source}
+  \chapter{Détails du programme}
+    \input{detail_code}
+
+  \chapter{Principes et lexiques des fonctions}
+    \input{detail_fonctions}
+
+  \chapter{Compte rendu d'exécution}
+    \section{Makefile}
+      \makefilefile{../src/Makefile}
+
+    \section{Jeux de tests}
+      \input{tests}
+
+\end{document}

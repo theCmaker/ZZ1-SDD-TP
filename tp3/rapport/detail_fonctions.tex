@@ -1,0 +1,149 @@
+Dans cette partie, sont décrits les algorithmes de principe associés aux fonctions écrites en langage C, ainsi qu'un lexique concernant les variables intermédiaires des fonctions.
+
+Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles dans le code source directement.
+
+\section{Gestion de la pile}
+  La gestion de la pile s'effectue grâce aux fichiers \texttt{stack.c} et \texttt{stack.h}.
+  
+  \subsection{init}
+      \begin{algo}[informal] %principe
+      \ALGO{init}
+      \BEGIN
+        \STATE[Il n'y a aucune erreur]{On initialise le code de retour à 1}
+        \STATE{On initialise la taille max de la pile}
+        \STATE[Pour indiquer qu'elle est vide]{On initialise l'indice du haut de la pile à -1}
+        \STATE{On alloue l'espace de la pile}
+        \IF{l'allocation n'est pas réussie}
+          \STATE{Le code de retour passe à 0}
+        \ENDIF
+        \RETURN{code de retour}
+      \END
+    \end{algo}
+
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{ret}{code de retour, 0 si il y a une erreur de création de la pile, 1 sinon}
+      \ENDVAR
+    \end{algo}
+
+  \subsection{supp}
+    Ici, nous libérons simplement le tableau de valeurs de la pile, puisque celui-ci est alloué dynamiquement lors de la création. Nous avons choisi de modifier les champs (indice de tête de pile à $-1$ et taille de la pile à $0$) afin d'empêcher tout traitement sur cette pile jusqu'à sa réinitialisation. En effet, les fonctions permettant d'empiler et de dépiler renverront un code d'erreur.
+  
+  \subsection{empty}
+    Cette fonction teste simplement si l'indice du haut de la pile est $-1$, ce qui signifie qu'il n'y a aucun élément dans la pile. Ainsi la valeur 1 sera retournée. Sinon la valeur 0 est retournée.
+  
+  \subsection{full}
+    Cette fonction vérifie si l'indice de l'élément en haut de la pile est égal à la taille max de la pile (moins 1, car les tableaux commencent à 0). Si c'est le cas, on renvoie 1 pour signaler que la pile est pleine, et 0 sinon.
+  
+  \subsection{pop}
+    \begin{algo}[informal] %principe
+    \ALGO{pop}
+    \BEGIN
+      \STATE[On n'a pas dépilé]{On initialise le code de retour à 0}
+      \IF{la pile n'est pas vide}
+        \STATE{On dépile l'élément dans une variable en Input/Output}
+        \STATE[On a dépilé et récupéré l'élément]{Le code de retour passe à 1}
+        \STATE[On retranche 1 à l'indice précédent]{On modifie l'indice de l'élément en haut de la pile}
+      \ENDIF
+      \RETURN{code de retour}
+    \END
+  \end{algo}
+
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{ok}{code de retour, 0 si on n'a pas dépilé, 1 si on a dépilé la valeur en haut de la pile}
+    \ENDVAR
+  \end{algo}
+  
+  \subsection{top}
+    \begin{algo}[informal] %principe
+    \ALGO{top}
+    \BEGIN
+      \STATE[Pas d'élément lu]{On initialise le code de retour à 0}
+      \IF{la pile n'est pas vide}
+        \STATE{On copie la tête de pile dans une variable en I/O}
+        \STATE[On a récupéré la valeur]{Le code de retour passe à 1}
+      \ENDIF
+      \RETURN{code de retour}
+    \END
+  \end{algo}
+
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{ok}{code de retour, 0 si on n'a pas récupéré l'élément en haut de la pile, 1 si on l'a récupéré}
+    \ENDVAR
+  \end{algo}
+  
+  \subsection{push}
+    \begin{algo}[informal] %principe
+    \ALGO{push}
+    \BEGIN
+      \STATE[L'élément n'est pas ajouté dans la pile]{On initialise le code de retour à 0}
+      \IF{la pile n'est pas pleine}
+        \STATE{On incrémente l'indice de l'élément en haut de la pile}
+        \STATE{On place l'élément dans le tableau de la pile, à l'indice précédement modifié}
+        \STATE[L'élément est empilé]{Le code de retour passe à 1}
+      \ENDIF
+      \RETURN{code de retour}
+    \END
+  \end{algo}
+
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{ok}{code de retour, 0 si on n'a pas empilé, 1 si on a empilé la valeur}
+    \ENDVAR
+  \end{algo}
+
+\section{Dérécursivation de la fonction}
+  La fonction récursive ainsi que sa version itérative se trouvent dans les fichiers \texttt{truc.c} et \texttt{truc.h}.
+  \subsection{TRUC}
+    Cette fonction étant l'énoncé du TP, nous ne détaillerons ainsi ni le principe ni les variables utilisées dans cet algorithme.
+    
+    \input{derec}
+  \newpage
+  \newpage
+  \subsection{truc\_iter}
+    \begin{algo}[informal] %principe
+      \ALGO{truc\_iter (Principe)}
+      \BEGIN
+        \STATE{Copie des paramètres d'entrée dans des variables locales, sl et il}
+        \STATE{Initialisation de la pile de la même taille que le tableau statique}
+        \IF{l'initialisation a réussi}
+          \REPEAT
+            \WHILE{sl \GT 0 \AND il \LE N}
+              \STATE{On envoie il dans la pile}
+              \STATE{sl \AFF sl - P(il)}
+              \STATE{On incrémente il}
+            \ENDWHILE
+            \IF{sl \EQ 0}
+              \STATE{Le booléen de retour est à Vrai}
+              \WHILE{la pile n'est pas vide}
+                \STATE{On récupère il à partir de la pile}
+                \STATE{On ajoute P(il) à sl}
+                \STATE{On affiche P(il)}
+              \ENDWHILE
+            \ELSE
+              \STATE{Le booléen de retour est à Faux}
+              \IF{la pile n'est pas vide}
+                \STATE{On récupère il à partir de la pile}
+                \STATE{On ajoute P(il) à sl}
+                \STATE{On incrémente il}
+              \ENDIF
+            \ENDIF
+          \ENDREPEAT[while]{la pile n'est pas vide}
+          \STATE{On supprime la pile}
+        \ENDIF
+        \RETURN{Booléen de retour}
+      \END
+    \end{algo}
+
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{sl}{copie locale du nombre s passé en paramètre. Représente le nombre à décomposer}
+        \DECLVAR{il}{copie locale du nombre i passé en paramètre. Représente le point de départ dans le tableau pour décomposer s}
+        \DECLVAR{r}{booléen de retour, indique 1 si on a obtenu la somme s, 0 sinon}
+        \DECLVAR{p}{pile}
+        \DECLVAR{P}{tableau d'entiers, défini statiquement}
+        \DECLVAR{N}{taille du tableau P}
+      \ENDVAR
+    \end{algo}
