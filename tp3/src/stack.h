@@ -16,7 +16,7 @@
   #include <stdlib.h>
   #include "tree.h"
 
-  typedef tree_t** datatype;
+  typedef tree_t* datatype;
 
   typedef struct _stack_t {
     int       max;  /* nombre max d'elements dans la pile */
@@ -31,5 +31,6 @@
   int pop(stack_t *, datatype *);
   int top(stack_t *, datatype *);
   int push(stack_t *, datatype);
+  void dump(stack_t, void (*)(datatype));
 
 #endif

@@ -12,7 +12,8 @@ int creerNoeud(tree_t ** r, char);
 */
 int creerArbre(char *ch, tree_t **r) {
   stack_t p;                    /* Pile */
-  tree_t **prec = r;            /* Pointeur de parcours de l'arbre */
+  tree_t **prec = r;                 /* Pointeur de parcours de l'arbre */
+  tree_t *tmp;
   char *cour = ch;              /* Caractere courant */
   int taille = strlen(ch);      /* Taille max de la pile */
   int ret = 0;                  /* Variable de retour */
@@ -22,7 +23,7 @@ int creerArbre(char *ch, tree_t **r) {
     ret = 1;                    /* Allocation ok */
     while (ret && (!empty(p) || *cour != ')')) {   /* Aucun souci et chaine non-finie */
       if (*cour == '(') {
-        push(&p,&((*prec)->lh));  /* Sauvegarde de l'adresse lien horizontal */
+        push(&p,*prec);           /* Sauvegarde de l'adresse courant */
         prec = &((*prec)->lv);    /* Deplacement sur le lien vertical */
         cour++;                   /* Acceleration, passe au prochain caractere */
       } else if (*cour == ',') {
@@ -35,13 +36,13 @@ int creerArbre(char *ch, tree_t **r) {
         cour++;                   /* Passage caractere suivant */
       }
       while (ret && !empty(p) && *cour == ')') {
-        pop(&p,&prec);            /* Recuperation du lien horizontal parent */
+        pop(&p,&tmp);            /* Recuperation du lien horizontal parent */
+        prec = &(tmp->lh);
         cour++;
       }
     }
     supp(&p);                     /* Liberation pile */
   }
-
   return ret;
 }
 
@@ -63,4 +64,8 @@ void afficherArbre(tree_t *t){
     afficherArbre(t->lv);
     afficherArbre(t->lh);
   }
+}
+
+void afficherPoint(tree_t *t){
+  printf("%c ",t->letter);
 }

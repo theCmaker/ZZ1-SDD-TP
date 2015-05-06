@@ -157,3 +157,11 @@ Affiche le contenu de la pile
   Sortie :
     Aucune
 */
+void dump(stack_t p, void (*afficherData)(datatype)) {
+  int i;
+  if (!empty(p)) {
+    for (i = 0; i < p.top; i++) {
+      afficherData(p.val[i]);
+    }
+  }
+}

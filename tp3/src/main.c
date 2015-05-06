@@ -12,8 +12,9 @@
 #include "tree.h"
 
 int main(/*int argc, char *argv[]*/) {
-  tree_t *monArbre;
-  if (creerArbre_2("(a(b(z(h,u)k)x(m)f(p,v,e)))",&monArbre)) {
+  tree_t *monArbre = NULL;
+  if (creerArbre("(a(b(z(h,u)k)x(m)f(p,v,e)))",&monArbre)) {
+  /*if (creerArbre("(a(b,c)d)",&monArbre)) {*/
     afficherArbre(monArbre);
     printf("\n");
   } else {
