@@ -15,6 +15,7 @@
   #include <stdio.h>
   #include <stdlib.h>
   #include <string.h>
+  #include <ctype.h>
   #include "list.h"
   typedef node_t tree_t;
   #include "stack.h"
@@ -22,8 +23,9 @@
   #define DEBUG 0
 
   int creerArbre(char *, tree_t **);
-  void afficherArbre(tree_t *t);
-  void afficherPoint(tree_t *t);
+  void libererArbre(tree_t **);
+  void afficherArbre(tree_t *);
+  void afficherPoint(tree_t *);
 
 
 #endif

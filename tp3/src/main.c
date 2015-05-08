@@ -13,10 +13,9 @@
 
 int main(/*int argc, char *argv[]*/) {
   tree_t *monArbre = NULL;
-  if (creerArbre("(a(b(z(h,u)k)x(m)f(p,v,e)))",&monArbre)) {
-  /*if (creerArbre("(a(b,c)d)",&monArbre)) {*/
+  if (creerArbre("(a(b(a(T))r(b(r(E))T(S)))b(a(i(L(l(e(R))))R(r(e)))i(e(N))o(s(s(E,U))))f(a(i(M,r(E))))j(o(u(e(T,u(R)))))k(i(m(o(n(O)))w(I)))m(a(S(s(E))))v(a(i(N)))y(a(c(K)))z(e(b(U))))",&monArbre)) {
     afficherArbre(monArbre);
-    printf("\n");
+    libererArbre(&monArbre);
   } else {
     fprintf(stderr, "Probleme creation arbre\n");
   }
