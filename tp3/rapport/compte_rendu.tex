@@ -5,12 +5,12 @@
 \usepackage[usenames,dvipsnames]{xcolor} %couleurs
 \usepackage[light,math]{iwona}
 \usepackage{tikz} %schémas
-\usetikzlibrary{shapes,arrows}
 \usepackage{algo} %mise en forme d'algos
 \usepackage{minted} %mise en forme de code source
 \usepackage{framed} %cadres et bordures
 \usepackage[frenchb]{babel} %langue
 \usepackage{amsmath} %symboles maths
+\usepackage{caption} %legendes
 \usepackage{subcaption} %légendes et sous-figures
 \usepackage{enumitem} %formatage des listes à puces
 \usepackage[nobottomtitles]{titlesec} %formatage des chapitres
@@ -59,7 +59,7 @@
     \section{Organisation du code source}
       Nous avons découpé le tp en 3 parties. Une partie s'occupe de la gestion de pile, une autre de la gestion de liste chaînée (utilisées dans la définition de l'arbre) et la dernière est chargée de gérer la structure d'arbre que nous avons crée.
 
-      \input{code_source}
+    \input{code_source}
   \chapter{Détails du programme}
     \input{detail_code}
 
