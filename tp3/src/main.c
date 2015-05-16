@@ -17,9 +17,10 @@ int main(/*int argc, char *argv[]*/) {
     afficherArbre(monArbre);
     insererMot(&monArbre,"arB");
     insererMot(&monArbre,"abattU");
-    insererMot(&monArbre,"arborE");
+    insererMot(&monArbre,"arborE"); /* Debut deja present */
     insererMot(&monArbre,"artistE");
-    insererMot(&monArbre,"clienT");
+    insererMot(&monArbre,"clienT"); /* Aucune lettre deja presente */
+    insererMot(&monArbre,"arT"); /* Mot deja present */
     afficherArbre(monArbre);
     libererArbre(&monArbre);
   } else {

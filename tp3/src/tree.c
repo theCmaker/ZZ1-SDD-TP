@@ -123,35 +123,31 @@ int insererMot(tree_t **t, char *w) {
   tree_t *tmp;
   short int existe = 1;
   
-  /* Avance dans l'arbre tant que le debut du mot y est present */
+  /* Avance dans l'arbre tant que le debut du mot y est present, sinon ajoute la premiere lettre manquante */
   while (existe && *arbre && *cour != '\0') {
-    arbre = rech_prec(arbre,*cour,&existe);
+    arbre = rech_prec(arbre,*cour,&existe); /* Cherche si la lettre est presente */
     if (existe) {
-      arbre = &((*arbre)->lv); /* va sur l'adresse du fils du frere */
-      cour++;
-    }
-  }
-
-  /* Insertion dans la liste chainee horizontale */
-  if (!existe) {
-    tmp = creerNoeud(*cour);
-    if (tmp) {
-      adj_cell(arbre,tmp);
-      arbre = &((*arbre)->lv);
-      cour++;
-    } else {
-      res = 0;
-    }
+      arbre = &((*arbre)->lv); /* Va sur l'adresse du fils du frere */
+    } else { /* Insertion de la premiere lettre manquante */
+      tmp = creerNoeud(*cour);
+      if (tmp) { /* L'element est correctement cree */
+        adj_cell(arbre,tmp);
+        arbre = &((*arbre)->lv);
+      } else { /* Erreur*/
+        res = 0;
+      }
+    }    
+    cour++; /* Passe a la lettre suivante */
   }
 
   /* Insertion des lettres restantes selon des liens verticaux */
   while (res && *cour != '\0') {
     tmp = creerNoeud(*cour);
-    if (tmp) {
+    if (tmp) { /* Element cree correctement */
       adjFils(arbre,tmp);
-      arbre = &((*arbre)->lv);
-      cour++;
-    } else {
+      arbre = &((*arbre)->lv); /* Passe au fils du frere */
+      cour++; /* Passe a la lettre suivante */
+    } else { /* Erreur */
       res = 0;
     }
   }
