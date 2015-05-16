@@ -26,6 +26,6 @@
   void libererArbre(tree_t **);
   void afficherArbre(tree_t *);
   void afficherPoint(tree_t *);
-
+  int insererMot(tree_t **, char *);
 
 #endif

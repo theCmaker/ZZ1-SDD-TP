@@ -1,6 +1,6 @@
 #include "tree.h"
 
-int creerNoeud(tree_t ** r, char);
+tree_t *creerNoeud(char);
 
 /*  int creerArbre(char *ch, tree_t **r)
   Entrees :
@@ -30,7 +30,8 @@ int creerArbre(char *ch, tree_t **r) {
         prec = &((*prec)->lh);    /* Deplacement sur le lien horizontal */
         cour++;
       }
-      if (!creerNoeud(prec,*cour)) {
+      *prec = creerNoeud(*cour);
+      if (! (*prec)) {
         ret = 0; /* Problème allocation */
       } else {
         cour++;                   /* Passage caractere suivant */
@@ -46,16 +47,14 @@ int creerArbre(char *ch, tree_t **r) {
   return ret;
 }
 
-int creerNoeud(tree_t **r, char v) {
-  int res = 0;
-  *r = (tree_t*) malloc (sizeof(tree_t));
-  if (*r) {
-    res = 1;
-    (*r)->lv = NULL;
-    (*r)->lh = NULL;
-    (*r)->letter = v;
+tree_t *creerNoeud(char v) {
+  tree_t *r = (tree_t*) malloc (sizeof(tree_t));
+  if (r) {
+    r->lv = NULL;
+    r->lh = NULL;
+    r->letter = v;
   }
-  return res;
+  return r;
 }
 
 void afficherArbre(tree_t *t) {
@@ -110,4 +109,51 @@ void libererArbre(tree_t **t) {
     supp(&p);
     *t = NULL;
   }
+}
+
+void adjFils(tree_t **prec, tree_t *elt) {
+  elt->lv = (*prec);
+  (*prec) = elt;
+}
+
+int insererMot(tree_t **t, char *w) {
+  int res = 1;
+  char *cour = w;
+  tree_t **arbre = t;
+  tree_t *tmp;
+  short int existe = 1;
+  
+  /* Avance dans l'arbre tant que le debut du mot y est present */
+  while (existe && *arbre && *cour != '\0') {
+    arbre = rech_prec(arbre,*cour,&existe);
+    if (existe) {
+      arbre = &((*arbre)->lv); /* va sur l'adresse du fils du frere */
+      cour++;
+    }
+  }
+
+  /* Insertion dans la liste chainee horizontale */
+  if (!existe) {
+    tmp = creerNoeud(*cour);
+    if (tmp) {
+      adj_cell(arbre,tmp);
+      arbre = &((*arbre)->lv);
+      cour++;
+    } else {
+      res = 0;
+    }
+  }
+
+  /* Insertion des lettres restantes selon des liens verticaux */
+  while (res && *cour != '\0') {
+    tmp = creerNoeud(*cour);
+    if (tmp) {
+      adjFils(arbre,tmp);
+      arbre = &((*arbre)->lv);
+      cour++;
+    } else {
+      res = 0;
+    }
+  }
+  return res;
 }

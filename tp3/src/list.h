@@ -13,6 +13,7 @@
 #define __LISTE_H__
 
   #include <string.h>
+  #include <ctype.h>
 
   typedef struct _node_t {
     char letter;
@@ -22,6 +23,7 @@
 
   typedef struct _node_t cell_t;
 
+  void adj_cell(cell_t **, cell_t *);
   cell_t ** rech_prec(cell_t **, char, short int*);
   void supp_cell(cell_t **);
   void liberer_liste(cell_t **);
