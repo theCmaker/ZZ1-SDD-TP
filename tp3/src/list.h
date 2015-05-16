@@ -21,7 +21,7 @@
     struct _node_t *lh;
   } node_t;
 
-  typedef struct _node_t cell_t;
+  typedef node_t cell_t;
 
   void adj_cell(cell_t **, cell_t *);
   cell_t ** rech_prec(cell_t **, char, short int*);
