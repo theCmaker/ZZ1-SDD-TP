@@ -1,7 +1,7 @@
 /*  stack.c
   Fonctions de gestion de la structure de pile
 
-  -----| DERECURSIVATION DE FONCTION PAR PILE |-----
+  -----| PILE |-----
 
   BARBESANGE Benjamin,
   PISSAVY Pierre-Loup

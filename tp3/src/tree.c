@@ -1,8 +1,22 @@
+/*  tree.c
+  Fonction de gestion de l'arbre
+
+  -----| GESTION DU DICTIONNAIRE |-----
+
+  BARBESANGE Benjamin,
+  PISSAVY Pierre-Loup
+
+  ISIMA 1ere Annee, 2014-2015
+*/
+
 #include "tree.h"
 
 tree_t *creerNoeud(char);
 
 /*  int creerArbre(char *ch, tree_t **r)
+Cree un arbre a partir d'un chaine caractre representant la notation parenthesee
+et en prenant l'adresse du pointeur sur la tete de l'arbre
+
   Entrees :
     char *ch : chaine de representation de l'arbre
     tree_t **r : pointeur double de tête de l'arbre
@@ -47,6 +61,15 @@ int creerArbre(char *ch, tree_t **r) {
   return ret;
 }
 
+/*  tree_t *creerNoeud(char v)
+Cree un noeud ayant pour valeur le caractere entre
+
+  Entrees :
+    char : valeur du nouveau noeu cree
+  
+  Sortie :
+    tree_t* : pointeur sur le nouvel element cree
+*/
 tree_t *creerNoeud(char v) {
   tree_t *r = (tree_t*) malloc (sizeof(tree_t));
   if (r) {
@@ -57,6 +80,15 @@ tree_t *creerNoeud(char v) {
   return r;
 }
 
+/*  void afficherArbre(tree_t *t)
+Affiche les mots contenus dans l'arbre
+
+  Entrees :
+    tree_t* : pointeur sur la tete de l'arbre
+  
+  Sortie :
+    Aucune
+*/
 void afficherArbre(tree_t *t) {
   stack_t p;                    /* Pile */
   tree_t *cour = t;             /* Pointeur de parcours de l'arbre */
@@ -81,12 +113,28 @@ void afficherArbre(tree_t *t) {
   }
 }
 
+/*  void afficherPoint(tree_t *t)
+Affiche la valeur d'un noeud, connaissant son adresse
 
+  Entrees :
+    tree_t* : pointeur sur le noeud
+  
+  Sortie :
+    Aucune
+*/
 void afficherPoint(tree_t *t) {
   printf("%c",tolower(t->letter));
 }
 
+/*  void libererArbre(tree_t **t)
+Libere la memoire occupee par l'arbre
 
+  Entrees :
+    tree_t** : adresse du pointeur sur la tete de l'arbre
+  
+  Sortie :
+    Aucune
+*/
 void libererArbre(tree_t **t) {
   stack_t p;                    /* Pile */
   tree_t *cour = *t;            /* Pointeur de parcours de l'arbre */

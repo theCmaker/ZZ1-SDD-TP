@@ -1,7 +1,7 @@
 /*  tree.h
   Header
 
-  -----| ARBRES |-----
+  -----| GESTION DU DICTIONNAIRE |-----
 
   BARBESANGE Benjamin,
   PISSAVY Pierre-Loup
@@ -17,10 +17,11 @@
   #include <string.h>
   #include <ctype.h>
   #include "list.h"
-  typedef node_t tree_t;
   #include "stack.h"
 
   #define DEBUG 0
+  
+  typedef node_t tree_t;
 
   int creerArbre(char *, tree_t **);
   void libererArbre(tree_t **);
