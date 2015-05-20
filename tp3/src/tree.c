@@ -164,38 +164,53 @@ void adjFils(tree_t **prec, tree_t *elt) {
   (*prec) = elt;
 }
 
+tree_t **rech_mot(tree_t **t, char **w) {
+  char *cour = *w;
+  tree_t **arbre = t;
+  short int existe = 1;
+  
+  /* Avance dans l'arbre tant que le debut du mot y est present */
+  while (existe && *arbre && *cour != '\0') {
+    arbre = rech_prec(arbre,*cour,&existe);
+    if (existe) {
+      arbre = &((*arbre)->lv); /* va sur l'adresse du fils */
+      cour++;
+    }
+  }
+  *w = cour;
+
+  return arbre;
+} 
+
+
 int insererMot(tree_t **t, char *w) {
   int res = 1;
   char *cour = w;
-  tree_t **arbre = t;
   tree_t *tmp;
-  short int existe = 1;
-  
-  /* Avance dans l'arbre tant que le debut du mot y est present, sinon ajoute la premiere lettre manquante */
-  while (existe && *arbre && *cour != '\0') {
-    arbre = rech_prec(arbre,*cour,&existe); /* Cherche si la lettre est presente */
-    if (existe) {
-      arbre = &((*arbre)->lv); /* Va sur l'adresse du fils du frere */
-    } else { /* Insertion de la premiere lettre manquante */
-      tmp = creerNoeud(*cour);
-      if (tmp) { /* L'element est correctement cree */
-        adj_cell(arbre,tmp);
-        arbre = &((*arbre)->lv);
-      } else { /* Erreur*/
-        res = 0;
-      }
-    }    
-    cour++; /* Passe a la lettre suivante */
+  tree_t **arbre = t;
+  printf("mot: %s\n",cour);
+  arbre = rech_mot(t,&cour);
+  printf("fin mot: %s\n",cour);
+  /* Insertion dans la liste chainee horizontale */
+  if (*cour != '\0') {
+    tmp = creerNoeud(*cour);
+    if (tmp) {
+      adj_cell(arbre,tmp);
+      arbre = &((*arbre)->lv);
+      cour++;
+    } else {
+      res = 0;
+    }
   }
 
   /* Insertion des lettres restantes selon des liens verticaux */
   while (res && *cour != '\0') {
     tmp = creerNoeud(*cour);
-    if (tmp) { /* Element cree correctement */
+    if (tmp) {
       adjFils(arbre,tmp);
-      arbre = &((*arbre)->lv); /* Passe au fils du frere */
-      cour++; /* Passe a la lettre suivante */
-    } else { /* Erreur */
+      arbre = &((*arbre)->lv);
+      cour++;
+    } else {
       res = 0;
     }
   }

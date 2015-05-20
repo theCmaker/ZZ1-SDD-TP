@@ -46,13 +46,13 @@ void adj_cell(cell_t **prec, cell_t *elt) {
 */
 cell_t ** rech_prec(cell_t **liste, char letter, short int *existe) {
   cell_t **prec = liste;
-  while ((*prec) && tolower((*prec)->letter) < letter) {
+  while ((*prec) && tolower((*prec)->letter) < tolower(letter)) {
     prec = &((*prec)->lh);
   }
   /* Booleen de presence     */
   /* 1 : present             */
   /* 0 : absent              */
-  *existe = (*prec && tolower((*prec)->letter) == letter)?1:0;
+  *existe = (*prec && tolower((*prec)->letter) == tolower(letter))?1:0;
   return prec;
 }
 
