@@ -1,0 +1,29 @@
+\begin{figure}[h]
+  \begin{subfigure}[c]{0.3\textwidth}
+    \subcaption{Structure utilisée}
+    \label{fig:struct}
+    \begin{center}
+    \shorthandoff{:}
+    \begin{tikzpicture}[scale=0.5]
+      \matrix at (0,0) {
+        \node [case1] (a1) {max}; & \node [case1] (a11) {top}; & \node [case1,ptr] (a12) {val}; \\[1cm]
+      };
+      \matrix at (0, -4){
+        \node [case2] (b1) {Valeurs dans la pile};\\
+      };
+      \draw [vers] (a12.south) |- +(0,-1) -| (b1.north);
+    
+    \end{tikzpicture}
+    \shorthandon{:}
+    \end{center}
+  \end{subfigure}
+  \begin{subfigure}{0.7\textwidth}
+    \subcaption{Code}
+    \label{fig:struct_code}
+    \begin{center}
+      \cfile[firstline=20,lastline=24]{../src/stack.h}
+    \end{center}
+  \end{subfigure}
+  \caption{Structure de pile et code correspondant}
+  \label{fig:struct_code_drawing}
+\end{figure}

@@ -1,0 +1,76 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc} %encodage entrée
+\usepackage[T1]{fontenc}
+\usepackage{graphicx} %images
+\usepackage[usenames,dvipsnames]{xcolor} %couleurs
+\usepackage[light,math]{iwona}
+\usepackage{tikz} %schémas
+\usepackage{algo} %mise en forme d'algos
+\usepackage{minted} %mise en forme de code source
+\usepackage{framed} %cadres et bordures
+\usepackage[frenchb]{babel} %langue
+\usepackage{amsmath} %symboles maths
+\usepackage{caption} %legendes
+\usepackage{subcaption} %légendes et sous-figures
+\usepackage{enumitem} %formatage des listes à puces
+\usepackage[nobottomtitles]{titlesec} %formatage des chapitres
+\usepackage{blindtext}
+\usepackage[a4paper]{geometry} %mise en page
+\usepackage[hidelinks]{hyperref}%liens
+
+\input{settings/colors}
+\input{settings/algo}
+\input{settings/mintedC}
+\input{settings/mintedMakefile}
+\input{settings/mintedBash}
+\input{settings/hyperrefSettings}
+
+\hypersetup{
+  pdftitle={TP 3 - Gestion d'un dictionnaire arborescent}
+}
+
+%styles et formatage
+\geometry{scale=0.8,centering}
+\frenchbsetup{StandardLists=true}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter\hsp\textcolor{lightgray}{|}\hsp}{0pt}{\LARGE\bfseries}
+
+\newcommand{\NIL}{\texttt{\small NIL}}
+
+\begin{document}
+  \input{titlepage}
+  \tableofcontents
+  \setlength{\parskip}{10pt}
+  \setlength{\parindent}{0pt}
+  \chapter{Présentation}
+    Le but de ce tp est de créer une structure d'arbres permettant de gérer des mots d'un dictionnaire. Chaque liste des liens horizontaux est rangée par ordre alphabétique.
+
+    Les opérations suivantes sont permises avec l'arbre:
+    \begin{itemize}
+      \item Creer l'arbre à partir de la notation parenthésée,
+      \item Insérer un mot à la bonne place dans l'arbre,
+      \item Afficher le contenu de l'arbre,
+      \item Rechercher des mots ayant un certain motif,
+      \item Libérer la mémoire occupée par l'arbre.
+    \end{itemize}
+
+    \section{Structure de données employée}
+      Les mots du dictionnaire sont rangés dans un arbre, par orbre alphabétiue. La fin d'un mot est signalée par une lettre majuscule.
+    \section{Organisation du code source}
+      Nous avons découpé le tp en 3 parties. Une partie s'occupe de la gestion de pile, une autre de la gestion de liste chaînée (utilisées dans la définition de l'arbre) et la dernière est chargée de gérer la structure d'arbre que nous avons crée.
+
+    \input{code_source}
+  \chapter{Détails du programme}
+    \input{detail_code}
+
+  \chapter{Principes et lexiques des fonctions}
+    \input{detail_fonctions}
+
+  \chapter{Compte rendu d'exécution}
+    \section{Makefile}
+      \makefilefile{../src/Makefile}
+
+    \section{Jeux de tests}
+%      \input{tests}
+
+\end{document}
