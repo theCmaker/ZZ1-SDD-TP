@@ -46,7 +46,7 @@ int creerArbre(char *ch, tree_t **r) {
       }
       *prec = creerNoeud(*cour);
       if (! (*prec)) {
-        ret = 0; /* Problème allocation */
+        ret = 0;                  /* Problème allocation */
       } else {
         cour++;                   /* Passage caractere suivant */
       }
@@ -105,7 +105,7 @@ void afficherArbre(tree_t *t) {
       }
       /* On a atteint une feuille */
       while (!empty(p) && cour == NULL) {  /* Recherche du premier frere des ascendants */
-        pop(&p,&cour);               /* Recuperation du lien horizontal parent */
+        pop(&p,&cour);               /* Recuperation du parent */
         cour = cour->lh;             /* Deplacement sur le lien horizontal */
       }
     } while (!empty(p) || cour != NULL);
@@ -155,60 +155,98 @@ void libererArbre(tree_t **t) {
       }
     } while (!empty(p) || cour != NULL);
     supp(&p);
-    *t = NULL;
   }
 }
 
-void adjFils(tree_t **prec, tree_t *elt) {
+void adj_fils(tree_t **prec, tree_t *elt) {
   elt->lv = (*prec);
   (*prec) = elt;
 }
 
 tree_t **rech_mot(tree_t **t, char **w) {
-  char *cour = *w;
-  tree_t **arbre = t;
-  short int existe = 1;
+  char *cour = *w;        /* Pointeur parcours du mot */
+  tree_t **arbre = t;     /* Pointeur parcours de l'arbre */
+  short int existe = 1;   /* Booleen d'existence de lettre */
   
   /* Avance dans l'arbre tant que le debut du mot y est present */
-  while (existe && *arbre && *cour != '\0') {
+  while (existe && *arbre && !isupper(*cour)) {
     arbre = rech_prec(arbre,*cour,&existe);
     if (existe) {
       arbre = &((*arbre)->lv); /* va sur l'adresse du fils */
-      cour++;
+      cour++; /* Consommation du caractere */
     }
   }
-  *w = cour;
+  /* Test derniere lettre sensible a la casse pour indiquer la presence */
+  if (*arbre && isupper(*cour)) {
+    /* Recherche d'un hypothetique point d'insertion */
+    arbre = rech_prec(arbre,*cour,&existe);
+    if ((*arbre)->letter == *cour) {
+      cour++;       /* Consommation du caractere */
+    }
+  }
+  *w = cour; /* Mise a jour de la position des caracteres non encore presents dans l'arbre */
 
   return arbre;
-} 
+}
+
 
 int insererMot(tree_t **t, char *w) {
-  int res = 1;
-  char *cour = w;
-  tree_t *tmp;
-  tree_t **arbre = t;
-  arbre = rech_mot(t,&cour);
-  
-  /* Insertion dans la liste chainee horizontale */
-  if (*cour != '\0') {
-    tmp = creerNoeud(*cour);
-    if (tmp) {
-      adj_cell(arbre,tmp);
-      arbre = &((*arbre)->lv);
-      cour++;
-    } else {
-      res = 0;
-    }
-  }
+  int len;             /* Longueur du mot */
+  int i;               /* Indice de parcours pour copie */
+  int res = 1;         /* Code de retour */
+  char *cour;          /* Copie du mot */
+  tree_t *tmp;         /* Noeud temporaire de creation */
+  tree_t **arbre = t;  /* Pointeur de parcours de l'arbre */
 
-  /* Insertion des lettres restantes selon des liens verticaux */
-  while (res && *cour != '\0') {
-    tmp = creerNoeud(*cour);
-    if (tmp) {
-      adjFils(arbre,tmp);
-      arbre = &((*arbre)->lv);
-      cour++;
-    } else {
+  if (*w != '\0') { /* Mot non vide */
+    /* Traitement du mot */
+    len = strlen(w);   /* Calcul longueur */
+    cour = (char*) malloc ((len+1)*sizeof(char));
+    if (cour) {        /* Allocation ok */
+      i = 0;
+      while (w[i+1] != '\0') {
+        cour[i] = tolower(w[i]); /* Passage en minuscules */
+        ++i;
+      }
+      cour[i] = toupper(w[i]); /* Derniere lettre majuscule */
+      cour[++i] = '\0';
+
+      /* Recherche d'un debut deja present dans l'arbre */
+      arbre = rech_mot(t,&cour);
+      
+      if (*cour != '\0') { /* Mot non deja present dans l'arbre */
+        /* Insertion dans la liste chainee horizontale */
+        if (*arbre && (*arbre)->letter == tolower(*cour)) {
+          /* Derniere lettre deja existante, necessite de changer la casse */
+          (*arbre)->letter = *cour;  /* Passage en majuscule pour ajouter le mot */
+          cour++;                    /* Consommation du dernier caractere */
+        } else {
+          /* Insertions necessaires */
+          /* Ajout de lien horizontal */
+          tmp = creerNoeud(*cour);
+          if (tmp) {                 /* Noeud cree */
+            adj_cell(arbre,tmp);     /* Insertion lien horizontal */
+            arbre = &((*arbre)->lv); /* Pointeur sur noeud fils */
+            cour++;                  /* Lettre suivante */
+
+            /* Insertion des lettres restantes selon des liens verticaux */
+            while (res && *cour != '\0') {
+              tmp = creerNoeud(*cour);
+              if (tmp) {                 /* Noeud cree */
+                adj_fils(arbre,tmp);     /* Insertion lien vertical */
+                arbre = &((*arbre)->lv); /* Pointeur sur noeud fils */
+                cour++;                  /* Lettre suivante */
+              } else {                   /* Noeud non cree */
+                res = 0;
+              }
+            }
+          } else {                   /* Noeud non cree */
+            res = 0;
+          }
+        }
+      }
+      free(cour-len); /* Liberation a partir du pointeur sur le debut du mot */
+    } else { /* Allocation ratee */
       res = 0;
     }
   }
