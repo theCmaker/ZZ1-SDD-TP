@@ -13,8 +13,14 @@
 
 int main(/*int argc, char *argv[]*/) {
   tree_t *monArbre = NULL;
-  char *motif1 = "";
-  char *motif2 = "ab";
+  int i, nbMotifs = 4;
+  char **motif;
+  
+  motif = (char**)malloc(nbMotifs * sizeof(char*));
+  motif[0] = "";
+  motif[1] = "a";
+  motif[2] = "az";
+  motif[3] = "x";
   
   if (creerArbre("(a(b(a(T))r(b(r(E))T(S)))b(a(i(L(l(e(R))))R(r(e)))i(e(N))o(s(s(E,U))))f(a(i(M,r(E))))j(o(u(e(T,u(R)))))k(i(m(o(n(O)))w(I)))m(a(S(s(E))))v(a(i(N)))y(a(c(K)))z(e(b(U))))",&monArbre)) {
     printf("**********\nAffichage avant insertion\n");
@@ -30,14 +36,13 @@ int main(/*int argc, char *argv[]*/) {
     insererMot(&monArbre,"kin");
     insererMot(&monArbre,"papa");
     
-  	printf("**********\nAffichage apres insertion\n");
-  	afficherArbre(monArbre);
+    printf("**********\nAffichage apres insertion\n");
+    afficherArbre(monArbre);
   	
-  	printf("**********\nRecherche du motif \"%s\"\n", motif1);
-  	rech_motif(&monArbre, motif1);
-  	
-  	printf("**********\nRecherche du motif \"%s\"\n", motif2);
-  	rech_motif(&monArbre, motif2);
+	for(i=0; i<nbMotifs; i++) {
+      printf("**********\nRecherche du motif \"%s\"\n", motif[i]);
+      rech_motif(&monArbre, motif[i]);
+	}
 
     libererArbre(&monArbre);
   } else {

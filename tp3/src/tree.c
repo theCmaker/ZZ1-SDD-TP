@@ -273,6 +273,7 @@ void rech_motif(tree_t **t, char *w) {
 	char *cour = w;
 
 	arbre = rech_mot(t, &cour); /* recherche jusqu'a la fin du motif */
-
-	afficherArbrePref(*arbre, w); /* il faudrait pouvoir push le motif dans la pile comme ca le dump affichera en entier */
+    if (*cour == '\0') { /* On a trouve tout le motif */
+      afficherArbrePref(*arbre, w);
+	}
 }
