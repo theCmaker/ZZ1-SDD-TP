@@ -80,16 +80,17 @@ tree_t *creerNoeud(char v) {
   return r;
 }
 
-/*  void afficherArbre(tree_t *t)
-Affiche les mots contenus dans l'arbre
+/*  void afficherArbrePref(tree_t *t, char *prefixe)
+Affiche les mots contenus dans l'arbre avec un prefixe donne en entre
 
   Entrees :
     tree_t* : pointeur sur la tete de l'arbre
+    char * : prefixe a ecrire avant chaque mot de l'arbre
   
   Sortie :
     Aucune
 */
-void afficherArbre(tree_t *t) {
+void afficherArbrePref(tree_t *t, char *prefixe) {
   stack_t p;                    /* Pile */
   tree_t *cour = t;             /* Pointeur de parcours de l'arbre */
 
@@ -98,6 +99,7 @@ void afficherArbre(tree_t *t) {
       while (cour != NULL) {
         push(&p,cour);               /* Sauvegarde du point courant */
         if (isupper(cour->letter)) { /* Detection fin de mot */
+          printf("%s", prefixe);     /* Affiche le prefixe */
           dump(p,afficherPoint);     /* Affichage du mot (lecture pile) */
           printf("\n");
         }
@@ -111,6 +113,19 @@ void afficherArbre(tree_t *t) {
     } while (!empty(p) || cour != NULL);
     supp(&p);
   }
+}
+
+/*  void afficherArbrePref(tree_t *t)
+Affiche les mots contenus dans l'arbre
+
+  Entrees :
+    tree_t* : pointeur sur la tete de l'arbre
+  
+  Sortie :
+    Aucune
+*/
+void afficherArbre(tree_t *t) {
+  afficherArbrePref(t, "");
 }
 
 /*  void afficherPoint(tree_t *t)
@@ -220,5 +235,5 @@ void rech_motif(tree_t **t, char *w) {
 	char *cour = w;
 
 	arbre = rech_mot(t, &cour); /* recherche jusqu'a la fin du motif */
-	afficherArbre(*arbre); /* il faudrait pouvoir push le motif dans la pile comme ca le dump affichera en entier */
+	afficherArbrePref(*arbre, w); /* il faudrait pouvoir push le motif dans la pile comme ca le dump affichera en entier */
 }
