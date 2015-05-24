@@ -182,15 +182,13 @@ tree_t **rech_mot(tree_t **t, char **w) {
   return arbre;
 } 
 
-
 int insererMot(tree_t **t, char *w) {
   int res = 1;
   char *cour = w;
   tree_t *tmp;
   tree_t **arbre = t;
-  printf("mot: %s\n",cour);
   arbre = rech_mot(t,&cour);
-  printf("fin mot: %s\n",cour);
+  
   /* Insertion dans la liste chainee horizontale */
   if (*cour != '\0') {
     tmp = creerNoeud(*cour);
@@ -215,4 +213,12 @@ int insererMot(tree_t **t, char *w) {
     }
   }
   return res;
+}
+
+void rech_motif(tree_t **t, char *w) {
+	tree_t **arbre = t;
+	char *cour = w;
+
+	arbre = rech_mot(t, &cour); /* recherche jusqu'a la fin du motif */
+	afficherArbre(*arbre);
 }

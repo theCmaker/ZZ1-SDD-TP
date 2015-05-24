@@ -27,5 +27,6 @@
   void afficherArbre(tree_t *);
   void afficherPoint(tree_t *);
   int insererMot(tree_t **, char *);
+  void rech_motif(tree_t **, char *);
 
 #endif
