@@ -24,6 +24,7 @@
   
   int creerArbre(char *, tree_t **);
   void libererArbre(tree_t **);
+  void afficherArbrePref(tree_t *, char *);
   void afficherArbre(tree_t *);
   void afficherPoint(tree_t *);
   int insererMot(tree_t **, char *);
