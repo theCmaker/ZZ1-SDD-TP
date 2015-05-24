@@ -220,5 +220,5 @@ void rech_motif(tree_t **t, char *w) {
 	char *cour = w;
 
 	arbre = rech_mot(t, &cour); /* recherche jusqu'a la fin du motif */
-	afficherArbre(*arbre);
+	afficherArbre(*arbre); /* il faudrait pouvoir push le motif dans la pile comme ca le dump affichera en entier */
 }
