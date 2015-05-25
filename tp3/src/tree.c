@@ -171,6 +171,7 @@ void libererArbre(tree_t **t) {
     } while (!empty(p) || cour != NULL);
     supp(&p);
   }
+  *t = NULL;
 }
 
 void adj_fils(tree_t **prec, tree_t *elt) {
