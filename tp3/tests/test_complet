@@ -1,0 +1,48 @@
+#Test de creation
+C (a(b(a(T))r(b(r(E))T(S)))b(a(i(l(l(e(R))))R(r(E)))i(e(N))o(s(s(E,U))))f(a(i(M,r(E))))j(o(u(e(T,u(R)))))k(i(m(o(n(O)))w(I)))m(a(S(s(E))))v(a(i(N)))y(a(c(K)))z(e(b(U))))
+#Affichage apres creation
+A
+
+#Insertion d'un mot dont aucune partie n'est presente dans le dictionnaire: toto
+I toto
+#Affichage suite a insertion
+A
+
+#Insertion d'un mot dont le debut est deja present: arbore
+I arbore
+#Affichage suite a insertion
+A
+
+#Insertion d'un mot inclus dans un mot deja present: bail
+I bail
+#Affichage suite a insertion
+A
+
+#Insertion d'un mot deja existant: barre
+I barre
+#Affichage suite a insertion
+A
+
+#Insertion du mot vide (doit etre sans effet)
+I
+#Affichage suite a insertion
+A  
+
+#Recherche de motif: cas mots existants: mots commencant par ba
+M ba
+
+#Recherche de motif: cas de mots inexistants: mots commencant par x
+M x
+
+#Recherche de motif: recherche du motif vide (= contenu de l'arbre)
+M    
+
+#Suppression de l'arbre
+L
+#Affichage suite a suppression (arbre vide)
+A
+
+#Insertion dans un arbre vide
+I moi
+#Affichage suite a insertion
+A

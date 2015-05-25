@@ -1,0 +1,206 @@
+Test de creation
+Affichage apres creation
+abat
+arbre
+art
+arts
+bailler
+bar
+barre
+bien
+bosse
+bossu
+faim
+faire
+jouet
+joueur
+kimono
+kiwi
+mas
+masse
+vain
+yack
+zebu
+
+
+Insertion d'un mot dont aucune partie n'est presente dans le dictionnaire: toto
+Affichage suite a insertion
+abat
+arbre
+art
+arts
+bailler
+bar
+barre
+bien
+bosse
+bossu
+faim
+faire
+jouet
+joueur
+kimono
+kiwi
+mas
+masse
+toto
+vain
+yack
+zebu
+
+
+Insertion d'un mot dont le debut est deja present: arbore
+Affichage suite a insertion
+abat
+arbore
+arbre
+art
+arts
+bailler
+bar
+barre
+bien
+bosse
+bossu
+faim
+faire
+jouet
+joueur
+kimono
+kiwi
+mas
+masse
+toto
+vain
+yack
+zebu
+
+
+Insertion d'un mot inclus dans un mot deja present: bail
+Affichage suite a insertion
+abat
+arbore
+arbre
+art
+arts
+bail
+bailler
+bar
+barre
+bien
+bosse
+bossu
+faim
+faire
+jouet
+joueur
+kimono
+kiwi
+mas
+masse
+toto
+vain
+yack
+zebu
+
+
+Insertion d'un mot deja existant: barre
+Affichage suite a insertion
+abat
+arbore
+arbre
+art
+arts
+bail
+bailler
+bar
+barre
+bien
+bosse
+bossu
+faim
+faire
+jouet
+joueur
+kimono
+kiwi
+mas
+masse
+toto
+vain
+yack
+zebu
+
+
+Insertion du mot vide (doit etre sans effet)
+Affichage suite a insertion
+abat
+arbore
+arbre
+art
+arts
+bail
+bailler
+bar
+barre
+bien
+bosse
+bossu
+faim
+faire
+jouet
+joueur
+kimono
+kiwi
+mas
+masse
+toto
+vain
+yack
+zebu
+
+
+Recherche de motif: cas mots existants: mots commencant par ba
+bail
+bailler
+bar
+barre
+
+
+Recherche de motif: cas de mots inexistants: mots commencant par x
+
+
+Recherche de motif: recherche du motif vide (= contenu de l'arbre)
+abat
+arbore
+arbre
+art
+arts
+bail
+bailler
+bar
+barre
+bien
+bosse
+bossu
+faim
+faire
+jouet
+joueur
+kimono
+kiwi
+mas
+masse
+toto
+vain
+yack
+zebu
+
+
+Suppression de l'arbre
+Affichage suite a suppression (arbre vide)
+
+
+Insertion dans un arbre vide
+Affichage suite a insertion
+moi
