@@ -18,15 +18,108 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
     \begin{algo}[informal] %principe
       \ALGO{creerArbre (Principe)}
       \BEGIN
-        \RETURN{}
+        \STATE{Initialise le code d'erreur à 0}
+        \STATE{Initialise caractère cour, au début de la chaîne}
+        \STATE{Initialise pointeur prec, de parcours à la racine}
+        \STATE{Initialisation de la pile}
+        \IF{l'initialisation de la pile est réussie}
+          \STATE{Code d'erreur passe à 1}
+          \WHILE{Code d'erreur \EQ 1 \AND (Pile non vide \OR caractere courant \NEQ ')')}
+            \IF{cour \EQ ')'}
+              \STATE{Push l'adresse du pointeur de parcours}
+              \STATE{prec passe sur le lien vertical}
+              \STATE{Avance d'un caractere dans la chaîne}{cour ++}
+            \ELSE \IF{cour \EQ ','}
+              \STATE{prec passe sur le lien horizontal}
+              \STATE{Avance d'un caractère dans la chaîne}
+            \ENDIF
+            \STATE{On cree un noeud à l'adresse prec, avec le carctère courant}
+            \IF{l'allocation a échouée}
+              \STATE{Code d'erreur passe à 0}
+            \ELSE
+              \STATE{Avance d'un caractère dans la chaîne}
+            \ENDIF
+            \WHILE{Code d'erreur \EQ 1 \AND Pile non vide \AND cour \EQ ')')}
+              \STATE{Pop dans un pointeur temporaire}
+              \STATE{prec devient pointeur sur l'adresse du lien horizontal de ce que l'on vient de dépiler}
+              \STATE{Avance d'un caractère dans la chaîne}
+            \ENDWHILE
+          \ENDWHILE
+          \STATE{Libération de la pile}
+        \ENDIF
+        \RETURN{Code d'erreur}
       \END
     \end{algo}
 
     \begin{algo}[informal] %lexique
       \VAR
-        \DECLVAR{}{}
+        \DECLVAR{p}{pile}
+        \DECLVAR{**prec}{adresse du pointeur de parcours de l'arbre}
+        \DECLVAR{*tmp}{pointeur temporaire lorsque l'on dépile}
+        \DECLVAR{*cour}{caractère courant dans la chaîne}
+        \DECLVAR{taille}{taille max de la pile (taille de la chaîne de catactère)}
+        \DECLVAR{ret}{code d'erreur (1 si tout va bien, 0 sinon)}
       \ENDVAR
     \end{algo}
+
+  \subsection{creerNoeud}
+    \begin{algo}[informal] %principe
+      \ALGO{creerNoeud (Principe)}
+      \BEGIN
+        \STATE{Allocation d'un nouvel élément}
+        \IF{allocation réussie}
+          \STATE{Le lien vertical de l'élément est NULL}
+          \STATE{Le lien horizontal de l'élément est NULL}
+          \STATE{La valeur de l'élément prend la valeur du paramètre}
+        \ENDIF
+        \RETURN{le nouvel élément crée}
+      \END
+    \end{algo}
+    
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{*r}{nouvel élément crée}
+      \ENDVAR
+    \end{algo}
+
+  \subsection{afficherArbrePref}
+    \begin{algo}[informal] %principe
+      \ALGO{afficherArbrePref (Principe)}
+      \BEGIN
+        \STATE{Initialisation de la pile}
+        \STATE{Initialisation d'un pointeur cour, de parcours de l'arbre}
+        \IF{cour \NEQ NULL \AND pile allouée}
+          \REPEAT
+            \WHILE{cour \NEQ NULL}
+              \STATE{Push cour}
+              \IF{la lettre dans cour est majuscule}{fin de mot}
+                \STATE{Affiche le préfixe donné en paramètre}
+                \STATE{Affiche le contenu de la pile}
+                \STATE{Affiche un retour à la ligne}
+              \ENDIF
+            \ENDWHILE
+            \WHILE{pile non vide \AND cour \EQ NULL}
+              \STATE{Pop dans cour}
+              \STATE{cour passe sur son lien horizontal}
+            \ENDWHILE
+          \ENDREPEAD[while]{pile non vilde \OR cour \NEQ NULL}
+          \STATE{Libération de la pile}
+        \ENDIF
+      \END
+    \end{algo}
+    
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{p}{pile}
+        \DECLVAR{*cour}{pointeur de parcours de l'arbre}
+      \ENDVAR
+    \end{algo}
+  
+  \subsection{afficherArbre}
+  Ici, on appelle simplement la fonction précédente avec un préfixe valant la chaîne vide.
+  
+  \subsection{afficherPoint}
+  Cette fonction affiche simplement la valeur d'un élément en convertissant le caractère en minuscule
 
   \subsection{insererMot}
     \begin{algo}[informal] %principe
