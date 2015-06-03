@@ -148,11 +148,12 @@ int push(stack_t *p, datatype v) {
   return ok;
 }
 
-/*  void dump(stack_t p)
+/*  void dump(stack_t p, void (*afficherData)(datatype))
 Affiche le contenu de la pile
 
   Entree :
     p : tete de la pile
+    *afficherData : pointeur de fonction permettant l'affichage des elements
 
   Sortie :
     Aucune

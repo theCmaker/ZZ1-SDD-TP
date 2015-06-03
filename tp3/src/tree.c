@@ -23,6 +23,8 @@ et en prenant l'adresse du pointeur sur la tete de l'arbre
   
   Sortie :
     int : code de retour sur la creation
+          0 : probleme d'alloc d'element
+          1 : aucun probleme
 */
 int creerArbre(char *ch, tree_t **r) {
   stack_t p;                    /* Pile */
@@ -174,11 +176,33 @@ void libererArbre(tree_t **t) {
   *t = NULL;
 }
 
+/*  void adj_fils(tree_t **prec, tree_t *elt)
+Ajoute un element dans l'arbre, a partir de l'adresse du pointeur sur le prec
+
+  Entrees :
+    **prec : adresse du pointeur sur l'element avant lequel inserer
+    *elt : pointeur sur l'element a ajouter
+    
+  Sortie :
+    Aucune
+*/
+
 void adj_fils(tree_t **prec, tree_t *elt) {
   elt->lv = (*prec);
   (*prec) = elt;
 }
 
+/*  tree_t **rech_mot(tree_t **t, char **w)
+
+
+  Entrees :
+    **t : adresse du pointeur de tete de l'arbre
+    **w : pointeur sur le mot a chercher
+    
+  Sortie :
+    tree_t ** : adresse du pointeur dans l'arbre ou on a trouvee la derniere lettre
+                possible du mot
+*/
 tree_t **rech_mot(tree_t **t, char **w) {
   char *cour = *w;        /* Pointeur parcours du mot */
   tree_t **arbre = t;     /* Pointeur parcours de l'arbre */
@@ -205,7 +229,18 @@ tree_t **rech_mot(tree_t **t, char **w) {
   return arbre;
 }
 
+/*  int insererMot(tree_t **t, char *w)
+Insere un mot dans le dictionnaire a la bonne place
 
+  Entrees :
+    **t : adresse du pointeur de tete du dictionnaire (arbre)
+    *w : chaine de caractere (mot) a inserer
+    
+  Sortie :
+    int : code d'erreur
+          0 : probleme d'allocation ou d'insertion
+          1 : aucun soucis d'insertion
+*/
 int insererMot(tree_t **t, char *w) {
   int len;             /* Longueur du mot */
   int i;               /* Indice de parcours pour copie */
@@ -269,6 +304,16 @@ int insererMot(tree_t **t, char *w) {
   return res;
 }
 
+/*  void rech_motif(tree_t **t, char *w)
+Affiche tous les mots commencant par un certain motif dans l'arbre
+
+  Entrees :
+    **t : adresse du pointeur sur l'arbre
+    *w : chaine de caractere representant le motif des mots a afficherArbre
+    
+  Sortie :
+    Aucune
+*/
 void rech_motif(tree_t **t, char *w) {
 	tree_t **arbre = t;
 	char *cour = w;

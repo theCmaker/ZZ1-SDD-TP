@@ -29,14 +29,13 @@ void adj_cell(cell_t **prec, cell_t *elt) {
   (*prec) = elt;
 }
 
-/*  cell_t ** rech_prec(cell_t **liste, int debut, short int *existe)
+/*  cell_t ** rech_prec(cell_t **liste, char letter, short int *existe)
   Recherche le precedent d'un element dans la liste chainee a partir de la
   date de debut de message
 
   Entrees :
     cell_t **liste : pointeur sur le pointeur du premier element de la liste chainee
-    int debut : date de debut de message que l'on souhaite inserer, sous la forme AAAAMMJJ
-          on cherchera donc les messages dont la date est immediatement superieure
+    char lettre : caractere a chercher dans la liste
     short int *existe : variable en entre/sortie indiquant si on a ou pas de message ayant la date de debut
       0 : il n'y a pas de message avec cette date de debut
       1 : il y a au moins un message
@@ -105,17 +104,15 @@ void ins_cell(cell_t **liste, cell_t *elt) {
   adj_cell(prec,elt);
 }
 
-/*  news_t * creer_cell(int debut, int fin, char *message)
-  Permet de creer un element de la liste chainee a partir de
-  la date de debut et de fin de validite ainsi que le texte du message
+/*  node_t * creer_cell(char letter)
+  Permet de creer un element de la liste chainee a partir du
+  caractere donne en parametre
 
   Entrees :
-    int debut : date de debut de validite de message sous la forme AAAAMMJJ
-    int fin : date de fin de validite de message sous la forme AAAAMMJJ
-    char *message : texte du message
+    char letter : lettre a mettre dans l'element
 
   Sortie :
-    news_t* : pointeur sur l'element cree
+    node_t* : pointeur sur l'element cree
 */
 node_t * creer_cell(char letter) {
   node_t *elt = (node_t*) malloc(sizeof(node_t));
