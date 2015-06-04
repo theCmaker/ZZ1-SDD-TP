@@ -166,14 +166,14 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
         \STATE{Initialisation d'un pointeur arbre, de parcours de l'arbre}
         \STATE{Initialisation d'un booleen existe}{Initialisé à TRUE}
         \WHILE{existe \EQ TRUE \AND arbre \NEQ NULL \AND cour est en minuscule}{Recherche du début du mot}
-          \STATE{Lance rech_prec() et stocke les résultats dans arbre et existe}
+          \STATE{Lance rech\_prec() et stocke les résultats dans arbre et existe}
           \IF{existe \EQ TRUE}
             \STATE{On passe arbre sur l'adresse de son fils}
             \STATE{Avance d'un caractère dans le mot}
           \ENDIF
         \ENDWHILE
         \IF{arbre \NEQ NULL \AND cour en majuscule}
-          \STATE{Lance rech_prec() et stocke les résultats dans arbre et existe}
+          \STATE{Lance rech\_prec() et stocke les résultats dans arbre et existe}
           \IF{la valeur du noeud courant \EQ cour}
             \STATE{Avance d'un caractère dans le mot}
           \ENDIF
