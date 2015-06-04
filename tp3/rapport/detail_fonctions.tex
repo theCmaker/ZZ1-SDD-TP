@@ -121,30 +121,143 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
   \subsection{afficherPoint}
   Cette fonction affiche simplement la valeur d'un élément en convertissant le caractère en minuscule
 
-  \subsection{insererMot}
-    \begin{algo}[informal] %principe
-      \ALGO{insererMot (Principe)}
-      \BEGIN
-        \RETURN{}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{}{}
-      \ENDVAR
-    \end{algo}
-
   \subsection{libererArbre}
     \begin{algo}[informal] %principe
       \ALGO{libererArbre (Principe)}
       \BEGIN
-        \RETURN{}
+        \STATE{Initialisation d'une pile}
+        \STATE{Initialisation d'un pointeur cour, sur la tête de l'arbre}
+        \IF{cour \NEQ NULL \AND Pile initialisée}
+          \REPEAT
+            \WHILE{cour \NEQ NULL}
+              \STATE{Place la valeur cour dans un pointeur temporaire}
+              \IF{Lien horizontal de cour \NEQ NULL}
+                \STATE{Push l'adresse dans la pile}{Sauvegarde pour y revenir}
+              \ENDIF
+              \STATE{Passe au lien vertical de cour}
+              \STATE{Libération de l'élément contenu dans le pointeur temporaire}
+            \ENDWHILE
+            \IF{Pile non vide}{Il reste des éléments à libérer}
+              \STATE{Pop la pile dans cour}
+            \ENDIF
+          \ENDREPEAD[while]{Pile non vide \OR cour \NEQ NULL}
+          \STATE{Libération de la pile}
+        \ENDIF
+        \STATE{Mise du pointeur de tête de l'arbre sur NULL}
       \END
     \end{algo}
 
     \begin{algo}[informal] %lexique
       \VAR
-        \DECLVAR{}{}
+        \DECLVAR{p}{pile}
+        \DECLVAR{*cour}{pointeur de parcours de l'arbre}
+        \DECLVAR{*tmp}{pointeur temporaire servant à libérer les éléments}
+      \ENDVAR
+    \end{algo}
+  
+  \subsection{adj\_fils}
+  Cette fonction permet simplement d'ajouter un fils à un élément. Le pointeur sur lien vertical de l'élément prend l'adresse du précédent et le pointeur prec prend l'adresse de l'élément que l'on ajoute.
+  
+  \subsection{rech\_mot}
+    \begin{algo}[informal] %principe
+      \ALGO{rech\_mot (Principe)}
+      \BEGIN
+        \STATE{Initialisation d'un pointeur cour, sur le caractère courant du mot}
+        \STATE{Initialisation d'un pointeur arbre, de parcours de l'arbre}
+        \STATE{Initialisation d'un booleen existe}{Initialisé à TRUE}
+        \WHILE{existe \EQ TRUE \AND arbre \NEQ NULL \AND cour est en minuscule}{Recherche du début du mot}
+          \STATE{Lance rech_prec() et stocke les résultats dans arbre et existe}
+          \IF{existe \EQ TRUE}
+            \STATE{On passe arbre sur l'adresse de son fils}
+            \STATE{Avance d'un caractère dans le mot}
+          \ENDIF
+        \ENDWHILE
+        \IF{arbre \NEQ NULL \AND cour en majuscule}
+          \STATE{Lance rech_prec() et stocke les résultats dans arbre et existe}
+          \IF{la valeur du noeud courant \EQ cour}
+            \STATE{Avance d'un caractère dans le mot}
+          \ENDIF
+        \ENDIF
+        \STATE{Le mot en paramètre prend la valeur de cour}{Ne contiendra que les lettres du mot non traitées}
+        \RETURN{arbre}
+      \END
+    \end{algo}
+    
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{*cour}{pointeur de parcours du mot en paramètre}
+        \DECLVAR{**arbre}{double pointeur de parcours de l'arbre}
+        \DECLVAR{existe}{booleen d'existence du caractère courant du mot dans l'arbre}
+      \ENDVAR
+    \end{algo}
+    
+  \subsection{insererMot}
+    \begin{algo}[informal] %principe
+      \ALGO{insererMot (Principe)}
+      \BEGIN
+        \STATE{Initialisation d'un pointeur arbre à la tête}
+        \STATE{Initialisation d'un code d'erreur à 1}
+        \IF{le mot en entré \NEQ '\0'}{Le mot n'est pas vide}
+          \STATE{On cree une copie du mot entré}
+          \STATE{On passe chaque lettre de cette copie en minuscule, sauf la dernière}{Avec une simple boucle while}
+          \STATE{Lance rech\_mot() et stocke les résultats dans arbre et cour}
+          \IF{cour \NEQ '\0'}{Le mot n'est pas présent}
+            \IF{arbre \NEQ NULL \AND valeur de l'élémént arbre \EQ cour(en minuscule)}
+              \STATE{On passe la lettre dans arbre en majuscule}
+              \STATE{Avance d'un caractère dans le mot}
+            \ELSE
+              \STATE{Creation d'un nouveau noeud avec cour comme valeur}
+              \IF{élément correctement crée}
+                \STATE{Ajout de l'élément dans le lien horizontal de arbre}
+                \STATE{On passe arbre sur l'adresse du pointeur de son fils}
+                \STATE{Avance d'un caractère dans le mot}
+                \WHILE{code d'erreur \NEQ 0 \AND cour \NEQ '\0'}{Insère les lettres restantes}
+                  \STATE{Creation d'un nouveau noeud avec cour comme valeur}
+                  \IF{élément correctement crée}
+                    \STATE{Ajout de l'élément dans le lien vertical de arbre}
+                    \STATE{On passe arbre sur l'adresse du pointeur de son fils}
+                    \STATE{On avance d'un caractère dans le mot}
+                  \ELSE
+                    \STATE{Code d'erreur passe à 0}{Problème d'allocation}
+                  \ENDIF
+                \ENDWHILE
+              \ELSE
+                \STATE{Code d'erreur passe à 0}{Problème d'allocation}
+              \ENDIF
+            \ENDIF
+          \ENDIF
+        \ENDIF
+        \RETURN{Code d'erreur}
+      \END
+    \end{algo}
+    
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{len}{taille du mot en paramètre}
+        \DECLVAR{i}{indice de boucle pour copie du mot}
+        \DECLVAR{res}{code d'erreur (1 si tout s'est bien passé, 0 sinon)}
+        \DECLVAR{*cour}{poiteur sur caractère courant du mot (copié)}
+        \DECLVAR{*tmp}{pointeur temporaire pour la création de nouveaux noeuds}
+        \DECLVAR{**arbre}{pointeur de parcours de l'arbre}
+      \ENDVAR
+    \end{algo}
+    
+  \subsection{rech\_motif}
+    \begin{algo}[informal] %principe
+      \ALGO{rech\_motif (Principe)}
+      \BEGIN
+        \STATE{Initialisation d'un pointeur arbre, sur la tête}
+        \STATE{Initialisation d'un pointeur cour, sur la caractère courant du mot}
+        \STATE{Lance rech\_mot() et stocke les résultats dans arbre et cour}
+        \IF{cour \EQ '\0'}
+          \STATE{Affichage de l'arbre avec pour préfixe le motif entré}
+        \ENDIF
+      \END
+    \end{algo}
+  
+    \begin{algo}[informal] %lexique
+      \VAR
+        \DECLVAR{**arbre}{pointeur de parcours de l'arbre}
+        \DECLVAR{*cour}{pointeur sur le caractère courant de l'arbre}
       \ENDVAR
     \end{algo}
