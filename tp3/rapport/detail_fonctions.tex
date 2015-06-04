@@ -26,23 +26,23 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
           \STATE{Code d'erreur passe à 1}
           \WHILE{Code d'erreur \EQ 1 \AND (Pile non vide \OR caractere courant \NEQ ')')}
             \IF{cour \EQ ')'}
-              \STATE{Push l'adresse du pointeur de parcours}
+              \STATE{Empiler l'adresse du pointeur de parcours}
               \STATE{prec passe sur le lien vertical}
-              \STATE{Avance d'un caractere dans la chaîne}{cour ++}
+              \STATE{Avance d'un caractère dans la chaîne}
             \ELSE \IF{cour \EQ ','}
               \STATE{prec passe sur le lien horizontal}
               \STATE{Avance d'un caractère dans la chaîne}
             \ENDIF
-            \STATE{On cree un noeud à l'adresse prec, avec le carctère courant}
-            \IF{l'allocation a échouée}
+            \STATE{On crée un n\oe ud à l'adresse prec, avec le caractère courant}
+            \IF{l'allocation a échoué}
               \STATE{Code d'erreur passe à 0}
             \ELSE
-              \STATE{Avance d'un caractère dans la chaîne}
+              \STATE{Avance au caractère suivant dans la chaîne}
             \ENDIF
             \WHILE{Code d'erreur \EQ 1 \AND Pile non vide \AND cour \EQ ')')}
-              \STATE{Pop dans un pointeur temporaire}
+              \STATE{On dépile dans un pointeur temporaire}
               \STATE{prec devient pointeur sur l'adresse du lien horizontal de ce que l'on vient de dépiler}
-              \STATE{Avance d'un caractère dans la chaîne}
+              \STATE{Avance au caractère suivant dans la chaîne}
             \ENDWHILE
           \ENDWHILE
           \STATE{Libération de la pile}
@@ -55,9 +55,9 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \VAR
         \DECLVAR{p}{pile}
         \DECLVAR{**prec}{adresse du pointeur de parcours de l'arbre}
-        \DECLVAR{*tmp}{pointeur temporaire lorsque l'on dépile}
-        \DECLVAR{*cour}{caractère courant dans la chaîne}
-        \DECLVAR{taille}{taille max de la pile (taille de la chaîne de catactère)}
+        \DECLVAR{tmp}{pointeur temporaire lorsque l'on dépile}
+        \DECLVAR{cour}{pointeur sur le caractère courant dans la chaîne}
+        \DECLVAR{taille}{taille max de la pile (taille de la chaîne de catactères)}
         \DECLVAR{ret}{code d'erreur (1 si tout va bien, 0 sinon)}
       \ENDVAR
     \end{algo}
@@ -68,17 +68,17 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \BEGIN
         \STATE{Allocation d'un nouvel élément}
         \IF{allocation réussie}
-          \STATE{Le lien vertical de l'élément est NULL}
-          \STATE{Le lien horizontal de l'élément est NULL}
+          \STATE{Le lien vertical de l'élément est \NIL}
+          \STATE{Le lien horizontal de l'élément est \NIL}
           \STATE{La valeur de l'élément prend la valeur du paramètre}
         \ENDIF
-        \RETURN{le nouvel élément crée}
+        \RETURN{le nouvel élément créé}
       \END
     \end{algo}
     
     \begin{algo}[informal] %lexique
       \VAR
-        \DECLVAR{*r}{nouvel élément crée}
+        \DECLVAR{*r}{nouvel élément créé}
       \ENDVAR
     \end{algo}
 
@@ -88,21 +88,21 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \BEGIN
         \STATE{Initialisation de la pile}
         \STATE{Initialisation d'un pointeur cour, de parcours de l'arbre}
-        \IF{cour \NEQ NULL \AND pile allouée}
+        \IF{cour \NEQ \NIL{} \AND pile allouée}
           \REPEAT
-            \WHILE{cour \NEQ NULL}
-              \STATE{Push cour}
-              \IF{la lettre dans cour est majuscule}{fin de mot}
+            \WHILE{cour \NEQ \NIL}
+              \STATE{Empiler cour}
+              \IF[fin de mot]{la lettre dans cour est majuscule}
                 \STATE{Affiche le préfixe donné en paramètre}
                 \STATE{Affiche le contenu de la pile}
                 \STATE{Affiche un retour à la ligne}
               \ENDIF
             \ENDWHILE
-            \WHILE{pile non vide \AND cour \EQ NULL}
-              \STATE{Pop dans cour}
+            \WHILE{pile non vide \AND cour \EQ \NIL}
+              \STATE{Dépiler dans cour}
               \STATE{cour passe sur son lien horizontal}
             \ENDWHILE
-          \ENDREPEAD[while]{pile non vilde \OR cour \NEQ NULL}
+          \ENDREPEAT[while]{pile non vide \OR cour \NEQ \NIL}
           \STATE{Libération de la pile}
         \ENDIF
       \END
@@ -119,7 +119,7 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
   Ici, on appelle simplement la fonction précédente avec un préfixe valant la chaîne vide.
   
   \subsection{afficherPoint}
-  Cette fonction affiche simplement la valeur d'un élément en convertissant le caractère en minuscule
+  Cette fonction affiche simplement la valeur d'un élément en convertissant le caractère en minuscules
 
   \subsection{libererArbre}
     \begin{algo}[informal] %principe
@@ -127,23 +127,23 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \BEGIN
         \STATE{Initialisation d'une pile}
         \STATE{Initialisation d'un pointeur cour, sur la tête de l'arbre}
-        \IF{cour \NEQ NULL \AND Pile initialisée}
+        \IF{cour \NEQ \NIL{} \AND Pile initialisée}
           \REPEAT
-            \WHILE{cour \NEQ NULL}
+            \WHILE{cour \NEQ \NIL}
               \STATE{Place la valeur cour dans un pointeur temporaire}
-              \IF{Lien horizontal de cour \NEQ NULL}
-                \STATE{Push l'adresse dans la pile}{Sauvegarde pour y revenir}
+              \IF{Lien horizontal de cour \NEQ \NIL}
+                \STATE[Sauvegarde pour y revenir]{Empile l'adresse dans la pile}
               \ENDIF
               \STATE{Passe au lien vertical de cour}
               \STATE{Libération de l'élément contenu dans le pointeur temporaire}
             \ENDWHILE
-            \IF{Pile non vide}{Il reste des éléments à libérer}
-              \STATE{Pop la pile dans cour}
+            \IF[Il reste des éléments à libérer]{Pile non vide}
+              \STATE{Dépile dans cour}
             \ENDIF
-          \ENDREPEAD[while]{Pile non vide \OR cour \NEQ NULL}
+          \ENDREPEAT[while]{Pile non vide \OR cour \NEQ \NIL}
           \STATE{Libération de la pile}
         \ENDIF
-        \STATE{Mise du pointeur de tête de l'arbre sur NULL}
+        \STATE{Mise du pointeur de tête de l'arbre sur \NIL}
       \END
     \end{algo}
 
@@ -164,21 +164,21 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \BEGIN
         \STATE{Initialisation d'un pointeur cour, sur le caractère courant du mot}
         \STATE{Initialisation d'un pointeur arbre, de parcours de l'arbre}
-        \STATE{Initialisation d'un booleen existe}{Initialisé à TRUE}
-        \WHILE{existe \EQ TRUE \AND arbre \NEQ NULL \AND cour est en minuscule}{Recherche du début du mot}
-          \STATE{Lance rech\_prec() et stocke les résultats dans arbre et existe}
-          \IF{existe \EQ TRUE}
+        \STATE[Initialisé à Vrai]{Initialisation d'un booléen existe}
+        \WHILE[Recherche du début du mot]{existe \EQ Vrai \AND arbre \NEQ \NIL{} \AND cour est en minuscule}
+          \STATE{Lance \texttt{rech\_prec()} et stocke les résultats dans arbre et existe}
+          \IF{existe \EQ Vrai}
             \STATE{On passe arbre sur l'adresse de son fils}
             \STATE{Avance d'un caractère dans le mot}
           \ENDIF
         \ENDWHILE
-        \IF{arbre \NEQ NULL \AND cour en majuscule}
-          \STATE{Lance rech\_prec() et stocke les résultats dans arbre et existe}
-          \IF{la valeur du noeud courant \EQ cour}
+        \IF{arbre \NEQ \NIL{} \AND cour en majuscule}
+          \STATE{Lance \texttt{rech\_prec()} et stocke les résultats dans arbre et existe}
+          \IF{la valeur du n\oe ud courant \EQ cour}
             \STATE{Avance d'un caractère dans le mot}
           \ENDIF
         \ENDIF
-        \STATE{Le mot en paramètre prend la valeur de cour}{Ne contiendra que les lettres du mot non traitées}
+        \STATE[Ne contiendra que les lettres du mot non traitées]{Le mot en paramètre prend la valeur de cour}
         \RETURN{arbre}
       \END
     \end{algo}
@@ -187,7 +187,7 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \VAR
         \DECLVAR{*cour}{pointeur de parcours du mot en paramètre}
         \DECLVAR{**arbre}{double pointeur de parcours de l'arbre}
-        \DECLVAR{existe}{booleen d'existence du caractère courant du mot dans l'arbre}
+        \DECLVAR{existe}{booléen d'existence du caractère courant du mot dans l'arbre}
       \ENDVAR
     \end{algo}
     
@@ -197,32 +197,32 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \BEGIN
         \STATE{Initialisation d'un pointeur arbre à la tête}
         \STATE{Initialisation d'un code d'erreur à 1}
-        \IF{le mot en entré \NEQ '\0'}{Le mot n'est pas vide}
+        \IF{Le mot n'est pas vide}
           \STATE{On cree une copie du mot entré}
-          \STATE{On passe chaque lettre de cette copie en minuscule, sauf la dernière}{Avec une simple boucle while}
+          \STATE[Avec un simple Tant Que]{On passe chaque lettre de cette copie en minuscule, sauf la dernière}
           \STATE{Lance rech\_mot() et stocke les résultats dans arbre et cour}
-          \IF{cour \NEQ '\0'}{Le mot n'est pas présent}
-            \IF{arbre \NEQ NULL \AND valeur de l'élémént arbre \EQ cour(en minuscule)}
+          \IF[Le mot n'est pas présent]{\NOT fin de chaîne}
+            \IF{arbre non vide \AND valeur du n\oe ud \EQ cour(en minuscule)}
               \STATE{On passe la lettre dans arbre en majuscule}
               \STATE{Avance d'un caractère dans le mot}
             \ELSE
-              \STATE{Creation d'un nouveau noeud avec cour comme valeur}
-              \IF{élément correctement crée}
+              \STATE{Création d'un nouveau n\oe ud contenant la lettre courante}
+              \IF{élément correctement créé}
                 \STATE{Ajout de l'élément dans le lien horizontal de arbre}
                 \STATE{On passe arbre sur l'adresse du pointeur de son fils}
                 \STATE{Avance d'un caractère dans le mot}
-                \WHILE{code d'erreur \NEQ 0 \AND cour \NEQ '\0'}{Insère les lettres restantes}
-                  \STATE{Creation d'un nouveau noeud avec cour comme valeur}
-                  \IF{élément correctement crée}
+                \WHILE[Insère les lettres restantes]{code d'erreur \NEQ 0 \AND cour \NEQ '\textbackslash 0'}
+                  \STATE{Création d'un nouveau n\oe ud avec cour comme valeur}
+                  \IF{élément correctement créé}
                     \STATE{Ajout de l'élément dans le lien vertical de arbre}
                     \STATE{On passe arbre sur l'adresse du pointeur de son fils}
                     \STATE{On avance d'un caractère dans le mot}
                   \ELSE
-                    \STATE{Code d'erreur passe à 0}{Problème d'allocation}
+                    \STATE[Problème d'allocation]{Code d'erreur passe à 0}
                   \ENDIF
                 \ENDWHILE
               \ELSE
-                \STATE{Code d'erreur passe à 0}{Problème d'allocation}
+                \STATE[Problème d'allocation]{Code d'erreur passe à 0}
               \ENDIF
             \ENDIF
           \ENDIF
@@ -237,7 +237,7 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
         \DECLVAR{i}{indice de boucle pour copie du mot}
         \DECLVAR{res}{code d'erreur (1 si tout s'est bien passé, 0 sinon)}
         \DECLVAR{*cour}{poiteur sur caractère courant du mot (copié)}
-        \DECLVAR{*tmp}{pointeur temporaire pour la création de nouveaux noeuds}
+        \DECLVAR{*tmp}{pointeur temporaire pour la création de nouveaux n\oe uds}
         \DECLVAR{**arbre}{pointeur de parcours de l'arbre}
       \ENDVAR
     \end{algo}
@@ -247,9 +247,9 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \ALGO{rech\_motif (Principe)}
       \BEGIN
         \STATE{Initialisation d'un pointeur arbre, sur la tête}
-        \STATE{Initialisation d'un pointeur cour, sur la caractère courant du mot}
+        \STATE{Initialisation d'un pointeur cour, sur le caractère courant du mot}
         \STATE{Lance rech\_mot() et stocke les résultats dans arbre et cour}
-        \IF{cour \EQ '\0'}
+        \IF{cour \EQ '\textbackslash 0'}
           \STATE{Affichage de l'arbre avec pour préfixe le motif entré}
         \ENDIF
       \END
