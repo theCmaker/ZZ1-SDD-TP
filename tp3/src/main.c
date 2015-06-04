@@ -8,14 +8,16 @@
 
   ISIMA 1ere Annee, 2014-2015
 */
+#include "tree.h"
+#define COLUMNS 401 /* Nombre max de caracteres par ligne + 1 */
 
 void test();
 
-#include "tree.h"
+
 int main(int argc, char *argv[]) {
   FILE *f;
-  char buf[400];
-  char text[400];
+  char buf[COLUMNS];
+  char text[COLUMNS];
   tree_t *arbre = NULL;
   if (argc > 1) {
     /* Lecture de fichier de commandes */
@@ -24,7 +26,7 @@ int main(int argc, char *argv[]) {
       while (!feof(f)) {
         buf[0] = '\0';
         text[0] = '\0';
-        fgets(buf,400,f);
+        fgets(buf,COLUMNS,f);
         switch (buf[0]) {
           case 'C': /* creer */
             sscanf(&buf[1],"%s",text);
@@ -39,11 +41,7 @@ int main(int argc, char *argv[]) {
             rech_motif(&arbre,text);
             break;
           case 'L': /* liberer */
-            if (arbre) {
-              libererArbre(&arbre);
-            } else {
-              printf("Liberation impossible\n");
-            }
+            libererArbre(&arbre);
             break;
           case 'A': /* afficher */
             afficherArbre(arbre);
@@ -75,7 +73,7 @@ void test() {
   char *motif[] = {"a","","az","x"};
   printf("##########\nDEBUT DU PROGRAMME DE TEST\n##########\n");
   
-  if (creerArbre("(a(l(p(h(A))))b(r(a(v(E,O))))c(h(a(r(l(i(E))))))d(e(l(t(A(p(l(a(n(E)))))))))e(c(h(O))p(i(n(E))))g(o(l(F)))h(o(t(e(L))))i(n(d(i(A,e(N))))))",&monArbre)) {
+  if (creerArbre ("(a(l(p(h(A))))b(r(a(v(E,O))))c(h(a(r(l(i(E))))))d(e(l(t(A(p(l(a(n(E)))))))))e(c(h(O))p(i(n(E))))g(o(l(F)))h(o(t(e(L))))i(n(d(i(A,e(N))))))", &monArbre)) {
     printf("**********\nAffichage avant insertion\n");
     afficherArbre(monArbre);
 

@@ -1,0 +1,16 @@
+C (a(b(a(T))r(b(r(E))T(S)))b(a(i(L(l(e(R))))R(r(e)))i(e(N))o(s(s(E,U))))f(a(i(M,r(E))))j(o(u(e(T,u(R)))))k(i(m(o(n(O)))w(I)))m(a(S(s(E))))v(a(i(N)))y(a(c(K)))z(e(b(U))))
+#ARBRE UTILISE
+A
+#
+#MOTIF: ba
+M ba
+#
+#MOTIF VIDE: ""
+M
+# 
+#MOTIF MOT: "bail"
+M bail
+#
+#MOTIF ABSENT: "kh"
+M kh
+L

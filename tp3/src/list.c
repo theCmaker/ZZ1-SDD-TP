@@ -30,15 +30,14 @@ void adj_cell(cell_t **prec, cell_t *elt) {
 }
 
 /*  cell_t ** rech_prec(cell_t **liste, char letter, short int *existe)
-  Recherche le precedent d'un element dans la liste chainee a partir de la
-  date de debut de message
+  Recherche le precedent d'un element dans la liste chainee
 
   Entrees :
     cell_t **liste : pointeur sur le pointeur du premier element de la liste chainee
     char lettre : caractere a chercher dans la liste
-    short int *existe : variable en entre/sortie indiquant si on a ou pas de message ayant la date de debut
-      0 : il n'y a pas de message avec cette date de debut
-      1 : il y a au moins un message
+    short int *existe : variable en entree/sortie indiquant la présence de la lettre
+      0 : absence
+      1 : presence
 
   Sortie :
     cell_t ** : pointeur sur le pointeur de l'element precedent
@@ -89,7 +88,6 @@ void liberer_liste(cell_t **liste) {
 
 /*  void ins_cell(cell_t **liste, cell_t *elt)
   Permet d'inserer une cellule a la bonne place dans la liste chainee
-  Les messages sont tries par ordre decroissant des date de debut
 
   Entrees :
     cell_t **liste : pointeur sur le pointeur du premier element de la liste chainee

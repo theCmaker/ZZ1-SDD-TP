@@ -1,7 +1,7 @@
 CC=pdflatex
 CFLAGS=-shell-escape
 CONFIG=settings/*.tex
-OBJS=titlepage.tex code_source.tex detail_code.tex detail_fonctions.tex tests.tex
+OBJS=titlepage.tex code_source.tex detail_code.tex detail_fonctions.tex tests.tex schema.tex
 JOBNAME=compte_rendu
 
 $(JOBNAME).pdf: $(JOBNAME).tex $(CONFIG) $(OBJS)

@@ -12,11 +12,13 @@
 \usepackage{amsmath} %symboles maths
 \usepackage{caption} %legendes
 \usepackage{subcaption} %légendes et sous-figures
+\usepackage{multicol}
 \usepackage{enumitem} %formatage des listes à puces
 \usepackage[nobottomtitles]{titlesec} %formatage des chapitres
 \usepackage{blindtext}
 \usepackage[a4paper]{geometry} %mise en page
 \usepackage[hidelinks]{hyperref}%liens
+\usepackage{rotating}
 
 \input{settings/colors}
 \input{settings/algo}
@@ -24,6 +26,12 @@
 \input{settings/mintedMakefile}
 \input{settings/mintedBash}
 \input{settings/hyperrefSettings}
+\input{settings/chainedListBis}
+
+\tikzset{%styles schémas
+    ptr/.style={fill=gray!50,shape=ptr},
+    chain2/.style={fill=RoyalBlue!50,shape=chain2}
+}
 
 \hypersetup{
   pdftitle={TP 3 - Gestion d'un dictionnaire arborescent}
@@ -43,23 +51,45 @@
   \setlength{\parskip}{10pt}
   \setlength{\parindent}{0pt}
   \chapter{Présentation}
-    Le but de ce tp est de créer une structure d'arbres permettant de gérer des mots d'un dictionnaire. Chaque liste des liens horizontaux est rangée par ordre alphabétique.
+    Le but de ce TP est de créer une structure d'arbre permettant de gérer des mots d'un dictionnaire. Chaque liste des liens horizontaux est rangée par ordre alphabétique.
 
     Les opérations suivantes sont permises avec l'arbre:
     \begin{itemize}
       \item Creer l'arbre à partir de la notation parenthésée,
       \item Insérer un mot à la bonne place dans l'arbre,
       \item Afficher le contenu de l'arbre,
-      \item Rechercher des mots ayant un certain motif,
+      \item Rechercher des mots commençant par un certain motif,
       \item Libérer la mémoire occupée par l'arbre.
     \end{itemize}
 
     \section{Structure de données employée}
-      Les mots du dictionnaire sont rangés dans un arbre, par orbre alphabétiue. La fin d'un mot est signalée par une lettre majuscule.
-    \section{Organisation du code source}
-      Nous avons découpé le tp en 3 parties. Une partie s'occupe de la gestion de pile, une autre de la gestion de liste chaînée (utilisées dans la définition de l'arbre) et la dernière est chargée de gérer la structure d'arbre que nous avons crée.
+      Les mots du dictionnaire sont rangés dans un arbre à liens horizontaux et verticaux, par orbre alphabétique en lecture préfixe. La fin d'un mot est signalée par une lettre majuscule.
 
+      \input{schema}
+
+      Afin d'effectuer les tests, nous proposons une fonction basique effectuant des tests sommaires, ainsi que l'interprétation d'un fichier qui peut être donné comme premier paramètre.
+
+      \newpage
+      Le cas échéant, la structure de ce fichier doit respecter les règles suivantes:
+      \begin{itemize}[noitemsep,nolistsep]
+        \item 400 caractères au maximum par ligne,
+        \item Les caractères suivants sont acceptés en début de ligne:
+        \begin{description}[font=\texttt,noitemsep,nolistsep]
+          \item [C :] Création d'arbre, doit contenir ensuite une représentation parenthésée,
+          \item [I :] Insertion, peut contenir un mot ensuite,
+          \item [M :] Recherche de motif, peut contenir un motif ensuite (chaîne de caractères),
+          \item [L :] Libérer l'arbre,
+          \item [A :] Afficher l'arbre,
+          \item [\# :] Provoque l'affichage du texte qui suit (commentaire affiché).
+        \end{description}
+        \item Pour l'insertion, la casse n'a pas d'importance,
+        \item Si l'on souhaite créer un nouvel arbre apres en avoir créé un premier, il est nécessaire de libérer ce dernier,
+        \item Tout autre caractère ou bien une ligne vide provoqueront l'affichage d'une ligne vide.
+      \end{itemize}
+    \section{Organisation du code source}
+      Nous avons découpé le TP en 3 parties. Une partie permet la gestion de pile, une autre la gestion de listes chaînées (qui sont utilisées dans la définition de l'arbre) et la dernière gère la structure d'arbre que nous avons créée.
     \input{code_source}
+
   \chapter{Détails du programme}
     \input{detail_code}
 
@@ -71,6 +101,6 @@
       \makefilefile{../src/Makefile}
 
     \section{Jeux de tests}
-%      \input{tests}
+      \input{tests}
 
 \end{document}

@@ -1,7 +1,7 @@
 /*  stack.h
   Header
 
-  -----| DERECURSIVATION DE FONCTION PAR PILE |-----
+  -----| PILE |-----
 
   BARBESANGE Benjamin,
   PISSAVY Pierre-Loup

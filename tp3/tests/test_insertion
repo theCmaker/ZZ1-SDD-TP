@@ -1,0 +1,24 @@
+#ARBRE VIDE
+A
+#INSERTION DANS L'ARBRE VIDE: toto
+I toto
+A
+#INSERTION 2: barre
+I barre
+A
+#INSERTION MOT EXISTANT: toto
+I toto
+A
+#INSERTION MOT VIDE: 
+I
+A 
+#INSERTION MOT INCLUS: bar
+I bar
+A
+#INSERTION MOT A DEBUT COMMUN 1: barreau
+I barreau
+A
+#INSERTION MOT A DEBUT COMMUN 2: barriere
+I barriere
+A
+L

@@ -1,0 +1,55 @@
+ARBRE UTILISE
+abat
+arbre
+art
+arts
+bail
+bailler
+bar
+bien
+bosse
+bossu
+faim
+faire
+jouet
+joueur
+kimono
+kiwi
+mas
+masse
+vain
+yack
+zebu
+
+MOTIF: ba
+bail
+bailler
+bar
+
+MOTIF VIDE: ""
+abat
+arbre
+art
+arts
+bail
+bailler
+bar
+bien
+bosse
+bossu
+faim
+faire
+jouet
+joueur
+kimono
+kiwi
+mas
+masse
+vain
+yack
+zebu
+ 
+MOTIF MOT: "bail"
+bailler
+
+MOTIF ABSENT: "kh"

@@ -1,29 +1,37 @@
-\begin{figure}[h]
-  \begin{subfigure}[c]{0.3\textwidth}
-    \subcaption{Structure utilisée}
-    \label{fig:struct}
+\begin{figure}[H]
     \begin{center}
-    \shorthandoff{:}
-    \begin{tikzpicture}[scale=0.5]
-      \matrix at (0,0) {
-        \node [case1] (a1) {max}; & \node [case1] (a11) {top}; & \node [case1,ptr] (a12) {val}; \\[1cm]
-      };
-      \matrix at (0, -4){
-        \node [case2] (b1) {Valeurs dans la pile};\\
-      };
-      \draw [vers] (a12.south) |- +(0,-1) -| (b1.north);
-    
-    \end{tikzpicture}
-    \shorthandon{:}
+      \shorthandoff{:}
+      \begin{tikzpicture}[>=latex]
+        \node [ptr,label=below:r] (A0) at (0,0) {};
+        \node [chain2] (A1) at (2,0) {a};
+        \node [chain2] (A2) at (2,-1.5) {m};
+        \node [chain2] (A3) at (8,0) {r};
+        \node [chain2] (A4) at (2,-3) {a};
+        \node [chain2] (A5) at (5,-3) {I};
+        \node [chain2] (A6) at (8,-1.5) {a};
+        \node [chain2] (A7) at (11,-1.5) {i};
+        \node [chain2] (A8) at (2,-4.5) {S};
+        \node [chain2] (A12) at (8,-3) {T};
+        \node [chain2] (A14) at (11,-3) {Z};
+        \node [chain2] (A10) at (5,-4.5) {S};
+        \foreach \m in {8,12,10,14} {
+          \node at (A\m.ptr1) {\NIL};
+        }
+        \foreach \m in {2,3,5,7,8,12,10,14} {
+          \node at (A\m.ptr2) {\NIL};
+        }
+        \foreach \m in {1,...,7} {
+          \pgfmathtruncatemacro\p{2*\m}
+          \draw [->] (A\m.ptr1) -- (A\p.north);
+        }
+        \foreach \m in {0,4,6} {
+          \pgfmathtruncatemacro\p{\m + 1}
+          \draw [->] (A\m.next) -- (A\p.west);
+        }
+        \draw [->] (A1.ptr2) -- (A3.west);
+      \end{tikzpicture}
+      \shorthandon{:}
     \end{center}
-  \end{subfigure}
-  \begin{subfigure}{0.7\textwidth}
-    \subcaption{Code}
-    \label{fig:struct_code}
-    \begin{center}
-      \cfile[firstline=20,lastline=24]{../src/stack.h}
-    \end{center}
-  \end{subfigure}
-  \caption{Structure de pile et code correspondant}
-  \label{fig:struct_code_drawing}
-\end{figure}
+    \caption{Représentation en liens vertical et horizontal}
+    \label{fig:lvlh}
+  \end{figure}

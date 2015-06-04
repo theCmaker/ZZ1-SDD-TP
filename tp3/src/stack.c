@@ -37,12 +37,7 @@ int init(stack_t *p, int n) {
 Fonction de suppression de la pile
 
   Entree :
-    *p : pointeur sur la tete de la pilevoid afficherArbre(tree_t *t){
-  if (t != NULL) {
-    printf("%c ",t->letter);
-    afficherArbre(t->lv);
-    afficherArbre(t->lh);
-  }
+    *p : pointeur sur la tete de la pile
 
   Sortie :
     Aucune

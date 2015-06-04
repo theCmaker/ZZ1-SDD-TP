@@ -21,13 +21,14 @@
   #include "stack.h"
 
   #define DEBUG 0
+  #define STACKSIZE 200
   
-  int creerArbre(char *, tree_t **);
+  int  creerArbre(char *, tree_t **);
   void libererArbre(tree_t **);
   void afficherArbrePref(tree_t *, char *);
   void afficherArbre(tree_t *);
   void afficherPoint(tree_t *);
-  int insererMot(tree_t **, char *);
+  int  insererMot(tree_t **, char *);
   void rech_motif(tree_t **, char *);
 
 #endif

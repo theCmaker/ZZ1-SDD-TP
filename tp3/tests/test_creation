@@ -1,10 +1,20 @@
 #CREATION ARBRE
 C (a(b(a(T))r(b(r(E))T(S)))b(a(i(L(l(e(R))))R(r(e)))i(e(N))o(s(s(E,U))))f(a(i(M,r(E))))j(o(u(e(T,u(R)))))k(i(m(o(n(O)))w(I)))m(a(S(s(E))))v(a(i(N)))y(a(c(K)))z(e(b(U))))
-#AFFICHAGE ARBRE
 A
-#INSERTION
-I toto
-#AFFICHAGE ARBRE
+L
+#CREATION ARBRE VIDE
+C ()
 A
-#SUPPRESSION
+L
+#CREATION ARBRE A 1 SEUL POINT
+C (A)
+A
+L
+#CREATION ARBRE A LIENS VERTICAUX SEULEMENT (= 1 MOT)
+C (m(a(n(g(e(R))))))
+A
+L
+#CREATION ARBRE A LIENS HORIZONTAUX SEULEMENT (MOTS D'UNE SEULE LETTRE)
+C (A,Y)
+A
 L
