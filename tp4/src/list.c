@@ -44,15 +44,15 @@ void adj_cell(cell_t **prec, cell_t *elt) {
   Sortie :
     cell_t ** : pointeur sur le pointeur de l'element precedent
 */
-cell_t ** rech_prec(cell_t **liste, int val, short int *existe) {
+cell_t ** rech_prec(cell_t **liste, int col, short int *existe) {
   cell_t **prec = liste;
-  while ((*prec) && (*prec)->val < val) {
+  while ((*prec) && (*prec)->col < col) {
     prec = &((*prec)->next);
   }
   /* Booleen de presence     */
   /* 1 : present             */
   /* 0 : absent              */
-  *existe = (*prec && (*prec)->val == val)?1:0;
+  *existe = (*prec && (*prec)->col == col)?1:0;
   return prec;
 }
 
