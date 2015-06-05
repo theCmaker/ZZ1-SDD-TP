@@ -26,7 +26,7 @@
 \input{settings/hyperrefSettings}
 
 \hypersetup{
-  pdftitle={TP 3 - Gestion d'un dictionnaire arborescent}
+  pdftitle={TP 4 - Gestion d'une matrice creuse de grande taille}
 }
 
 %styles et formatage
@@ -43,21 +43,22 @@
   \setlength{\parskip}{10pt}
   \setlength{\parindent}{0pt}
   \chapter{Présentation}
-    Le but de ce tp est de créer une structure d'arbres permettant de gérer des mots d'un dictionnaire. Chaque liste des liens horizontaux est rangée par ordre alphabétique.
+    Le but de ce tp est de pouvoir gérer une matrice creuse (contenant beaucoup de valeurs nulles) de grande taille. Pour ce faire, nous renseignerons dans un fichier les emplacements des valeurs non nulles de la manière suivant : numéro_ligne numéro_colonne valeur ; sur chaque ligne. Chaque donnée étant séparée par un espace.
 
-    Les opérations suivantes sont permises avec l'arbre:
+    Les opérations suivantes sont permises avec la matrice :
     \begin{itemize}
-      \item Creer l'arbre à partir de la notation parenthésée,
-      \item Insérer un mot à la bonne place dans l'arbre,
-      \item Afficher le contenu de l'arbre,
-      \item Rechercher des mots ayant un certain motif,
-      \item Libérer la mémoire occupée par l'arbre.
+      \item 
     \end{itemize}
 
     \section{Structure de données employée}
-      Les mots du dictionnaire sont rangés dans un arbre, par orbre alphabétiue. La fin d'un mot est signalée par une lettre majuscule.
+      Les éléments non nuls de la matrice sont rangés dans des tables. Nous disposons d'une table principale qui est un tableau renseignant 2 éléments dans chaque case :
+      \begin{itemize}
+        \item Numéro de la ligne concernée
+        \item Pointeur sur la liste chaînée contenant les colonnes
+      \end{itemize}
+    
     \section{Organisation du code source}
-      Nous avons découpé le tp en 3 parties. Une partie s'occupe de la gestion de pile, une autre de la gestion de liste chaînée (utilisées dans la définition de l'arbre) et la dernière est chargée de gérer la structure d'arbre que nous avons crée.
+      Nous avons découpé le tp en 2 parties. Une partie s'occupe de la gestion de liste chaînée (utilisées dans la définition de la table secondaire) et seconde s'occupe de la gestion de la matrice.
 
     \input{code_source}
   \chapter{Détails du programme}

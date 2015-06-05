@@ -2,84 +2,93 @@ Dans cette partie, sont décrits les algorithmes de principe associés aux fonct
 
 Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles dans le code source directement.
 
-\section{Gestion de la pile}
-  La gestion de la pile s'effectue grâce aux fichiers \texttt{stack.c} et \texttt{stack.h}.
-  Les algorithmes de principe des différentes fonctions ont été précédement détaillés dans le \texttt{tp 2}, nous ne les détaillerons donc pas.
-
 \section{Gestion des listes chaînées}
   Les fonctions de gestion des listes chaînées peuvent être trouvées dans les fichiers \texttt{list.c} et \texttt{list.h}.
   Les algorithmes de principe de ces fonctions ont également été fourni dans le \texttt{tp 1}. Ils ne seront donc pas inclus ici.
 
-\section{Gestion de l'arbre}
-  La gestion de l'arbre s'effectue avec les fonctions contenues dans \texttt{tree.c} et \texttt{tree.h}.
+\section{Gestion de la matrice}
+  La gestion de la matrice s'effectue avec les fonctions contenues dans \texttt{mat.c} et \texttt{mat.h}.
     
   \newpage
-  \subsection{creerArbre}
-    \begin{algo}[informal] %principe
-      \ALGO{creerArbre (Principe)}
-      \BEGIN
-        \RETURN{}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{}{}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{insererMot}
-    \begin{algo}[informal] %principe
-      \ALGO{insererMot (Principe)}
-      \BEGIN
-        \RETURN{}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{}{}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{afficherArbre}
-    \begin{algo}[informal] %principe
-      \ALGO{afficherArbre (Principe)}
-      \BEGIN
-        \RETURN{}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{}{}
-      \ENDVAR
-    \end{algo}
-    
-  \subsection{afficherPoint}
-    \begin{algo}[informal] %principe
-      \ALGO{afficherPoint (Principe)}
-      \BEGIN
-        \RETURN{}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{}{}
-      \ENDVAR
-    \end{algo}
-
-  \subsection{libererArbre}
-    \begin{algo}[informal] %principe
-      \ALGO{libererArbre (Principe)}
-      \BEGIN
-        \RETURN{}
-      \END
-    \end{algo}
-
-    \begin{algo}[informal] %lexique
-      \VAR
-        \DECLVAR{}{}
-      \ENDVAR
-    \end{algo}
+\subsection{lire\_matrice}
+  \begin{algo}[informal] %principe
+    \ALGO{ (Principe)}
+    \BEGIN
+      \STATE{Ouverture du fichier en lecture seule}
+      \STATE{Initialisation du code d'erreur à 1}
+      \STATE{Initialisation de la matrice}
+      \IF{le fichier est correctement ouvert \AND la matrice est initialisée}
+        \WHILE{code d'erreur \EQ 1 \AND on a pas lu tout le fichier}
+          \STATE{On récupère les valeurs de la ligne du fichier}
+          \STATE{On insère la valeur à la bonne place dans la matrice}
+          \IF{l'insertion n'a pas réussie}
+            \STATE{Le code d'erreur passe à 0}
+          \ENDIF
+        \ENDWHILE
+      \ELSE
+        \STATE{Le code d'erreur passe à 0}
+      \ENDIF
+      \RETURN{Code d'erreur}
+    \END
+  \end{algo}
+  
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{*f}{descripteur sur le fichier contenant les informations sur la matrice}
+      \DECLVAR{row}{entier pour récupérer le numéro de la ligne dans le fichier}
+      \DECLVAR{col}{entier pour récupérer le numéro de la colonne dans le fichier}
+      \DECLVAR{val}{valeur à insérer dans la matrice}
+      \DECLVAR{res}{code d'erreur (1 aucune erreur, 0 sinon)}
+    \ENDVAR
+  \end{algo}
+  
+\subsection{init\_mat}
+  \begin{algo}[informal] %principe
+    \ALGO{init\_mat (Principe)}
+    \BEGIN
+      \STATE{Initialisation du code d'erreur à 1}
+      \STATE{Initialise le nombre de lignes de la matrice à 0}
+      \STATE{Allocation du tableau de lignes de la matrice}
+      \IF{le tableau de ligne est alloué}
+        \STATE{On place une valeur de ligne maximale pour la première ligne}[Ceci permet d'avoir un bon résultat lors de la première recherche dichotomique]
+        \STATE{Le code d'erreur passe à 1}
+      \ENDIF
+      \RETURN{Code d'erreur}
+    \END
+  \end{algo}
+  
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{res}{code d'erreur (1 si aucun problème, 0 sinon)}
+    \ENDVAR
+  \end{algo}
+  
+\subsection{rech\_dich}
+  \begin{algo}[informal] %principe
+    \ALGO{rech\_dich (Principe)}
+    \BEGIN
+      \STATE{Initialisation d'un entier deb à 0}
+      \STATE{Initialisation d'un entier fin au nombre de lignes de la matrice}
+      \IF{ligne cherchée \LT numéro de la dernière ligne de la matrice}
+        \WHILE{deb \NEQ fin}
+          \STATE{mil prend la valeur (deb + fin) / 2}
+          \IF{ligne cherchée \LT numéro de la ligne à la place mil dans la matrice}
+            \STATE{fin prend la valeur mil}
+          \ELSE
+            \STATE{deb prend mil + 1}
+          \ENDIF
+        \ENDWHILE
+      \ENDIF
+      \STATE{Modification du booleen existe}
+      \RETURN{deb}
+    \END
+  \end{algo}
+  
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{deb}{entier représentant la position de départ de la recherche dichotomique, c'est également le retour de la fonction indiquant où se trouve l'élément cherché ou son adresse d'insertion}
+      \DECLVAR{fin}{entier représentant la position de fin de la recherche dichotomique}
+      \DECLVAR{mil}{entier représentant le milieu entre deb et fin}
+      \DECLVAR{*existe}{adresse du booleen indiquant si la ligne cherchée se trouve ou non déjà dans la matrice (1 si elle existe, 0 sinon)}
+    \ENDVAR
+  \end{algo}
