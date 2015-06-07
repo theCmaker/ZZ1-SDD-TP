@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) {
       afficher_matrice(m);
       printf("%d\n",element(m,2,2));
       printf("%d\n",element(m,5,1));
+      liberer_matrice(&m);
     } else {
       printf("Erreur probable\n");
     }

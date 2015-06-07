@@ -8,17 +8,16 @@ int lire_matrice(char *fichier, mat_t *m) {
   int read;
   if (init_mat(m) && f) {
      while (res && !feof(f)) {
+       read = 0;
        read = fscanf(f,"%d %d %d", &row, &col, &val);
-       if (read >= 3 && inser_val(m,row,col,val)) {
-         printf("Ajout effectue: li:%d, col:%d, val:%d\n",row,col,val);
-       } else if (read >= 3) {
+       if (read >= 3 && !inser_val(m,row,col,val)) {
          res = 0;
        }
      }
+     fclose(f);
   } else {
     res = 0;
   }
-  afficher_matrice(*m);
   return res;
 }
 
@@ -38,10 +37,10 @@ int rech_dich(mat_t *m, int row, short int *existe) {
   int deb, fin, mil;
   deb = 0;
   fin = m->nbrow;
-  if (row < m->rows[m->nbrow].row) {
+  if (row < m->rows[fin].row) {
     while (deb != fin) {
       mil = (deb + fin)/2;
-      if (row < m->rows[mil].row) {
+      if (row <= m->rows[mil].row) {
         fin = mil;
       } else {
         deb = mil + 1;
@@ -95,7 +94,7 @@ int element(mat_t m, int i, int j) {
   if (existe) {
     prec = rech_prec(&(m.rows[r].cols),j,&existe);
     if (existe) {
-      elt = (*prec)->next->val;
+      elt = (*prec)->val;
     }
   }
   return elt;
@@ -127,4 +126,15 @@ void afficher_matrice(mat_t m) {
     }
     printf("\n");
   }
+}
+
+void liberer_matrice(mat_t *m){
+  int i;
+  for (i = 0; i < m->nbrow; i++) {
+    liberer_liste(&(m->rows[i].cols));
+  }
+  free(m->rows);
+  m->rows = NULL;
+  m->nbrow = 0;
+  m->nbcol = 0;
 }
