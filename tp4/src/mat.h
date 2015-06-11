@@ -1,5 +1,5 @@
 /*  mat.h
-  Fonctions de gestion de matrice
+  Header
 
   -----| MATRICE |-----
 

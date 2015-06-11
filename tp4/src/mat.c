@@ -1,5 +1,5 @@
 /*  mat.c
-  Header
+  Fonctions de gestion de matrice
 
   -----| MATRICE |-----
 
