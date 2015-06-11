@@ -12,9 +12,6 @@
 #ifndef __LISTE_H__
 #define __LISTE_H__
 
-  #include <string.h>
-  #include <ctype.h>
-
   typedef struct _node_t {
     int col;               /* Numero de colonne */
     int val;               /* Valeur */
