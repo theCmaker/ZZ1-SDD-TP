@@ -13,11 +13,11 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
   \begin{algo}[informal] %principe
     \ALGO{ (Principe)}
     \BEGIN
-      \STATE{Ouverture du fichier en lecture seule}
+      \STATE{Ouverture du fichier en lecture}
       \STATE{Initialisation du code d'erreur à 1}
       \STATE{Initialisation de la matrice}
       \IF{le fichier est correctement ouvert \AND la matrice est initialisée}
-        \WHILE{code d'erreur \EQ 1 \AND on a pas lu tout le fichier}
+        \WHILE{code d'erreur \EQ 1 \AND on n'a pas lu tout le fichier}
           \STATE{On récupère les valeurs de la ligne du fichier}
           \STATE{On insère la valeur à la bonne place dans la matrice}
           \IF{l'insertion n'a pas réussie}
@@ -46,10 +46,11 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
     \ALGO{init\_mat (Principe)}
     \BEGIN
       \STATE{Initialisation du code d'erreur à 1}
-      \STATE{Initialise le nombre de lignes de la matrice à 0}
+      \STATE{Initialisation du nombre de lignes de la matrice à 0}
       \STATE{Allocation du tableau de lignes de la matrice}
-      \IF{le tableau de ligne est alloué}
-        \STATE{On place une valeur de ligne maximale pour la première ligne}[Ceci permet d'avoir un bon résultat lors de la première recherche dichotomique]
+      \IF{le tableau de lignes est alloué}
+        \STATE{On place une valeur de ligne maximale pour la première ligne}
+        \COMMENT{Ceci permet d'avoir un bon résultat lors de la première recherche dichotomique}
         \STATE{Le code d'erreur passe à 1}
       \ENDIF
       \RETURN{Code d'erreur}
@@ -70,11 +71,11 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \STATE{Initialisation d'un entier fin au nombre de lignes de la matrice}
       \IF{ligne cherchée \LT numéro de la dernière ligne de la matrice}
         \WHILE{deb \NEQ fin}
-          \STATE{mil prend la valeur (deb + fin) / 2}
+          \STATE{mil prend le rang milieu entre deb et fin}
           \IF{ligne cherchée \LT numéro de la ligne à la place mil dans la matrice}
-            \STATE{fin prend la valeur mil}
+            \STATE[Recherche sur la première moitié]{fin prend la valeur mil}
           \ELSE
-            \STATE{deb prend mil + 1}
+            \STATE[Recherche sur la seconde moitié]{deb prend mil + 1}
           \ENDIF
         \ENDWHILE
       \ENDIF
@@ -88,23 +89,23 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \DECLVAR{deb}{entier représentant la position de départ de la recherche dichotomique, c'est également le retour de la fonction indiquant où se trouve l'élément cherché ou son adresse d'insertion}
       \DECLVAR{fin}{entier représentant la position de fin de la recherche dichotomique}
       \DECLVAR{mil}{entier représentant le milieu entre deb et fin}
-      \DECLVAR{*existe}{adresse du booleen indiquant si la ligne cherchée se trouve ou non déjà dans la matrice (1 si elle existe, 0 sinon)}
+      \DECLVAR{*existe}{adresse du booléen indiquant si la ligne cherchée se trouve ou non déjà dans la matrice (1 si elle existe, 0 sinon)}
     \ENDVAR
   \end{algo}
   
 \subsection{decal\_rows}
-  Cette procédure décale simplement les éléments de la table principale d'une case vers la droite jusqu'à la case spécifiée en paramètre ; en partant de la dernière case.
+  Cette procédure décale simplement les éléments de la table principale d'une case vers la droite jusqu'à la case spécifiée en paramètre, en partant de la dernière case.
 
 \subsection{inser\_row}
   Cette procédure va dans un premier temps effectuer un décalage des éléments de la table vers la droite. Ceci va permettre d'avoir une place pour la nouvelle ligne.
-  On incrément le nombre de lignes de la matrice, on insère le numéro de ligne dans la table principale et on place le pointeur vers la liste chaînée représentant les colonnes de cette ligne sur NULL.
+  On incrémente le nombre de lignes de la matrice, on insère le numéro de ligne dans la table principale et on place le pointeur vers la liste chaînée représentant les colonnes de cette ligne sur \NIL.
 
 \subsection{inser\_val}
   \begin{algo}[informal] %principe
     \ALGO{inser\_val (Principe)}
     \BEGIN
       \STATE{Initialisation du code d'erreur à 1}
-      \STATE{Recherche la ligne d'insertion par Dichotomie}
+      \STATE{Recherche la ligne d'insertion par dichotomie}
       \IF{la ligne n'existe pas}
         \STATE{On l'insère avec la fonction inser\_val}
       \ENDIF
@@ -123,9 +124,9 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
   
   \begin{algo}[informal] %lexique
     \VAR
-      \DECLVAR{existe}{booleen indiquant si la ligne cherchée existe déjà ou non}
+      \DECLVAR{existe}{booléen indiquant si la ligne cherchée existe déjà ou non}
       \DECLVAR{res}{code d'erreur (1 si aucun problème, 0 sinon)}
-      \DECLVAR{*c}{cellule crée, qui sera insérée dans la matrice}
+      \DECLVAR{*c}{cellule créée, qui sera insérée dans la matrice}
     \ENDVAR
   \end{algo}
   
@@ -152,7 +153,7 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
       \DECLVAR{elt}{valeur de l'élément qui sera renvoyée}
       \DECLVAR{**prec}{pointeur sur l'élément trouvé dans la recherche de la colonne}
       \DECLVAR{r}{entier indiquant la position de la ligne cherchée dans la table majeure}
-      \DECLVAR{existe}{booleen indiquant si la ligne cherchée existe ou non}
+      \DECLVAR{existe}{booléen indiquant si la ligne cherchée existe ou non}
     \ENDVAR
   \end{algo}
   
@@ -161,26 +162,26 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
     \ALGO{afficher\_matrice (Principe)}
     \BEGIN
       \STATE{Initialise la ligne courante ligne\_cour à 0}
-      \FORGEN{pour chaque ligne de la matrice Faire}
-        \STATE{L'indice j de colonne est à 1}
+      \FORGEN{chaque ligne de la matrice}
+        \STATE{On se place sur la première colonne}
         \IF{la ligne courante est présente dans la matrice}
-          \STATE{Stocke l'adresse de la première colonne col\_cour de la ligne courante}
-          \WHILE{col\_cour \NEQ NULL \AND j \LE nombre maximum de colonnes}
-            \IF{col\_cour \EQ j}
-              \STATE{Affiche la valeur de la cellule}
-              \STATE{col\_cour passe sur la cellule suivante}
+          \STATE{On stocke l'adresse de la première colonne non-nulle de la ligne courante}
+          \WHILE{la liste chainée n'est pas terminée}
+            \IF{la colonne courante est non-nulle}
+              \STATE{Afficher la valeur de la cellule}
+              \STATE{Stocker la prochaine colonne non-nulle}
             \ELSE
-              \STATE{Affiche 0}
+              \STATE{Afficher 0}
             \ENDIF
-            \STATE{Incrémente j}
+            \STATE{Passer sur la colonne suivante}
           \ENDWHILE
-          \STATE{Incrémentation de la ligne}
+          \STATE{Passer à la ligne suivante}
         \ENDIF
-        \WHILE{on est pas au bout de la ligne courante}
-          \STATE{On complète avec des 0}
-          \STATE{Incrémente j}
+        \WHILE{la ligne courante n'est pas complète}
+          \STATE{Ajouter un 0}
+          \STATE{Passer à la colonne suivante}
         \ENDWHILE
-        \STATE{Afficher un retour à la ligne}
+        \STATE[La ligne est complète]{Afficher un retour à la ligne}
       \ENDFOR
     \END
   \end{algo}
@@ -197,5 +198,5 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
   \end{algo}
 
 \subsection{liberer\_matrice}
-  Cette fonction permet de libérér la mémoire occupée par la matrice. On fait une boucle for sur chaque élément de la table majeure et dans cette boucle on libère chaque listes avec la fonction \textit{liberer\_liste} (permettant de libérer une liste chaînée).
-  Une fois sortis de la boucle, on libère le tableau de la table majeure et on indique que la nombre maximal de lignes et de colonnes et de 0.
+  Cette fonction permet de libérer la mémoire occupée par la matrice. On itère sur chaque ligne de la table majeure en libérant chaque liste avec la fonction \textit{liberer\_liste} (permettant de libérer une liste chaînée).
+  Une fois les listes supprimées, on libère le tableau de la table majeure et on indique que la nombre maximal de lignes et de colonnes et de 0.

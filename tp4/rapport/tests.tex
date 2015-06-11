@@ -1,105 +1,43 @@
-\subsection{Fichier de tests}
-	La structure utilisée dans le fichier de tests est la suivante:
-	\begin{itemize}
-		\item Chaque ligne ne peut excéder 100 caractères,
-		\item Le premier caractère de chaque ligne peut-être:
-		\begin{itemize}
-			\item \texttt{\#}: Permet d'afficher le texte présent sur la ligne, après le caractère.
-			\item \texttt{p}: Permet de lancer le test de la pile. Nécessite un argument: le nombre d'éléments, donné sur la même ligne.
-			\item \texttt{t}: Permet de lancer la fonction \texttt{truc} en version itérative. Prend deux arguments positifs, strictement pour le second. Le premier correspond à S, le second à I.
-			\item \texttt{T}: Idem pour la version récursive.
-			\item Tout autre caractère ou ligne vide affichera une ligne vide.
-		\end{itemize}
-	\end{itemize}
-	Le programme est exécuté avec le fichier \texttt{tests/test}:
-	\inputminted[frame=single,label=Test]{text}{../tests/test}
-	On obtient alors le résultat suivant: 
-	\inputminted[frame=single,label=Resultat]{text}{../tests/resultat_test}
-
-\subsection{Tests de la pile}
-	Avec l'outil \texttt{ddd} nous présentons ici l'utilisation de la pile dans les tests \no 3 et 4 du fichier de tests. 
-	\begin{figure}[H]
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-	  	\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_3_0}
-			\subcaption{Début}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_3_1}
-			\subcaption{Après avoir empilé 1, 2, 3, 4 et 5}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-	  	\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_3_2}
-			\subcaption{Fin, après avoir dépilé 5, 4, 3, 2 et 1}
-		\end{subfigure}
-	  \caption{Test n°3 -- Aperçu des informations de la pile dans \texttt{ddd}}
-	\end{figure}
-	\begin{figure}[H]
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_0}
-			\subcaption{Début}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_1}
-			\subcaption{Après avoir empilé 7, 8 et 9}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_2}
-			\subcaption{Après avoir dépilé 9}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_3}
-			\subcaption{Après avoir empilé 10}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_4}
-			\subcaption{Après avoir dépilé 10}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_6}
-			\subcaption{Après avoir dépilé 8}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_7}
-			\subcaption{Après avoir empilé 9}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_8}
-			\subcaption{Après avoir dépilé 9}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_9}
-			\subcaption{Après avoir empilé 10}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_10}
-			\subcaption{Après avoir dépilé 10}
-		\end{subfigure}
-		\begin{subfigure}[c]{0.33\textwidth}
-			\centering
-			\includegraphics[width=3cm,clip=true,trim=1cm 1cm 15cm 24cm]{../tests/ddd_graph/ddd_4_11}
-			\subcaption{Fin, après avoir dépilé 7}
-		\end{subfigure}
-	  \caption{Test n°4 -- Aperçu de la pile dans \texttt{ddd}}
-	\end{figure}
-
+\subsection{Matrice nulle}
+	Fichier d'entrée (le fichier de matrice nulle est vide):
+	\inputminted[frame=single,label=test\_nulle]{text}{../tests/test_nulle}
+	Résultat:
+	\inputminted[frame=single,label=Résultat matrice nulle]{text}{../tests/resultat_test_nulle}
+\subsection{Matrice quelconque}
+	Fichier d'entrée:
+	\inputminted[frame=single,label=test\_1]{text}{../tests/test_1}
+	Fichier matrice:
+	\inputminted[frame=single,label=matrice\_1]{text}{../tests/matrice_1}
+	Résultat:
+	\inputminted[frame=single,label=Résultat matrice quelconque,tabsize=4]{text}{../tests/resultat_test_1}
+\subsection{Matrice ligne}
+	Fichier d'entrée:
+	\inputminted[frame=single,label=test\_2]{text}{../tests/test_2}
+	Fichier matrice:
+	\inputminted[frame=single,label=matrice\_2]{text}{../tests/matrice_2}
+	Résultat:
+	\inputminted[frame=single,label=Résultat matrice ligne,tabsize=2,breaklines=true]{text}{../tests/resultat_test_2}
+\subsection{Matrice très creuse (un seul élément non-nul)}
+	\label{subs:mat_creuse}
+	Fichier d'entrée:
+	\inputminted[frame=single,label=test\_3]{text}{../tests/test_3}
+	Fichier matrice:
+	\inputminted[frame=single,label=matrice\_3]{text}{../tests/matrice_3}
+	Résultat:
+	\inputminted[frame=single,label=Résultat matrice très creuse,tabsize=2,breaklines=true]{text}{../tests/resultat_test_3}
 \newpage
 \subsection{Bonne utilisation de la mémoire}
-	Pour vérifier la bonne libération de la mémoire, nous avons utilisé \texttt{valgrind} avec le programme seul. La fonction \texttt{main}, lorsqu'elle ne reçoit pas d'argument, lance un petit test sur les deux versions de la fonction \texttt{truc}, ainsi qu'un test sur la pile (initialiser, empiler jusqu'à ce que la pile soit remplie/dépiler jusqu'à ce qu'elle soit vide, libérer). Aucun bloc de mémoire n'est perdu, le retour texte de valgrind est présenté en figure \ref{fig:valgrind}.
+	Pour vérifier la bonne libération de la mémoire, nous avons utilisé \texttt{valgrind} avec le programme et un fichier de test. Aucun bloc de mémoire n'est perdu, le retour texte de valgrind est présenté en figure \ref{fig:valgrind}.
 	\begin{figure}[H]
-	  \inputminted[frame=single,label=Resultat Valgrind]{text}{../tests/valgrind_test}
+	  \inputminted[frame=single,label=Resultat Valgrind]{text}{../tests/valgrind_test_1}
 	  \caption{Passage dans l'outil \texttt{valgrind}}
 	  \label{fig:valgrind}
 	\end{figure}
+
+	Notons que l'utilisation de cette structure de données est en effet intéressante pour les matrices creuses:
+	
+	Par exemple pour le test de la matrice très creuse (page \pageref{subs:mat_creuse}), \texttt{valgrind} nous indique que le programme a utilisé au total 1968 octets. Le seul stockage de cette matrice sous forme de tableau aurait nécessité $4 \times 20 \times 24 = 1920$ octets. 
+
+	L'inconvénient de cette structure est que la table majeure occupe 8 à 12 octets par bloc de ligne, et que le nombre de ces lignes est fixé (ici 50+1, soit environ 400 octets mobilisés au minimum), on peut donc estimer qu'il faut près d'une centaine d'éléments nuls au minimum pour rendre cette structure de données intéressante du point de vue de la mémoire. 
+
+	On pourrait éventuellement proposer d'autres tailles pour la table majeure, ou bien une longueur dynamique (mais au détriment des performances lorsqu'il s'agira de redimensionner l'espace, i.e. lors de l'insertion).
