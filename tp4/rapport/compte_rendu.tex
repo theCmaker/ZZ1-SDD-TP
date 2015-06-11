@@ -24,6 +24,7 @@
 \input{settings/mintedMakefile}
 \input{settings/mintedBash}
 \input{settings/hyperrefSettings}
+\input{settings/chainedListBis}
 
 \hypersetup{
   pdftitle={TP 4 - Gestion d'une matrice creuse de grande taille}
@@ -36,6 +37,13 @@
 \titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter\hsp\textcolor{lightgray}{|}\hsp}{0pt}{\LARGE\bfseries}
 
 \newcommand{\NIL}{\texttt{\small NIL}}
+\tikzset{%styles schémas
+    case1/.style={rectangle,draw,fill=RoyalBlue!50,minimum size=7.5mm,anchor=base,text height=1.5ex,text depth=.25ex,text centered},
+    case2/.style={rectangle,draw,fill=Red!50,minimum size=7.5mm,anchor=base,text height=1.5ex,text depth=.25ex,text centered},
+    vers/.style={thick,->, >= latex},
+    ptr/.style={case1, fill=gray!50},
+    chain2/.style={fill=RoyalBlue!50,shape=chain2}
+}
 
 \begin{document}
   \input{titlepage}
@@ -43,22 +51,58 @@
   \setlength{\parskip}{10pt}
   \setlength{\parindent}{0pt}
   \chapter{Présentation}
-    Le but de ce tp est de pouvoir gérer une matrice creuse (contenant beaucoup de valeurs nulles) de grande taille. Pour ce faire, nous renseignerons dans un fichier les emplacements des valeurs non nulles de la manière suivant : numéro_ligne numéro_colonne valeur ; sur chaque ligne. Chaque donnée étant séparée par un espace.
+    Le but de ce TP est de pouvoir gérer une matrice creuse (contenant beaucoup de valeurs nulles) de grande taille. Il est demandé de pouvoir lire la matrice depuis un fichier et retourner la valeur d'un élément.
 
-    Les opérations suivantes sont permises avec la matrice :
+    Les opérations suivantes sont permises avec la matrice:
     \begin{itemize}
-      \item 
+      \item Lire depuis un fichier,
+      \item Afficher la matrice,
+      \item Afficher un élément connaissant sa position dans la matrice,
+      \item Libérer la mémoire allouée pour la matrice.
     \end{itemize}
 
-    \section{Structure de données employée}
-      Les éléments non nuls de la matrice sont rangés dans des tables. Nous disposons d'une table principale qui est un tableau renseignant 2 éléments dans chaque case :
-      \begin{itemize}
-        \item Numéro de la ligne concernée
-        \item Pointeur sur la liste chaînée contenant les colonnes
-      \end{itemize}
+    \section{Structures de données employées}
+      \subsection{Matrice}
+        Les éléments non nuls de la matrice sont rangés dans des tables. Nous disposons d'une table principale réprésentant les lignes non-nulles. Il s'agit d'un tableau renseignant 2 éléments dans chaque case :
+        \begin{itemize}
+          \item Numéro de la ligne concernée,
+          \item Pointeur sur la liste chaînée contenant les colonnes.
+        \end{itemize}
+        Comme l'indique le schéma de la figure \ref{fig:struct_drawing}, la structure de matrice contient également le nombre total de lignes non-nulles, ainsi que le nombre maximum de colonnes. Nous avons pris la liberté d'ajouter cette dernière valeur afin de faciliter l'affichage de la matrice, fonction qui n'était pas demandée, mais que nous fournissons tout de même. En effet, cela nous évite de parcourir chacune des listes chaînées à la recherche de l'indice de colonne le plus élevé.
+
+        \input{schema}
+
+        Chaque matrice peut être stockée dans un fichier rédigé de la manière suivante (exemple en figure \ref{fig:struct_fichier}):
+        \begin{itemize}
+          \item Le nom du fichier ne doit pas contenir d'espace,
+          \item Les valeurs nulles ne sont pas inscrites,
+          \item L'ordre entre les lignes n'a pas d'importance,
+          \item A raison d'une ligne du fichier par élément non-nul de la matrice, et chaque information étant séparée par une espace au moins: \\
+          \bashinline[showspaces=true]{Ligne Colonne Valeur}
+        \end{itemize}
+
+      \subsection{Fichier de commandes}
+        Afin d'effectuer les tests, nous proposons une fonction basique effectuant des tests sommaires, ainsi que l'interprétation d'un fichier qui peut être donné comme premier paramètre.
+
+        Le cas échéant, la structure de ce fichier doit respecter les règles suivantes:
+        \begin{itemize}[noitemsep,nolistsep]
+          \item 80 caractères au maximum par ligne,
+          \item Les caractères suivants sont acceptés en début de ligne:
+          \begin{description}[font=\texttt]%,noitemsep,nolistsep]
+            \item [R :] Lecture de la matrice à partir d'un fichier, le nom de ce fichier doit être indiqué ensuite,
+            \item [E :] Affichage de la valeur d'un élément, nécessite les indices de ligne puis de colonne,
+            \item [A :] Afficher la matrice,
+            \item [L :] Libérer la matrice,
+            \item [\# :] Provoque l'affichage du texte qui suit (commentaire affiché).
+          \end{description}
+          \item Il est nécessaire d'indiquer des valeurs entières,
+          \item Si l'on souhaite lire une matrice apres en avoir créé une première, il est nécessaire de libérer cette dernière,
+          \item Tout autre caractère ou bien une ligne vide provoqueront l'affichage d'une ligne vide.
+        \end{itemize}
+
     
     \section{Organisation du code source}
-      Nous avons découpé le tp en 2 parties. Une partie s'occupe de la gestion de liste chaînée (utilisées dans la définition de la table secondaire) et seconde s'occupe de la gestion de la matrice.
+      Nous avons décomposé le TP en 2 parties. La première partie est chargée de gérer les listes chaînées (utilisées dans la définition de la table secondaire) et la seconde est chargée de gérer la matrice.
 
     \input{code_source}
   \chapter{Détails du programme}

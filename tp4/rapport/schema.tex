@@ -1,29 +1,73 @@
-\begin{figure}[h]
-  \begin{subfigure}[c]{0.3\textwidth}
-    \subcaption{Structure utilisée}
-    \label{fig:struct}
-    \begin{center}
-    \shorthandoff{:}
-    \begin{tikzpicture}[scale=0.5]
-      \matrix at (0,0) {
-        \node [case1] (a1) {max}; & \node [case1] (a11) {top}; & \node [case1,ptr] (a12) {val}; \\[1cm]
-      };
-      \matrix at (0, -4){
-        \node [case2] (b1) {Valeurs dans la pile};\\
-      };
-      \draw [vers] (a12.south) |- +(0,-1) -| (b1.north);
-    
-    \end{tikzpicture}
-    \shorthandon{:}
-    \end{center}
-  \end{subfigure}
-  \begin{subfigure}{0.7\textwidth}
-    \subcaption{Code}
-    \label{fig:struct_code}
-    \begin{center}
-      \cfile[firstline=20,lastline=24]{../src/stack.h}
-    \end{center}
-  \end{subfigure}
-  \caption{Structure de pile et code correspondant}
-  \label{fig:struct_code_drawing}
+\begin{figure}
+    \hfill
+    \begin{minipage}{0.23\linewidth}
+      \[ 
+        M = \begin{pmatrix}
+          2 & 0 & 0 & 0 & 0 & 0 \\
+          0 & 0 & 0 & 42 & 0 & 7 \\
+          0 & 0 & 0 & 0 & 0 & 0 \\
+          0 & 0 & 0 & 0 & 0 & 0 \\
+          0 & 4 & 0 & 0 & 0 & 0 \\ 
+        \end{pmatrix}
+      \]
+      \centering Exemple de matrice creuse
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.70\linewidth}
+      \begin{center}
+      \shorthandoff{:}
+      \begin{tikzpicture}
+        \matrix at (0,0) {
+          \node [case2] (a1) {3}; & \node [case2] (a11) {6}; & \node [case1] (a12) {1}; & \node [case1,ptr] (a13) {}; & \node [case1] (a14) {2}; & \node [case1,ptr] (a15) {}; & \node [case1] (a16) {5}; & \node [case1,ptr] (a17) {}; \\[0.5cm]
+        };
+        \node [chain2] (col1) at (-1,-2) {1};
+        \node [chain2] (col2) at ($ (a15) + (+0.66,-2) $) {4};
+        \node [chain2] (col21) at ($ (col2) + (0,-1.5) $) {6};
+        \node [chain2] (col7) at (4.66,-2) {2};
+        
+        \node at (col7.ptr1) {4};
+        \node at (col21.ptr1) {7};
+        \node at (col1.ptr1) {2};
+        \node at (col2.ptr1) {42};
+
+        \node at (col7.ptr2) {\NIL};
+        \node at (col21.ptr2) {\NIL};
+        \node at (col1.ptr2) {\NIL};
+
+        \draw [vers] (a13.center) |- +(0,-1) -| (col1.north);
+        \draw [vers] (a15.center) -- (col2.north);
+        \draw [vers] (col2.ptr2) |- +(0,-.75) -| (col21.north);
+        \draw [vers] (a17.center) |- +(0,-1) -| (col7.north);
+
+        \node [rounded corners, fill=LimeGreen!50,anchor=center] (idl) at ($ (a14) + (0,1) $) {Indices de ligne};
+        \node [rounded corners, fill=LimeGreen!50,anchor=center] (idc) at ($ (col1.text) + (-2,-1) $) {Indice de colonne\vphantom{g}};
+        \node [rounded corners, fill=LimeGreen!50,anchor=center] (val) at ($ (col1.ptr1) + (0,-1) $) {Valeur\vphantom{g}};
+        \node [rounded corners, fill=LimeGreen!50,anchor=center] (nbl) at ($ (a1) + (-1,-1) $) {Nombre de lignes};
+        \node [rounded corners, fill=LimeGreen!50,anchor=center] (nbc) at ($ (nbl) + (0,2) $) {Nombre de colonnes\vphantom{g}};
+
+        \draw [vers,dotted,color=Black!70] (val) -- (col1);
+        \draw [vers,dotted,color=Black!70] (idc) to [out=90,in=180] (col1.west);
+        \draw [vers,dotted,color=Black!70] (idl) -- (a14.north);
+        \draw [vers,dotted,color=Black!70] (idl) to [out=180,in=90] (a12.north);
+        \draw [vers,dotted,color=Black!70] (idl) to [out=0,in=90] (a16.north);
+        \draw [vers,dotted,color=Black!70] (nbl) to [bend left=45] (a1.west);
+        \draw [vers,dotted,color=Black!70] (nbc) to [out=0, in=90] (a11.north);
+      \end{tikzpicture}
+      \shorthandon{:}
+      \end{center}
+    \end{minipage}
+  \caption{Structure de matrice creuse}
+  \label{fig:struct_drawing}
+\end{figure}
+
+\begin{figure}
+  \vspace{1cm}
+  \begin{minted}[label=Matrice $M$,frame=lines]{text}
+  2 6 7
+  1 1 2
+  5 2 4
+  2 4 42
+  \end{minted}
+  \caption{Fichier descriptif équivalent}
+  \label{fig:struct_fichier}
 \end{figure}
