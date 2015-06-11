@@ -1,0 +1,5 @@
+#TEST MATRICE NULLE
+R matrice_nulle
+A
+E 20 20
+L

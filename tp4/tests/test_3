@@ -1,0 +1,11 @@
+#TEST MATRICE 3
+#Lecture matrice a 1 element non nul.
+R matrice_3
+#Affichage
+A
+#Element nul
+E 2 3
+#Element non-nul
+E 20 24
+#Liberation
+L

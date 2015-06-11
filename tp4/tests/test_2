@@ -1,0 +1,11 @@
+#TEST MATRICE 2
+#Lecture matrice ligne
+R matrice_2
+#Affichage
+A
+#Element nul
+E 1 1
+#Element non-nul
+E 1 7
+#Liberation
+L

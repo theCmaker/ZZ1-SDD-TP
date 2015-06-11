@@ -1,0 +1,11 @@
+#TEST MATRICE 1
+#Lecture desordonnee sur les lignes et les colonnes
+R matrice_1
+#Affichage
+A
+#Element nul
+E 2 3
+#Element non-nul
+E 12 5
+#Liberation
+L
