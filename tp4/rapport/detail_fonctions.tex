@@ -93,4 +93,24 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
     \ENDVAR
   \end{algo}
   
+\subsection{decal\_rows}
+  Cette procédure décale simplement les éléments de la table principale d'une case vers la droite jusqu'à la case spécifiée en paramètre ; en partant de la dernière case.
+
+\subsection{inser\_row}
+  Cette procédure va dans un premier temps effectuer un décalage des éléments de la table vers la droite. Ceci va permettre d'avoir une place pour la nouvelle ligne.
+  On incrément le nombre de lignes de la matrice, on insère le numéro de ligne dans la table principale et on place le pointeur vers la liste chaînée représentant les colonnes de cette ligne sur NULL.
+
+\subsection{inser\_val}
+  \begin{algo}[informal] %principe
+    \ALGO{inser\_val (Principe)}
+    \BEGIN
+      
+      \RETURN{}
+    \END
+  \end{algo}
   
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{}{}
+    \ENDVAR
+  \end{algo}
