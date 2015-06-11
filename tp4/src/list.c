@@ -29,17 +29,15 @@ void adj_cell(cell_t **prec, cell_t *elt) {
   (*prec) = elt;
 }
 
-/*  cell_t ** rech_prec(cell_t **liste, int debut, short int *existe)
-  Recherche le precedent d'un element dans la liste chainee a partir de la
-  date de debut de message
+/*  cell_t ** rech_prec(cell_t **liste, int col, short int *existe)
+  Recherche le precedent d'un element dans la liste chainee triee selon les colonnes
 
   Entrees :
     cell_t **liste : pointeur sur le pointeur du premier element de la liste chainee
-    int debut : date de debut de message que l'on souhaite inserer, sous la forme AAAAMMJJ
-          on cherchera donc les messages dont la date est immediatement superieure
-    short int *existe : variable en entre/sortie indiquant si on a ou pas de message ayant la date de debut
-      0 : il n'y a pas de message avec cette date de debut
-      1 : il y a au moins un message
+    int col : indice de colonne
+    short int *existe : variable en entree/sortie indiquant si la colonne est presente ou non
+      0 : absence
+      1 : presence
 
   Sortie :
     cell_t ** : pointeur sur le pointeur de l'element precedent
@@ -90,7 +88,7 @@ void liberer_liste(cell_t **liste) {
 
 /*  void ins_cell(cell_t **liste, cell_t *elt)
   Permet d'inserer une cellule a la bonne place dans la liste chainee
-  Les messages sont tries par ordre decroissant des date de debut
+  Les colonnes sont triees par ordre croissant
 
   Entrees :
     cell_t **liste : pointeur sur le pointeur du premier element de la liste chainee
@@ -108,17 +106,16 @@ int ins_cell(cell_t **liste, cell_t *elt) {
   return (int) !existe;
 }
 
-/*  news_t * creer_cell(int debut, int fin, char *message)
-  Permet de creer un element de la liste chainee a partir de
-  la date de debut et de fin de validite ainsi que le texte du message
+/*  node_t * creer_cell(int col, int val)
+  Permet de creer un element de la liste chainee a partir du numero 
+  de colonne et de la valeur
 
   Entrees :
-    int debut : date de debut de validite de message sous la forme AAAAMMJJ
-    int fin : date de fin de validite de message sous la forme AAAAMMJJ
-    char *message : texte du message
+    int col : numero de colonne
+    int val : valeur
 
   Sortie :
-    news_t* : pointeur sur l'element cree
+    node_t* : pointeur sur l'element cree
 */
 node_t * creer_cell(int col, int val) {
   node_t *elt = (node_t*) malloc(sizeof(node_t));

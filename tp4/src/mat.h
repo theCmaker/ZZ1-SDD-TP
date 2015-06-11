@@ -19,9 +19,8 @@
 
   int init_mat(mat_t *);
   int lire_matrice(char *, mat_t*);
-  void afficher_matrice(mat_t);
-  int inser_val(mat_t *, int, int, int);
-  int element(mat_t, int, int);
+  void afficher_matrice(mat_t *);
+  int element(mat_t *, int, int);
   void liberer_matrice(mat_t *);
 
 
