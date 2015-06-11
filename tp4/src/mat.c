@@ -1,5 +1,5 @@
 /*  mat.c
-  Fonctions de gestion de matrice
+  Header
 
   -----| MATRICE |-----
 
@@ -149,9 +149,13 @@ int inser_val(mat_t *m, int row, int col, int val) {
   }
   c = creer_cell(col,val); /* Creation de la cellule*/
   if (c) {  /* Creation reussie */
-    ins_cell (&(m->rows[r].cols),c);  /* Ajout de la valeur */
-    if (col > m->nbcol) {
-      m->nbcol = col;     /* Actualisation du nombre maximal de colonnes */
+    if (!ins_cell(&(m->rows[r].cols),c)) {  /* Ajout de la valeur */
+      printf("Valeur non ajoutee: %d\n",col);
+      res = 0;
+    } else {
+      if (col > m->nbcol) {
+        m->nbcol = col;     /* Actualisation du nombre maximal de colonnes */
+      }
     }
   } else { /* Erreur memoire */
     res = 0;
@@ -176,7 +180,7 @@ int element(mat_t *m, int i, int j) {
   int r;          /* Rang de la ligne dans la matrice creuse */
   short int existe;  /* Booleen d'existence */
 
-  if (i < m->rows[m->nbrow].row && j < m->nbcol) { /* Element dans la matrice */
+  if (i > 0 && j > 0 && i <= m->rows[m->nbrow].row && j <= m->nbcol) { /* Element dans la matrice */
     r = rech_dich(m,i,&existe); /* Recherche de la ligne */
     if (existe) {   /* Ligne presente */
       prec = rech_prec(&(m->rows[r].cols),j,&existe);   /* Recherche colonne */
@@ -203,13 +207,13 @@ void afficher_matrice(mat_t *m) {
   int ligne_cour = 0; /* Ligne dans la structure */
   cell_t *col_cour;   /* Pointeur de parcours des colonnes de la structure */
   int max_col = m->nbcol; /* Nombre de colonnes reelles */
-  int max_row = m->rows[m->nbrow-1].row; /* Nombre de lignes reelles */
+  int max_row = (m->nbrow > 0) ? m->rows[m->nbrow-1].row : 0; /* Nombre de lignes reelles */
 
   for (i = 1; i <= max_row; ++i) {  /* Pour chaque ligne de la matrice */
     j = 1;                          /* Depart sur la colonne 1 */
     if (m->rows[ligne_cour].row == i) {    /* Ligne presente dans la structure */
       col_cour = m->rows[ligne_cour].cols; /* Premiere colonne */
-      while (col_cour && j <= max_col) {    /* Pour toutes les colonnes jusqu'a la fin de la liste */
+      while (col_cour) {   /* Pour toutes les colonnes jusqu'a la fin de la liste */
         if (col_cour->col == j) {       /* Colonne presente dans la structure */
           printf("%d\t",col_cour->val);
           col_cour = col_cour->next;    /* Colonne suivante (struct) */

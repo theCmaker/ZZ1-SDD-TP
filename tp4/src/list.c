@@ -86,7 +86,7 @@ void liberer_liste(cell_t **liste) {
   *liste = NULL;
 }
 
-/*  void ins_cell(cell_t **liste, cell_t *elt)
+/*  int ins_cell(cell_t **liste, cell_t *elt)
   Permet d'inserer une cellule a la bonne place dans la liste chainee
   Les colonnes sont triees par ordre croissant
 
@@ -95,11 +95,11 @@ void liberer_liste(cell_t **liste) {
     cell_t *elt : pointeur sur l'element a inserer dans la liste chainee
 
   Sortie :
-    Aucune
+    !existe: indique si la valeur a ete ajoutee (1: ajoutee, 0: pas ajoutee)
 */
 int ins_cell(cell_t **liste, cell_t *elt) {
   short int existe;
-  cell_t **prec = rech_prec(liste,elt->val,&existe);
+  cell_t **prec = rech_prec(liste,elt->col,&existe);
   if (!existe) {
     adj_cell(prec,elt);
   }

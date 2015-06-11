@@ -1,3 +1,14 @@
+/*  mat.h
+  Fonctions de gestion de matrice
+
+  -----| MATRICE |-----
+
+  BARBESANGE Benjamin,
+  PISSAVY Pierre-Loup
+
+  ISIMA 1ere Annee, 2014-2015
+*/
+
 #ifndef __MAT_H__
 #define __MAT_H__
   #include <stdio.h>

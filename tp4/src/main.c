@@ -1,11 +1,10 @@
 /*  main.c
   Fonction principale du programme, pour les tests
 
-  -----| ARBRES |-----
+  -----| MATRICE |-----
 
   BARBESANGE Benjamin,
   PISSAVY Pierre-Loup
-
   ISIMA 1ere Annee, 2014-2015
 */
 
@@ -33,7 +32,7 @@ int main(int argc, char *argv[]) {
             break;
           case 'E': /* element */
             sscanf(&buf[1],"%d %d",&i, &j);
-            element(&m,i,j);
+            printf("M(%d,%d)=%d\n",i,j,element(&m,i,j));
             break;
           case 'A': /* afficher */
             afficher_matrice(&m);
