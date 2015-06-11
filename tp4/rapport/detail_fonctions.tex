@@ -104,13 +104,99 @@ Les lexiques des variables d'entrée, sortie et entrée/sortie sont disponibles 
   \begin{algo}[informal] %principe
     \ALGO{inser\_val (Principe)}
     \BEGIN
-      
-      \RETURN{}
+      \STATE{Initialisation du code d'erreur à 1}
+      \STATE{Recherche la ligne d'insertion par Dichotomie}
+      \IF{la ligne n'existe pas}
+        \STATE{On l'insère avec la fonction inser\_val}
+      \ENDIF
+      \STATE{On crée la nouvelle cellule}
+      \IF{la cellule est correctement crée}
+        \STATE{On ajoute la cellule dans la liste chaînée des colonnes, sur la ligne correspondante}
+        \IF{l'indice de la colonne ajoutée \LT maximum de colonne courant}
+          \STATE{On actualise le maximum de colonnes}
+        \ENDIF
+      \ELSE
+        \STATE{Le code d'erreur passe à 0}
+      \ENDIF
+      \RETURN{Code d'erreur}
     \END
   \end{algo}
   
   \begin{algo}[informal] %lexique
     \VAR
-      \DECLVAR{}{}
+      \DECLVAR{existe}{booleen indiquant si la ligne cherchée existe déjà ou non}
+      \DECLVAR{res}{code d'erreur (1 si aucun problème, 0 sinon)}
+      \DECLVAR{*c}{cellule crée, qui sera insérée dans la matrice}
     \ENDVAR
   \end{algo}
+  
+\subsection{element}
+  \begin{algo}[informal] %principe
+    \ALGO{element (Principe)}
+    \BEGIN
+      \STATE{Initialisation de la valeur de l'élément à 0}
+      \IF{les indices sont dans la matrice}
+        \STATE{Recherche par dichotomie de la ligne}
+        \IF{la ligne cherchée existe}
+          \STATE{Recherche de la colonne dans la liste chaînée des colonnes}
+          \IF{la colonne existe}
+            \STATE{La valeur de l'élément prend la valeur de la cellule qui est trouvée}
+          \ENDIF
+        \ENDIF
+      \ENDIF
+      \RETURN{valeur de l'élément}
+    \END
+  \end{algo}
+  
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{elt}{valeur de l'élément qui sera renvoyée}
+      \DECLVAR{**prec}{pointeur sur l'élément trouvé dans la recherche de la colonne}
+      \DECLVAR{r}{entier indiquant la position de la ligne cherchée dans la table majeure}
+      \DECLVAR{existe}{booleen indiquant si la ligne cherchée existe ou non}
+    \ENDVAR
+  \end{algo}
+  
+\subsection{afficher\_matrice}
+  \begin{algo}[informal] %principe
+    \ALGO{afficher\_matrice (Principe)}
+    \BEGIN
+      \STATE{Initialise la ligne courante ligne\_cour à 0}
+      \FORGEN{pour chaque ligne de la matrice Faire}
+        \STATE{L'indice j de colonne est à 1}
+        \IF{la ligne courante est présente dans la matrice}
+          \STATE{Stocke l'adresse de la première colonne col\_cour de la ligne courante}
+          \WHILE{col\_cour \NEQ NULL \AND j \LE nombre maximum de colonnes}
+            \IF{col\_cour \EQ j}
+              \STATE{Affiche la valeur de la cellule}
+              \STATE{col\_cour passe sur la cellule suivante}
+            \ELSE
+              \STATE{Affiche 0}
+            \ENDIF
+            \STATE{Incrémente j}
+          \ENDWHILE
+          \STATE{Incrémentation de la ligne}
+        \ENDIF
+        \WHILE{on est pas au bout de la ligne courante}
+          \STATE{On complète avec des 0}
+          \STATE{Incrémente j}
+        \ENDWHILE
+        \STATE{Afficher un retour à la ligne}
+      \ENDFOR
+    \END
+  \end{algo}
+  
+  \begin{algo}[informal] %lexique
+    \VAR
+      \DECLVAR{i}{indice de ligne}
+      \DECLVAR{j}{indice de colonne}
+      \DECLVAR{ligne\_cour}{indice de la ligne courante, existante dans la matrice}
+      \DECLVAR{*col\_cour}{pointeur parcourant les cellules des colonnes des lignes de la matrice}
+      \DECLVAR{max\_col}{nombre de colonnes maximales dans la matrice}
+      \DECLVAR{max\_row}{nombre de lignes maximales dans la matrice}
+    \ENDVAR
+  \end{algo}
+
+\subsection{liberer\_matrice}
+  Cette fonction permet de libérér la mémoire occupée par la matrice. On fait une boucle for sur chaque élément de la table majeure et dans cette boucle on libère chaque listes avec la fonction \item{liberer\_liste} (permettant de libérer une liste chaînée).
+  Une fois sortis de la boucle, on libère le tableau de la table majeure et on indique que la nombre maximal de lignes et de colonnes et de 0.
