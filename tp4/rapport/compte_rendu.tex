@@ -36,6 +36,7 @@
 \newcommand{\hsp}{\hspace{20pt}}
 \titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter\hsp\textcolor{lightgray}{|}\hsp}{0pt}{\LARGE\bfseries}
 
+\newcommand{\blankpage}{\newpage \thispagestyle{empty} \addtocounter{page}{-1} \null \newpage}
 \newcommand{\NIL}{\texttt{\small NIL}}
 \tikzset{%styles schémas
     case1/.style={rectangle,draw,fill=RoyalBlue!50,minimum size=7.5mm,anchor=base,text height=1.5ex,text depth=.25ex,text centered},
@@ -47,7 +48,9 @@
 
 \begin{document}
   \input{titlepage}
+  \blankpage
   \tableofcontents
+  \blankpage
   \setlength{\parskip}{10pt}
   \setlength{\parindent}{0pt}
   \chapter{Présentation}
