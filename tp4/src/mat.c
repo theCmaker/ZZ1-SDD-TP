@@ -142,7 +142,7 @@ void inser_row(mat_t *m, int r, int row) {
 int inser_val(mat_t *m, int row, int col, int val) {
   short int existe; /* Booleen pour les tests d'existence */
   int res = 1;      /* Valeur de retour */
-  cell_t *c;        
+  cell_t *c;
   int r = rech_dich(m,row,&existe);  /* Recherche ligne d'insertion */
   if (!existe) {
     inser_row(m,r,row);    /* Ajout d'une ligne si necessaire */
@@ -176,11 +176,11 @@ int inser_val(mat_t *m, int row, int col, int val) {
 */
 int element(mat_t *m, int i, int j) {
   int elt = 0;    /* Valeur par defaut (matrice creuse!) */
-  cell_t **prec;  /* Pointeur de recherche */ 
+  cell_t **prec;  /* Pointeur de recherche */
   int r;          /* Rang de la ligne dans la matrice creuse */
   short int existe;  /* Booleen d'existence */
 
-  if (i > 0 && j > 0 && i <= m->rows[m->nbrow].row && j <= m->nbcol) { /* Element dans la matrice */
+  if (i > 0 && j > 0 && m->nbrow > 1 && i <= m->rows[m->nbrow-1].row && j <= m->nbcol) { /* Element dans la matrice */
     r = rech_dich(m,i,&existe); /* Recherche de la ligne */
     if (existe) {   /* Ligne presente */
       prec = rech_prec(&(m->rows[r].cols),j,&existe);   /* Recherche colonne */
@@ -196,7 +196,7 @@ int element(mat_t *m, int i, int j) {
   Affiche la matrice m
 
   Entrees :
-    *m : adresse de la matrice (evite de recopier toute 
+    *m : adresse de la matrice (evite de recopier toute
           la structure majeure lors de l'appel)
 
   Sortie :
@@ -218,7 +218,7 @@ void afficher_matrice(mat_t *m) {
           printf("%d\t",col_cour->val);
           col_cour = col_cour->next;    /* Colonne suivante (struct) */
         } else {                        /* Colonne absente (i.e. 0) */
-          printf("0\t");            
+          printf("0\t");
         }
         j++;                            /* Colonne suivante (reelle) */
       }
@@ -247,7 +247,7 @@ void liberer_matrice(mat_t *m){
     liberer_liste(&(m->rows[i].cols)); /* Suppression des colonnes */
   }
   free(m->rows);    /* Suppression du tableau de lignes */
-  m->rows = NULL;   
+  m->rows = NULL;
   m->nbrow = 0;     /* Actualisation lignes */
   m->nbcol = 0;     /* Actualisation colonnes */
 }

@@ -1,9 +1,11 @@
 TEST MATRICE 2
-Lecture matrice ligne
+Lecture matrice ligne (plusieurs elements)
 Affichage
 0  0  0  -6  0  0  9  0  0  0  0  0  0  8  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  -2  
 Element nul
 M(1,1)=0
 Element non-nul
-M(1,7)=9
+M(1,7)=0
 Liberation
+
+

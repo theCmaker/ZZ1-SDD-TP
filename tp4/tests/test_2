@@ -1,5 +1,5 @@
 #TEST MATRICE 2
-#Lecture matrice ligne
+#Lecture matrice ligne (plusieurs elements)
 R matrice_2
 #Affichage
 A
